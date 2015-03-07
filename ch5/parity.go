@@ -27,8 +27,8 @@ func initParityTable() []uint16 {
 // This function is good for computing the parity of a very large number of
 // 64-bit nonnegative integers
 func parityLookup(x uint64) uint16 {
-	return parityTable[(x>>48)&0xFFFF] ^
-		parityTable[(x>>32)&0xFFFF] ^
-		parityTable[(x>>16)&0xFFFF] ^
-		parityTable[x&0xFFFF]
+	return parityTable[(x>>48)&0xffff] ^
+		parityTable[(x>>32)&0xffff] ^
+		parityTable[(x>>16)&0xffff] ^
+		parityTable[x&0xffff]
 }
