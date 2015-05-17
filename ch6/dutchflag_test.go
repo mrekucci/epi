@@ -21,7 +21,7 @@ var rearrangeTests = []struct {
 func TestRearrange(t *testing.T) {
 	for _, tt := range rearrangeTests {
 		got := tt.an
-		rearrange(got[:], tt.i)
+		Rearrange(got[:], tt.i)
 		if !reflect.DeepEqual(got, tt.want) {
 			t.Errorf("rearrange(%d, %d) got %d; want %d", tt.an, tt.i, got, tt.want)
 		}
@@ -30,6 +30,6 @@ func TestRearrange(t *testing.T) {
 
 func BenchmarkRearrange(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		rearrange([]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}, 7)
+		Rearrange([]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}, 7)
 	}
 }

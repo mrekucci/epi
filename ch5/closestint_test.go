@@ -24,16 +24,16 @@ var intWeightTests = []struct {
 
 func TestIntWeight(t *testing.T) {
 	for _, tt := range intWeightTests {
-		got := intWeight(tt.in)
+		got := IntWeight(tt.in)
 		if got != tt.want {
-			t.Errorf("intWeight(%d) = %d; want %d", tt.in, got, tt.want)
+			t.Errorf("IntWeight(%d) = %d; want %d", tt.in, got, tt.want)
 		}
 	}
 }
 
 func BenchmarkIntWeight(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		intWeight(uint64(i))
+		IntWeight(uint64(i))
 	}
 }
 
@@ -62,15 +62,15 @@ var closestIntTests = []struct {
 
 func TestClosestInt(t *testing.T) {
 	for _, tt := range closestIntTests {
-		got, ok := closestInt(tt.in)
+		got, ok := ClosestInt(tt.in)
 		if got != tt.want || ok != tt.ok {
-			t.Errorf("closestInt(%#x) = %#x, %t; want %#x, %t", tt.in, got, ok, tt.want, tt.ok)
+			t.Errorf("ClosestInt(%#x) = %#x, %t; want %#x, %t", tt.in, got, ok, tt.want, tt.ok)
 		}
 	}
 }
 
 func BenchmarkClosestInt(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		closestInt(uint64(i))
+		ClosestInt(uint64(i))
 	}
 }

@@ -1,9 +1,9 @@
 package ch6
 
-// rearrange change order of given slice such that all elements
+// Rearrange change order of given slice such that all elements
 // less than an[i] appear first, followed by elements equal to
 // an[i], followed by elements greater than an[i],
-func rearrange(an []int, i int) {
+func Rearrange(an []int, i int) {
 	pv := an[i]
 	p, q := 0, 0
 	r := len(an) - 1

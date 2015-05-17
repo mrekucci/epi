@@ -29,16 +29,16 @@ var parityTests = []struct {
 
 func TestParity(t *testing.T) {
 	for _, tt := range parityTests {
-		got := parity(tt.in)
+		got := Parity(tt.in)
 		if got != tt.want {
-			t.Errorf("parity(%d) = %d; want %d", tt.in, got, tt.want)
+			t.Errorf("Parity(%d) = %d; want %d", tt.in, got, tt.want)
 		}
 	}
 }
 
 func BenchmarkParity(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		parity(uint16(i))
+		Parity(uint16(i))
 	}
 }
 
@@ -61,15 +61,15 @@ var parityLookupTests = []struct {
 
 func TestParityLookup(t *testing.T) {
 	for _, tt := range parityLookupTests {
-		got := parityLookup(tt.in)
+		got := ParityLookup(tt.in)
 		if got != tt.want {
-			t.Errorf("parityLookup(%d) = %d; want %d", tt.in, got, tt.want)
+			t.Errorf("ParityLookup(%d) = %d; want %d", tt.in, got, tt.want)
 		}
 	}
 }
 
 func BenchmarkParityLookup(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		parityLookup(uint64(i))
+		ParityLookup(uint64(i))
 	}
 }

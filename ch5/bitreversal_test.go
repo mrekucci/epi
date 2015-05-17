@@ -18,16 +18,16 @@ var reverseBitsTests = []struct {
 
 func TestReverseBits(t *testing.T) {
 	for _, tt := range reverseBitsTests {
-		got := reverseBits(tt.in)
+		got := ReverseBits(tt.in)
 		if got != tt.want {
-			t.Errorf("reverseBits(%#x) = %#x; want %#x", tt.in, got, tt.want)
+			t.Errorf("ReverseBits(%#x) = %#x; want %#x", tt.in, got, tt.want)
 		}
 	}
 }
 
 func BenchmarkReverseBits(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		reverseBits(uint16(i))
+		ReverseBits(uint16(i))
 	}
 }
 
@@ -47,15 +47,15 @@ var reverseBitsLookupTests = []struct {
 
 func TestReverseBitsLookup(t *testing.T) {
 	for _, tt := range reverseBitsLookupTests {
-		got := reverseBitsLookup(tt.in)
+		got := ReverseBitsLookup(tt.in)
 		if got != tt.want {
-			t.Errorf("reverseBitsLookup(%#x) = % #x; want %#x", tt.in, got, tt.want)
+			t.Errorf("ReverseBitsLookup(%#x) = % #x; want %#x", tt.in, got, tt.want)
 		}
 	}
 }
 
 func BenchmarkReverseBitsLookup(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		reverseBitsLookup(uint64(i))
+		ReverseBitsLookup(uint64(i))
 	}
 }

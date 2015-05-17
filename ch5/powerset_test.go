@@ -53,9 +53,9 @@ func init() {
 
 func TestPowerSet(t *testing.T) {
 	for _, tt := range powerSetTests {
-		got, ok := powerSet(tt.in)
+		got, ok := PowerSet(tt.in)
 		if !reflect.DeepEqual(got, tt.want) || ok != tt.ok {
-			t.Errorf("powerSet(%#v) = %#v, %t; want %#v, %t", tt.in, got, ok, tt.want, tt.ok)
+			t.Errorf("PowerSet(%#v) = %#v, %t; want %#v, %t", tt.in, got, ok, tt.want, tt.ok)
 		}
 	}
 }
@@ -63,6 +63,6 @@ func TestPowerSet(t *testing.T) {
 func BenchmarkPowerSet(b *testing.B) {
 	s := []interface{}{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"}
 	for i := 0; i < b.N; i++ {
-		powerSet(s)
+		PowerSet(s)
 	}
 }

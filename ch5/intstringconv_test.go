@@ -33,16 +33,16 @@ var stringToIntTests = []struct {
 
 func TestStringToInt(t *testing.T) {
 	for _, tt := range stringToIntTests {
-		got, err := stringToInt(tt.in)
+		got, err := StringToInt(tt.in)
 		if got != tt.want || err != tt.err {
-			t.Errorf("stringToInt(%q) = %d, %v; want %d, %v", tt.in, got, err, tt.want, tt.err)
+			t.Errorf("StringToInt(%q) = %d, %v; want %d, %v", tt.in, got, err, tt.want, tt.err)
 		}
 	}
 }
 
 func BenchmarkStringToInt(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		stringToInt("9223372036854775807")
+		StringToInt("9223372036854775807")
 	}
 }
 
@@ -62,15 +62,15 @@ var intToStringTests = []struct {
 
 func TestIntToString(t *testing.T) {
 	for _, tt := range intToStringTests {
-		got := intToString(tt.in)
+		got := IntToString(tt.in)
 		if got != tt.want {
-			t.Errorf("intToString(%d) = %q; want %q", tt.in, got, tt.want)
+			t.Errorf("IntToString(%d) = %q; want %q", tt.in, got, tt.want)
 		}
 	}
 }
 
 func BenchmarkIntToString(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		intToString(int64(i))
+		IntToString(int64(i))
 	}
 }

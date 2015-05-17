@@ -15,15 +15,15 @@ var swapBitsTests = []struct {
 
 func TestSwapBits(t *testing.T) {
 	for _, tt := range swapBitsTests {
-		got := swapBits(tt.x, tt.i, tt.j)
+		got := SwapBits(tt.x, tt.i, tt.j)
 		if got != tt.want {
-			t.Errorf("swapBits(%d, %d, %d) = %d; want %d", tt.x, tt.i, tt.j, got, tt.want)
+			t.Errorf("SwapBits(%d, %d, %d) = %d; want %d", tt.x, tt.i, tt.j, got, tt.want)
 		}
 	}
 }
 
 func BenchmarkSwapBits(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		swapBits(uint64(i), 0, 63)
+		SwapBits(uint64(i), 0, 63)
 	}
 }

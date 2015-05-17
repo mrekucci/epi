@@ -8,8 +8,8 @@ import (
 var errSyntax = errors.New("ch5.stringToInt: invalid syntax")
 var errRange = errors.New("ch5.stringToInt: value out of range")
 
-// stringToInt converts number represented by string with base 10 to integer.
-func stringToInt(s string) (int64, error) {
+// StringToInt converts number represented by string with base 10 to integer.
+func StringToInt(s string) (int64, error) {
 	const cutoff = math.MaxInt64/10 + 1 // The first smallest number such that cutoff*10 > MaxInt64.
 
 	if len(s) == 0 {
@@ -51,8 +51,8 @@ func stringToInt(s string) (int64, error) {
 	return n, nil
 }
 
-// intToString converts integer to string.
-func intToString(n int64) string {
+// IntToString converts integer to string.
+func IntToString(n int64) string {
 	if n == 0 {
 		return "0"
 	}
