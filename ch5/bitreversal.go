@@ -13,11 +13,11 @@ func reverseBits(x uint16) uint16 {
 	return uint16(rx)
 }
 
-// reverseBitsTable is a reverse bits cache for all 16-bit nonnegative integers.
+// reverseBitsTable is a reverse bits cache for all 16-bit non-negative integers.
 var reverseBitsTable = initReverseBitsTable()
 
 // initReverseBitsTable computes and returns reverse
-// bits for all 16-bit nonnegative integers.
+// bits for all 16-bit non-negative integers.
 func initReverseBitsTable() []uint16 {
 	bt := make([]uint16, 1<<16)
 	for i := 0; i <= math.MaxUint16; i++ {
@@ -26,6 +26,9 @@ func initReverseBitsTable() []uint16 {
 	return bt
 }
 
+// reverseBitsLookup reverse bits in x.
+// This function is good for reverse bits of a very
+// large number of 64-bit non-negative integers.
 func reverseBitsLookup(x uint64) uint64 {
 	return uint64(reverseBitsTable[(x>>48)&0xffff]) |
 		uint64(reverseBitsTable[(x>>32)&0xffff])<<16 |

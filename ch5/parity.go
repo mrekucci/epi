@@ -11,10 +11,10 @@ func parity(x uint16) (res uint16) {
 	return res
 }
 
-// parityTable is a parity cache for all 16-bit nonnegative integers.
+// parityTable is a parity cache for all 16-bit non-negative integers.
 var parityTable = initParityTable()
 
-// initParityTable computes and returns parities for all 16-bit nonnegative integers.
+// initParityTable computes and returns parities for all 16-bit non-negative integers.
 func initParityTable() []uint16 {
 	pt := make([]uint16, 1<<16)
 	for i := 0; i <= math.MaxUint16; i++ {
@@ -25,7 +25,7 @@ func initParityTable() []uint16 {
 
 // parityLookup returns 1 if the number of bits set to 1 in x is odd, otherwise O.
 // This function is good for computing the parity of a very large number of
-// 64-bit nonnegative integers
+// 64-bit non-negative integers.
 func parityLookup(x uint64) uint16 {
 	return parityTable[(x>>48)&0xffff] ^
 		parityTable[(x>>32)&0xffff] ^
