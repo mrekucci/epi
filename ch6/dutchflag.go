@@ -1,0 +1,25 @@
+package ch6
+
+// rearrange change order of given slice such that all elements
+// less than an[i] appear first, followed by elements equal to
+// an[i], followed by elements greater than an[i],
+func rearrange(an []int, i int) {
+	pv := an[i]
+	p, q := 0, 0
+	r := len(an) - 1
+	// Loop invariant: elements less then pivot an[0:p-1], elements equal to pivot an[p:q-1],
+	// unclassified an[q:r], elements greater then pivot an[r+1:len(an)-1].
+	for q <= r {
+		switch {
+		case an[q] < pv:
+			an[q], an[p] = an[p], an[q]
+			p++
+			q++
+		case an[q] > pv:
+			an[q], an[r] = an[r], an[q]
+			r--
+		default: // a[q] == p
+			q++
+		}
+	}
+}
