@@ -1,7 +1,5 @@
 package ch5
 
-import "math"
-
 // PowerSet returns a power set of s.
 // The length of s is limited to size of int.
 // When is crossed then nil interface and false is returned.
@@ -15,12 +13,22 @@ func PowerSet(s []interface{}) ([]interface{}, bool) {
 		x := i
 		var ss []interface{}
 		for x > 0 {
-			bp := int(math.Log2(float64(x & ^(x - 1)))) // Compute least significant bit position of int.
-			ss = append(ss, s[bp])
-			x &= (x - 1) // This ensure that the iteration count will be the same as number of 1 bits in x.
-			// Add if statement x == 0 which will execute on sub-set end.
+			lsb := x & -x // x & -x is same as x & ^(x - 1).
+
+			// Compute index of x's least significant bit.
+			i := 0
+			p := 1
+			for lsb&p == 0 { // lsb mast be greater then 0, which is always true 'cause x > 0.
+				p <<= 1
+				i++
+			}
+
+			ss = append(ss, s[i])
+			x &= (x - 1) // This ensures that the iteration count will be the same as number of 1 bits in x.
+			// x == 0 indicates sub-set end.
 		}
 		ps = append(ps, ss)
 	}
+
 	return ps, true
 }

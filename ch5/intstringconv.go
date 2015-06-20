@@ -57,26 +57,25 @@ func IntToString(n int64) string {
 		return "0"
 	}
 
-	d := 0 // Number of digits in result string.
-	neg := false
+	var s [19 + 1]byte // 10 is max digits of int64; +1 for sign.
+	i := len(s)
+
+	neg := n < 0
 	u := uint64(n)
-	if n < 0 {
-		d++
-		neg = true
-		u = uint64(^n + 1)
+	if neg {
+		u = -u // uint64(^n + 1)
 	}
 
-	d += 1 + int(math.Log10(float64(u))) // Number of digits of u.
-	s := make([]byte, d)
-	mi := d - 1
 	for u > 0 {
-		s[mi] = byte(u%10 + '0')
+		i--
+		s[i] = byte(u%10 + '0')
 		u /= 10
-		mi--
 	}
 
 	if neg {
-		s[0] = '-'
+		i--
+		s[i] = '-'
 	}
-	return string(s)
+
+	return string(s[i:])
 }
