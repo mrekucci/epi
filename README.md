@@ -1,4 +1,4 @@
-# epi
+# epi [![Build Status](https://travis-ci.org/mrekucci/epi.png)](https://travis-ci.org/mrekucci/epi)
 
 This is a work-in-progress, solutions for [Elements of Programming Interviews][1] problems written in Golang.
 
