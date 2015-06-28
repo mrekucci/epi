@@ -4,7 +4,10 @@
 
 package epi
 
-import "testing"
+import (
+	"math/rand"
+	"testing"
+)
 
 var minBatteryCapTests = []struct {
 	in   []int
@@ -41,8 +44,16 @@ func TestMinBatteryCap(t *testing.T) {
 	}
 }
 
-func BenchmarkMinBatteryCap(b *testing.B) {
+func benchMinBatteryCap(b *testing.B, size int) {
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		MinBatteryCap([]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}) // TODO: improve benchmark.
+		data := rand.Perm(size)
+		b.StartTimer()
+		MinBatteryCap(data)
+		b.StopTimer()
 	}
 }
+
+func BenchmarkMinBatteryCap1e2(b *testing.B) { benchMinBatteryCap(b, 1e2) }
+func BenchmarkMinBatteryCap1e4(b *testing.B) { benchMinBatteryCap(b, 1e4) }
+func BenchmarkMinBatteryCap1e6(b *testing.B) { benchMinBatteryCap(b, 1e6) }

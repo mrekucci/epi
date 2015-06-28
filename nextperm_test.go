@@ -5,6 +5,7 @@
 package epi
 
 import (
+	"math/rand"
 	"reflect"
 	"testing"
 )
@@ -33,8 +34,16 @@ func TestNext(t *testing.T) {
 	}
 }
 
-func BenchmarkNext(b *testing.B) {
+func benchNext(b *testing.B, size int) {
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		Next([]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15})
+		data := rand.Perm(size)
+		b.StartTimer()
+		Next(data)
+		b.StopTimer()
 	}
 }
+
+func BenchmarkNext1e2(b *testing.B) { benchNext(b, 1e2) }
+func BenchmarkNext1e4(b *testing.B) { benchNext(b, 1e4) }
+func BenchmarkNext1e6(b *testing.B) { benchNext(b, 1e6) }

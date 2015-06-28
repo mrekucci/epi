@@ -5,6 +5,7 @@
 package epi
 
 import (
+	"math/rand"
 	"reflect"
 	"testing"
 )
@@ -47,7 +48,7 @@ func init() {
 	for i := range powerSetTests {
 		test := &powerSetTests[i]
 		if !test.ok {
-			l := (32 << (^uint(0) >> 63))
+			l := intSize
 			for i := 0; i < l; i++ {
 				test.in = append(test.in, "0")
 			}
@@ -64,9 +65,20 @@ func TestPowerSet(t *testing.T) {
 	}
 }
 
-func BenchmarkPowerSet(b *testing.B) {
-	s := []interface{}{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"}
+func benchPowerSet(b *testing.B, size int) {
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		PowerSet(s)
+		ints := rand.Perm(size)
+		data := make([]interface{}, len(ints))
+		for j := range data {
+			data[j] = ints[j]
+		}
+		b.StartTimer()
+		PowerSet(data)
+		b.StopTimer()
 	}
 }
+
+func BenchmarkPowerSetIntSizeDiv8(b *testing.B) { benchPowerSet(b, intSize/8) }
+func BenchmarkPowerSetIntSizeDiv6(b *testing.B) { benchPowerSet(b, intSize/6) }
+func BenchmarkPowerSetIntSizeDiv4(b *testing.B) { benchPowerSet(b, intSize/4) }

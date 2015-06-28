@@ -5,6 +5,7 @@
 package epi
 
 import (
+	"math/rand"
 	"reflect"
 	"testing"
 )
@@ -47,8 +48,20 @@ func TestClockwise(t *testing.T) {
 	}
 }
 
-func BenchmarkClockwise(b *testing.B) {
+func benchClockwise(b *testing.B, size int) {
+	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		Clockwise([][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}})
+		ints := rand.Perm(size)
+		data := make([][]int, len(ints))
+		for j := range data {
+			data[j] = append([]int(nil), ints...)
+		}
+		b.StartTimer()
+		Clockwise(data)
+		b.StopTimer()
 	}
 }
+
+func BenchmarkClockwise1e1(b *testing.B) { benchClockwise(b, 1e1) }
+func BenchmarkClockwise1e2(b *testing.B) { benchClockwise(b, 1e2) }
+func BenchmarkClockwise1e3(b *testing.B) { benchClockwise(b, 1e3) }

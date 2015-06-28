@@ -4,12 +4,6 @@
 
 package epi
 
-// Integer limit values.
-const (
-	maxInt = int(^uint(0) >> 1)
-	minInt = -maxInt - 1
-)
-
 // max returns the larger of x or y.
 func max(x, y int) int {
 	if x > y {

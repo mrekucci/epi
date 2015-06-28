@@ -5,6 +5,7 @@
 package epi
 
 import (
+	"math/rand"
 	"reflect"
 	"testing"
 )
@@ -32,8 +33,19 @@ func TestRearrange(t *testing.T) {
 	}
 }
 
-func BenchmarkRearrange(b *testing.B) {
+func benchRearrange(b *testing.B, size int) {
+	b.StopTimer()
+	p := size / 3
+	q := size
 	for i := 0; i < b.N; i++ {
-		Rearrange([]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}, 7)
+		data := rand.Perm(size)
+		j := data[i%size]%(q-p) + p
+		b.StartTimer()
+		Rearrange(data, j)
+		b.StopTimer()
 	}
 }
+
+func BenchmarkRearrange1e2(b *testing.B) { benchRearrange(b, 1e2) }
+func BenchmarkRearrange1e4(b *testing.B) { benchRearrange(b, 1e4) }
+func BenchmarkRearrange1e6(b *testing.B) { benchRearrange(b, 1e6) }
