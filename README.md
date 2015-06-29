@@ -1,10 +1,17 @@
-# epi [![Build Status](https://travis-ci.org/mrekucci/epi.svg)](https://travis-ci.org/mrekucci/epi) [![Coverage Status](https://coveralls.io/repos/mrekucci/epi/badge.svg?branch=master)](https://coveralls.io/r/mrekucci/epi?branch=master)
+epi
+===
+
+[![Build Status](https://travis-ci.org/mrekucci/epi.svg)](https://travis-ci.org/mrekucci/epi)
+[![Coverage Status](https://coveralls.io/repos/mrekucci/epi/badge.svg?branch=master)](https://coveralls.io/r/mrekucci/epi?branch=master)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE.txt)
 
 This is a work-in-progress, solutions for [Elements of Programming Interviews][1] problems written in Golang.
 
-# Solutions
+Solutions
+=========
 
-## Primitive Types
+Primitive Types
+---------------
 
 | Problem                                                  | Test         |
 |----------------------------------------------------------|:------------:|
@@ -15,7 +22,8 @@ This is a work-in-progress, solutions for [Elements of Programming Interviews][1
 | [Generate the power set][10]                             | [tests][11]  |
 | [Interconvert strings and integers][12]                  | [tests][13]  |
 
-## Arrays and Strings
+Arrays and Strings
+------------------
 
 ### Arrays
 
