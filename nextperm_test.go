@@ -27,9 +27,9 @@ var nextTests = []struct {
 
 func TestNext(t *testing.T) {
 	for _, tt := range nextTests {
-		got := Next(tt.in)
+		got := NextPerm(tt.in)
 		if !reflect.DeepEqual(got, tt.want) {
-			t.Errorf("Next(%d) = %d; want %d", tt.in, got, tt.want)
+			t.Errorf("NextPerm(%d) = %d; want %d", tt.in, got, tt.want)
 		}
 	}
 }
@@ -39,7 +39,7 @@ func benchNext(b *testing.B, size int) {
 	for i := 0; i < b.N; i++ {
 		data := rand.Perm(size)
 		b.StartTimer()
-		Next(data)
+		NextPerm(data)
 		b.StopTimer()
 	}
 }

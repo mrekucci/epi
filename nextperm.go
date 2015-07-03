@@ -13,9 +13,9 @@ func reverse(an []int, s, e int) {
 	}
 }
 
-// Next returns next permutation of p under lexicographical order.
+// NextPerm returns next permutation of p under lexicographical order.
 // Returns empty slice if p already contains last permutation.
-func Next(p []int) []int {
+func NextPerm(p []int) []int {
 	k := len(p) - 2
 	for k >= 0 && p[k] >= p[k+1] {
 		k--
