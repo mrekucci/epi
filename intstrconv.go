@@ -9,8 +9,8 @@ import (
 	"math"
 )
 
-var errSyntax = errors.New("ch5.stringToInt: invalid syntax")
-var errRange = errors.New("ch5.stringToInt: value out of range")
+var errSyntax = errors.New("StringToInt: invalid syntax")
+var errRange = errors.New("StringToInt: value out of range")
 
 // StringToInt converts number represented by string with base 10 to integer.
 func StringToInt(s string) (int64, error) {
