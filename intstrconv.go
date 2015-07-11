@@ -61,7 +61,7 @@ func IntToString(n int64) string {
 		return "0"
 	}
 
-	var s [19 + 1]byte // 10 is max digits of int64; +1 for sign.
+	var s [19 + 1]byte // 19 is max digits of int64; +1 for sign.
 	i := len(s)
 
 	neg := n < 0
