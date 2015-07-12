@@ -34,6 +34,12 @@ Arrays and Strings
 | [Compute the next permutation][18]                       | [tests][19]  |
 | [Compute the spiral ordering of a 2D array][20]          | [tests][21]  |
 
+### Strings
+
+| Problem                                                  | Test         |
+|----------------------------------------------------------|:------------:|
+| [Implement run-length encoding][22]                      | [tests][23]  |
+
 
 [1]: http://elementsofprogramminginterviews.com
 [2]: parity.go
@@ -56,3 +62,5 @@ Arrays and Strings
 [19]: nextperm_test.go
 [20]: spiralmetrix.go
 [21]: spiralmetrix_test.go
+[22]: rlecompr.go
+[23]: rlecompr_test.go
