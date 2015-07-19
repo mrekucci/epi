@@ -10,25 +10,23 @@ import (
 	"testing"
 )
 
-var rearrangeTests = []struct {
-	an   [5]int
-	i    int
-	want [5]int
-}{
-	{[...]int{5, 4, 3, 2, 1}, 0, [...]int{4, 3, 2, 1, 5}},
-	{[...]int{5, 4, 3, 2, 1}, 1, [...]int{1, 3, 2, 4, 5}},
-	{[...]int{5, 4, 3, 2, 1}, 2, [...]int{1, 2, 3, 4, 5}},
-	{[...]int{5, 4, 3, 2, 1}, 3, [...]int{1, 2, 3, 4, 5}},
-	{[...]int{5, 4, 3, 2, 1}, 4, [...]int{1, 3, 2, 4, 5}},
-	{[...]int{4, 3, 3, 5, 5}, 0, [...]int{3, 3, 4, 5, 5}},
-}
-
 func TestRearrange(t *testing.T) {
-	for _, tt := range rearrangeTests {
-		got := tt.an
-		Rearrange(got[:], tt.i)
-		if !reflect.DeepEqual(got, tt.want) {
-			t.Errorf("rearrange(%d, %d) got %d; want %d", tt.an, tt.i, got, tt.want)
+	for _, test := range []struct {
+		an   [5]int
+		i    int
+		want [5]int
+	}{
+		{[...]int{5, 4, 3, 2, 1}, 0, [...]int{4, 3, 2, 1, 5}},
+		{[...]int{5, 4, 3, 2, 1}, 1, [...]int{1, 3, 2, 4, 5}},
+		{[...]int{5, 4, 3, 2, 1}, 2, [...]int{1, 2, 3, 4, 5}},
+		{[...]int{5, 4, 3, 2, 1}, 3, [...]int{1, 2, 3, 4, 5}},
+		{[...]int{5, 4, 3, 2, 1}, 4, [...]int{1, 3, 2, 4, 5}},
+		{[...]int{4, 3, 3, 5, 5}, 0, [...]int{3, 3, 4, 5, 5}},
+	} {
+		got := test.an
+		Rearrange(got[:], test.i)
+		if !reflect.DeepEqual(got, test.want) {
+			t.Errorf("Rearrange(%d, %d) got %d; want %d", test.an, test.i, got, test.want)
 		}
 	}
 }

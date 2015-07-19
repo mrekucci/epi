@@ -10,57 +10,49 @@ import (
 	"testing"
 )
 
-var powerSetTests = []struct {
-	in   []interface{}
-	want []interface{}
-	ok   bool
-}{
-	{
-		[]interface{}{"A", "B"},
-		[]interface{}{
-			[]interface{}(nil),
-			[]interface{}{"A"},
-			[]interface{}{"B"},
-			[]interface{}{"A", "B"}},
-		true,
-	},
-	{
-		[]interface{}{"A", "B", "C"},
-		[]interface{}{
-			[]interface{}(nil),
-			[]interface{}{"A"},
-			[]interface{}{"B"},
+func TestPowerSet(t *testing.T) {
+	for _, test := range []struct {
+		in   []interface{}
+		want []interface{}
+		ok   bool
+	}{
+		{
 			[]interface{}{"A", "B"},
-			[]interface{}{"C"},
-			[]interface{}{"A", "C"},
-			[]interface{}{"B", "C"},
-			[]interface{}{"A", "B", "C"}},
-		true,
-	},
-	{
-		[]interface{}(nil), // Will be initialized in init function to 32 or 64 elements according to architecture.
-		[]interface{}(nil),
-		false,
-	},
-}
-
-func init() {
-	for i := range powerSetTests {
-		test := &powerSetTests[i]
+			[]interface{}{
+				[]interface{}(nil),
+				[]interface{}{"A"},
+				[]interface{}{"B"},
+				[]interface{}{"A", "B"}},
+			true,
+		},
+		{
+			[]interface{}{"A", "B", "C"},
+			[]interface{}{
+				[]interface{}(nil),
+				[]interface{}{"A"},
+				[]interface{}{"B"},
+				[]interface{}{"A", "B"},
+				[]interface{}{"C"},
+				[]interface{}{"A", "C"},
+				[]interface{}{"B", "C"},
+				[]interface{}{"A", "B", "C"}},
+			true,
+		},
+		{
+			[]interface{}(nil), // Will be initialized, before the test will run, to 32 or 64 elements (according to the architecture).
+			[]interface{}(nil),
+			false,
+		},
+	} {
 		if !test.ok {
 			l := intSize
 			for i := 0; i < l; i++ {
 				test.in = append(test.in, "0")
 			}
 		}
-	}
-}
 
-func TestPowerSet(t *testing.T) {
-	for _, tt := range powerSetTests {
-		got, ok := PowerSet(tt.in)
-		if !reflect.DeepEqual(got, tt.want) || ok != tt.ok {
-			t.Errorf("PowerSet(%#v) = %#v, %t; want %#v, %t", tt.in, got, ok, tt.want, tt.ok)
+		if got, ok := PowerSet(test.in); !reflect.DeepEqual(got, test.want) || ok != test.ok {
+			t.Errorf("PowerSet(%#v) = %#v, %t; want %#v, %t", test.in, got, ok, test.want, test.ok)
 		}
 	}
 }

@@ -5,8 +5,8 @@
 package epi
 
 // PowerSet returns a power set of s.
-// The length of s is limited to size of int.
-// When the size is crossed then nil interface, and false is returned.
+// The length of s must be less then size of int.
+// If the size is equal or bigger, then nil interface and false is returned.
 func PowerSet(s []interface{}) (ps []interface{}, ok bool) {
 	if len(s) >= intSize {
 		return ps, false

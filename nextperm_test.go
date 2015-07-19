@@ -10,26 +10,23 @@ import (
 	"testing"
 )
 
-var nextTests = []struct {
-	in   []int
-	want []int
-}{
-	{[]int{1}, []int{}},
-	{[]int{1, 2}, []int{2, 1}},
-	{[]int{2, 1}, []int{}},
-	{[]int{1, 2, 3}, []int{1, 3, 2}},
-	{[]int{1, 3, 2}, []int{2, 1, 3}},
-	{[]int{2, 1, 3}, []int{2, 3, 1}},
-	{[]int{2, 3, 1}, []int{3, 1, 2}},
-	{[]int{3, 1, 2}, []int{3, 2, 1}},
-	{[]int{3, 2, 1}, []int{}},
-}
-
 func TestNext(t *testing.T) {
-	for _, tt := range nextTests {
-		got := NextPerm(tt.in)
-		if !reflect.DeepEqual(got, tt.want) {
-			t.Errorf("NextPerm(%d) = %d; want %d", tt.in, got, tt.want)
+	for _, test := range []struct {
+		in   []int
+		want []int
+	}{
+		{[]int{1}, []int{}},
+		{[]int{1, 2}, []int{2, 1}},
+		{[]int{2, 1}, []int{}},
+		{[]int{1, 2, 3}, []int{1, 3, 2}},
+		{[]int{1, 3, 2}, []int{2, 1, 3}},
+		{[]int{2, 1, 3}, []int{2, 3, 1}},
+		{[]int{2, 3, 1}, []int{3, 1, 2}},
+		{[]int{3, 1, 2}, []int{3, 2, 1}},
+		{[]int{3, 2, 1}, []int{}},
+	} {
+		if got := NextPerm(test.in); !reflect.DeepEqual(got, test.want) {
+			t.Errorf("NextPerm(%d) = %d; want %d", test.in, got, test.want)
 		}
 	}
 }

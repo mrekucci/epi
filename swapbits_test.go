@@ -6,22 +6,19 @@ package epi
 
 import "testing"
 
-var swapBitsTests = []struct {
-	x    uint64
-	i, j uint64
-	want uint64
-}{
-	{1, 0, 1, 1 << 1},
-	{5, 2, 4, 17},
-	{20, 2, 4, 20},
-	{1, 0, 63, 1 << 63},
-}
-
 func TestSwapBits(t *testing.T) {
-	for _, tt := range swapBitsTests {
-		got := SwapBits(tt.x, tt.i, tt.j)
-		if got != tt.want {
-			t.Errorf("SwapBits(%d, %d, %d) = %d; want %d", tt.x, tt.i, tt.j, got, tt.want)
+	for _, test := range []struct {
+		x    uint64
+		i, j uint64
+		want uint64
+	}{
+		{1, 0, 1, 1 << 1},
+		{5, 2, 4, 17},
+		{20, 2, 4, 20},
+		{1, 0, 63, 1 << 63},
+	} {
+		if got := SwapBits(test.x, test.i, test.j); got != test.want {
+			t.Errorf("SwapBits(%d, %d, %d) = %d; want %d", test.x, test.i, test.j, got, test.want)
 		}
 	}
 }
