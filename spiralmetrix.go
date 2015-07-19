@@ -38,9 +38,7 @@ func add(a [][]int, ac []int, off int) []int {
 
 // Clockwise returns an array which elements are under
 // clockwise spiral order of the original array a.
-func Clockwise(a [][]int) []int {
-	var ac []int
-
+func Clockwise(a [][]int) (ac []int) {
 	// Center of a.
 	ctr := len(a) >> 1
 	if len(a)%2 != 0 {
@@ -49,6 +47,5 @@ func Clockwise(a [][]int) []int {
 	for off := 0; off < ctr; off++ {
 		ac = add(a, ac, off)
 	}
-
 	return ac
 }
