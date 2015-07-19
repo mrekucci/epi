@@ -51,7 +51,7 @@ func TestClockwise(t *testing.T) {
 func benchClockwise(b *testing.B, size int) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		ints := rand.Perm(size)
+		ints := rand.New(rand.NewSource(1239)).Perm(size)
 		data := make([][]int, len(ints))
 		for j := range data {
 			data[j] = append([]int(nil), ints...)

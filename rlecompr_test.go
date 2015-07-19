@@ -9,7 +9,7 @@ import (
 func charPerm(n int) string {
 	const chartable = "abcdefghijklmnopqrstuvwxyz"
 	q := len(chartable) - 1
-	ints := rand.Perm(n)
+	ints := rand.New(rand.NewSource(1238)).Perm(n)
 	chars := make([]byte, len(ints))
 	for j, n := range ints {
 		chars[j] = chartable[n%q]

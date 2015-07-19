@@ -38,7 +38,7 @@ func benchRearrange(b *testing.B, size int) {
 	p := size / 3
 	q := size
 	for i := 0; i < b.N; i++ {
-		data := rand.Perm(size)
+		data := rand.New(rand.NewSource(1234)).Perm(size)
 		j := data[i%size]%(q-p) + p
 		b.StartTimer()
 		Rearrange(data, j)

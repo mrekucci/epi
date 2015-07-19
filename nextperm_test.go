@@ -37,7 +37,7 @@ func TestNext(t *testing.T) {
 func benchNext(b *testing.B, size int) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		data := rand.Perm(size)
+		data := rand.New(rand.NewSource(1236)).Perm(size)
 		b.StartTimer()
 		NextPerm(data)
 		b.StopTimer()
