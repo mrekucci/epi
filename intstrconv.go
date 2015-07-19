@@ -9,15 +9,18 @@ import (
 	"math"
 )
 
-var errSyntax = errors.New("StringToInt: invalid syntax")
-var errRange = errors.New("StringToInt: value out of range")
+// ErrSyntax indicates that a value does not have the right syntax.
+var ErrSyntax = errors.New("StringToInt: invalid syntax")
+
+// ErrRange indicates that a value is out of range.
+var ErrRange = errors.New("StringToInt: value out of range")
 
 // StringToInt converts number represented by string with base 10 to integer.
 func StringToInt(s string) (int64, error) {
 	const cutoff = math.MaxInt64/10 + 1 // The first smallest number such that cutoff*10 > MaxInt64.
 
 	if len(s) == 0 {
-		return 0, errSyntax
+		return 0, ErrSyntax
 	}
 
 	neg := false
@@ -31,19 +34,19 @@ func StringToInt(s string) (int64, error) {
 	var u uint64
 	for i := range s {
 		if s[i] < '0' || s[i] > '9' {
-			return 0, errSyntax
+			return 0, ErrSyntax
 		}
 
 		if u >= cutoff {
 			// u*10 overflows.
-			return 0, errRange
+			return 0, ErrRange
 		}
 		u *= 10
 
 		nu := u + uint64(s[i]-'0')
 		if neg && nu > -math.MinInt64 || !neg && nu > math.MaxInt64 {
 			// u+v overflows.
-			return 0, errRange
+			return 0, ErrRange
 		}
 		u = nu
 	}

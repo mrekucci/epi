@@ -12,7 +12,7 @@ func TestStringToInt(t *testing.T) {
 		want int64
 		err  error
 	}{
-		{"", 0, errSyntax},
+		{"", 0, ErrSyntax},
 		{"0", 0, nil},
 		{"-0", 0, nil},
 		{"1", 1, nil},
@@ -24,16 +24,16 @@ func TestStringToInt(t *testing.T) {
 		{"-123456789", -123456789, nil},
 		{"9223372036854775807", 1<<63 - 1, nil},
 		{"-9223372036854775807", -(1<<63 - 1), nil},
-		{"9223372036854775808", 0, errRange},
+		{"9223372036854775808", 0, ErrRange},
 		{"-9223372036854775808", -1 << 63, nil},
-		{"9223372036854775809", 0, errRange},
-		{"-9223372036854775809", 0, errRange},
-		{"9223372036854775810", 0, errRange},
-		{"-9223372036854775810", 0, errRange},
-		{"a", 0, errSyntax},
-		{"-a", 0, errSyntax},
-		{"123a", 0, errSyntax},
-		{"-123a", 0, errSyntax},
+		{"9223372036854775809", 0, ErrRange},
+		{"-9223372036854775809", 0, ErrRange},
+		{"9223372036854775810", 0, ErrRange},
+		{"-9223372036854775810", 0, ErrRange},
+		{"a", 0, ErrSyntax},
+		{"-a", 0, ErrSyntax},
+		{"123a", 0, ErrSyntax},
+		{"-123a", 0, ErrSyntax},
 	} {
 		if got, err := StringToInt(test.in); got != test.want || err != test.err {
 			t.Errorf("StringToInt(%q) = %d, %v; want %d, %v", test.in, got, err, test.want, test.err)
