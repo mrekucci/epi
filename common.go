@@ -18,11 +18,12 @@ const (
 // randStr returns a string of length n constructed
 // from pseudo-randomly selected characters from t.
 func randStr(n int, t string) string {
-	q := len(t) - 1
-	ints := rand.New(rand.NewSource(1238)).Perm(n)
-	chars := make([]byte, len(ints))
-	for j, n := range ints {
-		chars[j] = t[n%q]
+	l := len(t) - 1
+	chars := make([]byte, n)
+	if l > 0 {
+		for i, p := range rand.New(rand.NewSource(1238)).Perm(n) {
+			chars[i] = t[p%l]
+		}
 	}
 	return string(chars)
 }

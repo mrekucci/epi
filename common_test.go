@@ -11,7 +11,12 @@ func TestRandStr(t *testing.T) {
 		n int
 		t string
 	}{
-		{10, "abc"},
+		{1, ""},
+		{1, "a"},
+		{1, "abc"},
+		{10, "ab"},
+		{10, "abcdefghijklmnopqrstuvwxyz"},
+		{100, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"},
 	} {
 		if got := len(randStr(test.n, test.t)); got != test.n {
 			t.Errorf("len(randStr(%d, %q) = %d; want %d", test.n, test.t, got, test.n)
