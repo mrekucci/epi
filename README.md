@@ -39,6 +39,7 @@ Arrays and Strings
 | Problem                                                  | Test         |
 |----------------------------------------------------------|:------------:|
 | [Implement run-length encoding][22]                      | [tests][23]  |
+| [Reverse all the words in a sentence][24]                | [tests][25]  |
 
 
 [1]: http://elementsofprogramminginterviews.com
@@ -64,3 +65,5 @@ Arrays and Strings
 [21]: spiralmetrix_test.go
 [22]: rlecompr.go
 [23]: rlecompr_test.go
+[24]: reversewords.go
+[25]: reversewords_test.go

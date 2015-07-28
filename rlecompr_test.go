@@ -4,22 +4,7 @@
 
 package epi
 
-import (
-	"math/rand"
-	"testing"
-)
-
-// charPerm returns pseudo-random permutation of n characters as a string.
-func charPerm(n int) string {
-	const chartable = "abcdefghijklmnopqrstuvwxyz"
-	q := len(chartable) - 1
-	ints := rand.New(rand.NewSource(1238)).Perm(n)
-	chars := make([]byte, len(ints))
-	for j, n := range ints {
-		chars[j] = chartable[n%q]
-	}
-	return string(chars)
-}
+import "testing"
 
 func TestRLEEncode(t *testing.T) {
 	for _, test := range []struct {
@@ -55,7 +40,7 @@ func TestRLEEncode(t *testing.T) {
 func benchRLEEncode(b *testing.B, size int) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		s := charPerm(size)
+		s := randStr(size, "abcdefghijklmnopqrstuvwxyz")
 		b.StartTimer()
 		RLEEncode(s)
 		b.StopTimer()
@@ -102,7 +87,7 @@ func TestRLEDecode(t *testing.T) {
 func benchRLEDecode(b *testing.B, size int) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		s, ok := RLEEncode(charPerm(size))
+		s, ok := RLEEncode(randStr(size, "abcdefghijklmnopqrstuvwxyz"))
 		if !ok {
 			b.Errorf("RLEEncode did not encode string properly")
 		}

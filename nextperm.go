@@ -4,10 +4,10 @@
 
 package epi
 
-// reverse reverse elements of an[s:e] in an.
-func reverse(an []int, s, e int) {
+// reverseInts reverse elements of a[s:e] in a.
+func reverseInts(a []int, s, e int) {
 	for e > s {
-		an[s], an[e] = an[e], an[s]
+		a[s], a[e] = a[e], a[s]
 		s++
 		e--
 	}
@@ -38,7 +38,7 @@ func NextPerm(p []int) []int {
 	pn[k], pn[l] = pn[l], pn[k]
 	// Because swapping leaves the sequence after position k in decreasing order, we
 	// must reverse this sub-sequence to produce its lexicographically minimal permutation.
-	reverse(pn, k+1, len(pn)-1)
+	reverseInts(pn, k+1, len(pn)-1)
 
 	return pn
 }
