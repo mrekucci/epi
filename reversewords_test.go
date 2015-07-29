@@ -4,7 +4,10 @@
 
 package epi
 
-import "testing"
+import (
+	"math/rand"
+	"testing"
+)
 
 func TestReverseWords(t *testing.T) {
 	for _, test := range []struct {
@@ -31,7 +34,7 @@ func TestReverseWords(t *testing.T) {
 func benchReverseWords(b *testing.B, size int) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		s := randStr(size, "The quick brown fox jumps over the lazy dog") // Pangram.
+		s := randStr(size, "The quick brown fox jumps over the lazy dog", rand.NewSource(int64(i))) // Pangram.
 		b.StartTimer()
 		ReverseWords(s)
 		b.StopTimer()

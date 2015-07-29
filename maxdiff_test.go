@@ -44,7 +44,7 @@ func TestMinBatteryCap(t *testing.T) {
 func benchMinBatteryCap(b *testing.B, size int) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		data := rand.New(rand.NewSource(1235)).Perm(size)
+		data := rand.New(rand.NewSource(int64(i))).Perm(size)
 		b.StartTimer()
 		MinBatteryCap(data)
 		b.StopTimer()

@@ -4,29 +4,33 @@
 
 package epi
 
-import "testing"
+import (
+	"math/rand"
+	"testing"
+)
 
 func TestRandStr(t *testing.T) {
 	for _, test := range []struct {
 		n int
 		t string
+		s rand.Source
 	}{
-		{1, ""},
-		{1, "a"},
-		{1, "abc"},
-		{10, "ab"},
-		{10, "abcdefghijklmnopqrstuvwxyz"},
-		{100, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"},
+		{1, "", rand.NewSource(1)},
+		{1, "a", rand.NewSource(2)},
+		{1, "abc", rand.NewSource(3)},
+		{10, "ab", rand.NewSource(4)},
+		{10, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(5)},
+		{100, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", rand.NewSource(6)},
 	} {
-		if got := len(randStr(test.n, test.t)); got != test.n {
-			t.Errorf("len(randStr(%d, %q) = %d; want %d", test.n, test.t, got, test.n)
+		if got := len(randStr(test.n, test.t, test.s)); got != test.n {
+			t.Errorf("len(randStr(%d, %q, %v) = %d; want %d", test.n, test.t, test.s, got, test.n)
 		}
 	}
 }
 
 func benchRandStr(b *testing.B, size int) {
 	for i := 0; i < b.N; i++ {
-		randStr(size, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+		randStr(size, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", rand.NewSource(int64(i)))
 	}
 }
 

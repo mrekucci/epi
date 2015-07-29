@@ -17,11 +17,12 @@ const (
 
 // randStr returns a string of length n constructed
 // from pseudo-randomly selected characters from t.
-func randStr(n int, t string) string {
+// The pseudo-randomness uses random values from s.
+func randStr(n int, t string, s rand.Source) string {
 	l := len(t) - 1
 	chars := make([]byte, n)
 	if l > 0 {
-		for i, p := range rand.New(rand.NewSource(1238)).Perm(n) {
+		for i, p := range rand.New(s).Perm(n) {
 			chars[i] = t[p%l]
 		}
 	}

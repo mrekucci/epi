@@ -62,7 +62,7 @@ func benchPowerSet(b *testing.B, size int) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
 		data := make([]interface{}, size)
-		for j, p := range rand.New(rand.NewSource(1237)).Perm(size) {
+		for j, p := range rand.New(rand.NewSource(int64(i))).Perm(size) {
 			data[j] = p
 		}
 		b.StartTimer()

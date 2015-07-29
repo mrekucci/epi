@@ -4,7 +4,10 @@
 
 package epi
 
-import "testing"
+import (
+	"math/rand"
+	"testing"
+)
 
 func TestRLEEncode(t *testing.T) {
 	for _, test := range []struct {
@@ -40,7 +43,7 @@ func TestRLEEncode(t *testing.T) {
 func benchRLEEncode(b *testing.B, size int) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		s := randStr(size, "abcdefghijklmnopqrstuvwxyz")
+		s := randStr(size, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(i)))
 		b.StartTimer()
 		RLEEncode(s)
 		b.StopTimer()
@@ -87,7 +90,7 @@ func TestRLEDecode(t *testing.T) {
 func benchRLEDecode(b *testing.B, size int) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		s, ok := RLEEncode(randStr(size, "abcdefghijklmnopqrstuvwxyz"))
+		s, ok := RLEEncode(randStr(size, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(i))))
 		if !ok {
 			b.Errorf("RLEEncode did not encode string properly")
 		}
