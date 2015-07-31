@@ -40,6 +40,7 @@ Arrays and Strings
 |----------------------------------------------------------|:------------:|
 | [Implement run-length encoding][22]                      | [tests][23]  |
 | [Reverse all the words in a sentence][24]                | [tests][25]  |
+| [Find the first occurrence of a substring][26]           | [tests][27]  |
 
 
 [1]: http://elementsofprogramminginterviews.com
@@ -67,3 +68,5 @@ Arrays and Strings
 [23]: rlecompr_test.go
 [24]: reversewords.go
 [25]: reversewords_test.go
+[26]: strindex.go
+[27]: strindex_test.go
