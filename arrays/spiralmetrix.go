@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE.txt file.
 
-package epi
+package arrays
 
 // add adds elements to ac for offset off in spiral order and returns modified ac.
 func add(a [][]int, ac []int, off int) []int {

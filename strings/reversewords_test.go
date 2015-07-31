@@ -2,11 +2,13 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE.txt file.
 
-package epi
+package strings
 
 import (
 	"math/rand"
 	"testing"
+
+	"github.com/mrekucci/epi/epiutil"
 )
 
 func TestReverseWords(t *testing.T) {
@@ -34,7 +36,7 @@ func TestReverseWords(t *testing.T) {
 func benchReverseWords(b *testing.B, size int) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		s := randStr(size, "The quick brown fox jumps over the lazy dog", rand.NewSource(int64(i))) // Pangram.
+		s := epiutil.RandStr(size, "The quick brown fox jumps over the lazy dog", rand.NewSource(int64(i))) // Pangram.
 		b.StartTimer()
 		ReverseWords(s)
 		b.StopTimer()

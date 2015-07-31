@@ -2,13 +2,13 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE.txt file.
 
-package epi
+package strings
 
-// StrIndexNaive returns an start index of pattern p in the string s.
+// IndexNaive returns an start index of pattern p in the string s.
 // It uses sequential search method for matching a pattern p in the string s.
 // Let n be len(s) and m be len(p), then the matching time is O((n−m+1)*m)
 // without any pre-processing time.
-func StrIndexNaive(s, p string) int {
+func IndexNaive(s, p string) int {
 	m := len(p)
 	if m == 0 {
 		return 0
@@ -21,16 +21,14 @@ func StrIndexNaive(s, p string) int {
 	return -1
 }
 
-// 4 282 082 394 112
-// 4 294 967 296
-// StrIndexRK returns an start index of pattern p in the string s.
+// IndexRK returns an start index of pattern p in the string s.
 // It uses Rabin-Karp method for matching a pattern p in the string s.
 // Let n be len(s) and m be len(p), then the time for pre-processing is Θ(m).
 // And the time for matching:
 // 	- average: Θ(n+m+1)
 // 	- worst: Θ((n−m+1)*m)
 //
-func StrIndexRK(s, p string) int {
+func IndexRK(s, p string) int {
 	const b = 977 // Base (a prime).
 
 	n := len(s)
@@ -57,7 +55,7 @@ func StrIndexRK(s, p string) int {
 	// a better performance characteristics.
 
 	// Pre-processing.
-	var bp, ph, sh uint32 = 1, 0, 0 //
+	var bp, ph, sh uint32 = 1, 0, 0
 	for i := 0; i < m; i++ {
 		if i > 0 { // Base power: bp = b**(m-1)%(2**32).
 			bp *= b // Implicit modulus 2**32.

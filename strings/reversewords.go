@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE.txt file.
 
-package epi
+package strings
 
 // reverseBytes reverse elements of a[s:e] in a.
 func reverseBytes(a []byte, s, e int) {

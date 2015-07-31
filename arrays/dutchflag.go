@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE.txt file.
 
-package epi
+package arrays
 
 // Rearrange change order of given slice such that all elements
 // less than an[i] appear first, followed by elements equal to

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE.txt file.
 
-package epi
+package epiutil
 
 import (
 	"math/rand"
@@ -22,7 +22,7 @@ func TestRandStr(t *testing.T) {
 		{10, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(5)},
 		{100, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", rand.NewSource(6)},
 	} {
-		if got := len(randStr(test.n, test.t, test.s)); got != test.n {
+		if got := len(RandStr(test.n, test.t, test.s)); got != test.n {
 			t.Errorf("len(randStr(%d, %q, %v) = %d; want %d", test.n, test.t, test.s, got, test.n)
 		}
 	}
@@ -30,7 +30,7 @@ func TestRandStr(t *testing.T) {
 
 func benchRandStr(b *testing.B, size int) {
 	for i := 0; i < b.N; i++ {
-		randStr(size, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", rand.NewSource(int64(i)))
+		RandStr(size, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", rand.NewSource(int64(i)))
 	}
 }
 

@@ -2,7 +2,9 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE.txt file.
 
-package epi
+package strings
+
+import "github.com/mrekucci/epi/ptypes"
 
 // RLEEncode encode successive repeated characters
 // by the repetition count and the character.
@@ -15,7 +17,7 @@ func RLEEncode(s string) (string, bool) {
 		case '0' <= s[i] && s[i] <= '9':
 			return "", false
 		case len(s) == i+1 || s[i] != s[i+1]:
-			es = append(append(es, IntToString(int64(cnt))...), s[i])
+			es = append(append(es, ptypes.IntToString(int64(cnt))...), s[i])
 			cnt = 1
 		default:
 			cnt++

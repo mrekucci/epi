@@ -2,11 +2,13 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE.txt file.
 
-package epi
+package strings
 
 import (
 	"math/rand"
 	"testing"
+
+	"github.com/mrekucci/epi/epiutil"
 )
 
 func TestRLEEncode(t *testing.T) {
@@ -43,7 +45,7 @@ func TestRLEEncode(t *testing.T) {
 func benchRLEEncode(b *testing.B, size int) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		s := randStr(size, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(i)))
+		s := epiutil.RandStr(size, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(i)))
 		b.StartTimer()
 		RLEEncode(s)
 		b.StopTimer()
@@ -90,7 +92,7 @@ func TestRLEDecode(t *testing.T) {
 func benchRLEDecode(b *testing.B, size int) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		s, ok := RLEEncode(randStr(size, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(i))))
+		s, ok := RLEEncode(epiutil.RandStr(size, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(i))))
 		if !ok {
 			b.Errorf("RLEEncode did not encode string properly")
 		}

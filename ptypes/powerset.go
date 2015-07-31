@@ -2,7 +2,10 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE.txt file.
 
-package epi
+package ptypes
+
+// intSize is the size in bits of an int.
+const intSize = 32 << (^uint(0) >> 63)
 
 // PowerSet returns a power set of s.
 // The length of s must be less then size of int.

@@ -2,16 +2,18 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE.txt file.
 
-package epi
+package strings
 
 import (
 	"math/rand"
 	"testing"
+
+	"github.com/mrekucci/epi/epiutil"
 )
 
-type strIndexFn func(s, p string) int
+type indexFn func(s, p string) int
 
-func testStrIndexFn(t *testing.T, fn strIndexFn, fnName string) {
+func testIndexFn(t *testing.T, fn indexFn, fnName string) {
 	for _, test := range []struct {
 		s, p string
 		want int
@@ -43,13 +45,13 @@ func testStrIndexFn(t *testing.T, fn strIndexFn, fnName string) {
 	}
 }
 
-func TestStrIndexNaive(t *testing.T) { testStrIndexFn(t, StrIndexNaive, "StrIndexNaive") }
-func TestStrIndexRK(t *testing.T)    { testStrIndexFn(t, StrIndexRK, "StrIndexRK") }
+func TestIndexNaive(t *testing.T) { testIndexFn(t, IndexNaive, "IndexNaive") }
+func TestIndexRK(t *testing.T)    { testIndexFn(t, IndexRK, "IndexRK") }
 
-func benchStrIndexFn(b *testing.B, size int, fn strIndexFn, fnName string) {
+func benchIndexFn(b *testing.B, size int, fn indexFn, fnName string) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
-		s := randStr(size, "☺ abcdefghijklmnopqrstuvwxyz 世界", rand.NewSource(int64(i)))
+		s := epiutil.RandStr(size, "☺ abcdefghijklmnopqrstuvwxyz 世界", rand.NewSource(int64(i)))
 		o, c := size/3, size*2/3
 		p := s[o:c]
 		b.StartTimer()
@@ -61,9 +63,9 @@ func benchStrIndexFn(b *testing.B, size int, fn strIndexFn, fnName string) {
 	}
 }
 
-func BenchmarkStrIndexNaive1e4(b *testing.B) { benchStrIndexFn(b, 1e4, StrIndexNaive, "StrIndexNaive") }
-func BenchmarkStrIndexRK1e4(b *testing.B)    { benchStrIndexFn(b, 1e4, StrIndexRK, "StrIndexRK") }
-func BenchmarkStrIndexNaive1e6(b *testing.B) { benchStrIndexFn(b, 1e6, StrIndexNaive, "StrIndexNaive") }
-func BenchmarkStrIndexRK1e6(b *testing.B)    { benchStrIndexFn(b, 1e6, StrIndexRK, "StrIndexRK") }
-func BenchmarkStrIndexNaive1e8(b *testing.B) { benchStrIndexFn(b, 1e8, StrIndexNaive, "StrIndexNaive") }
-func BenchmarkStrIndexRK1e8(b *testing.B)    { benchStrIndexFn(b, 1e8, StrIndexRK, "StrIndexRK") }
+func BenchmarkIndexNaive1e4(b *testing.B) { benchIndexFn(b, 1e4, IndexNaive, "IndexNaive") }
+func BenchmarkIndexRK1e4(b *testing.B)    { benchIndexFn(b, 1e4, IndexRK, "IndexRK") }
+func BenchmarkIndexNaive1e6(b *testing.B) { benchIndexFn(b, 1e6, IndexNaive, "IndexNaive") }
+func BenchmarkIndexRK1e6(b *testing.B)    { benchIndexFn(b, 1e6, IndexRK, "IndexRK") }
+func BenchmarkIndexNaive1e8(b *testing.B) { benchIndexFn(b, 1e8, IndexNaive, "IndexNaive") }
+func BenchmarkIndexRK1e8(b *testing.B)    { benchIndexFn(b, 1e8, IndexRK, "IndexRK") }
