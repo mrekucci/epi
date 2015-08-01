@@ -25,7 +25,7 @@ func ReverseWords(s string) string {
 			p = q + 1
 		}
 	}
-	reverseBytes(r, p, len(r)-1) // Reverse the last world.
+	reverseBytes(r, p, len(r)-1) // Reverse the last word.
 
 	return string(r)
 }
