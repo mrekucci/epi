@@ -1,0 +1,37 @@
+// Copyright (c) 2015, Peter Mrekaj. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE.txt file.
+
+package lists
+
+// MergeSorted merges int nodes from l and f sorted lists into the ordered list m.
+// Note: when l or f contains different type from int then false is returned and
+// merged list will contains some value(s) merged from l or f up to the different
+// type.
+func MergeSorted(l, f *List) (*List, bool) {
+	m := new(List)
+	for l.Len() > 0 || f.Len() > 0 {
+		vl, nl, okl := PopInt(l)
+		if !okl {
+			return m, false
+		}
+		vf, nf, okf := PopInt(f)
+		if !okf {
+			return m, false
+		}
+
+		ll, n := l, nl // The assumption is: vl <= vf.
+		switch {
+		case l.Len() == 0:
+			ll, n = f, nf
+		case f.Len() == 0:
+			ll, n = l, n
+		case vl > vf:
+			ll, n = f, nf
+		}
+
+		ll.Remove(n)
+		m.Insert(n)
+	}
+	return m, true
+}

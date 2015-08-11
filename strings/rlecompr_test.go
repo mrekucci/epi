@@ -94,7 +94,7 @@ func benchRLEDecode(b *testing.B, size int) {
 	for i := 0; i < b.N; i++ {
 		s, ok := RLEEncode(epiutil.RandStr(size, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(i))))
 		if !ok {
-			b.Errorf("RLEEncode did not encode string properly")
+			b.Error("RLEEncode did not encode string properly")
 		}
 		b.StartTimer()
 		RLEDecode(s)

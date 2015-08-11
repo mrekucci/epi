@@ -42,6 +42,12 @@ Arrays and Strings
 | [Reverse all the words in a sentence][24]                | [tests][25]  |
 | [Find the first occurrence of a substring][26]           | [tests][27]  |
 
+Linked List
+-----------
+
+| Problem                                                  | Test         |
+|----------------------------------------------------------|:------------:|
+| [Merge two sorted lists][28]                             | [tests][29]  |
 
 [1]: http://elementsofprogramminginterviews.com
 [2]: ptypes/parity.go
@@ -70,3 +76,5 @@ Arrays and Strings
 [25]: strings/reversewords_test.go
 [26]: strings/index.go
 [27]: strings/index_test.go
+[28]: lists/mergesorted.go
+[29]: lists/mergesorted_test.go
