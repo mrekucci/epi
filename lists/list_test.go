@@ -71,6 +71,7 @@ func TestList(t *testing.T) {
 		[]*Node{&Node{Data: "A"}, &Node{Data: "B"}, &Node{Data: "C"}, &Node{Data: "D"}},
 		[]*Node{&Node{Data: 0}, &Node{Data: 1}, &Node{Data: 2}, &Node{Data: 3}, &Node{Data: 4}},
 	} {
+		// Test insert.
 		for _, n := range ns {
 			l.Insert(n)
 		}
@@ -78,29 +79,42 @@ func TestList(t *testing.T) {
 			t.Errorf("l.Insert all from %v got %s", ns, err)
 		}
 
+		// Test to slice.
 		s := l.ToSlice()
 		if err := checkListData(l, s); err != nil {
 			t.Fatalf("l.ToSlice() got %s", err)
 		}
 
-		nf := l.First()
-		if err := checkListPointers(l, append([]*Node{nf}, ns[1:]...)); err != nil {
+		// Test get first node data.
+		vf := l.First()
+		nf := ns[0]
+		if vf != nf.Data {
+			t.Errorf("l.First() = %v; want %v", vf, nf.Data)
+		}
+		if err := checkListPointers(l, ns); err != nil {
 			t.Errorf("l.First() from %v got %s", l.ToSlice(), err)
 		}
 
-		nl := l.Last()
-		if err := checkListPointers(l, append(ns[:len(ns)-1], nl)); err != nil {
+		// Test get last node data.
+		vl := l.Last()
+		nl := ns[len(ns)-1]
+		if vl != nl.Data {
+			t.Errorf("l.Last() = %v; want %v", vl, nl.Data)
+		}
+		if err := checkListPointers(l, ns); err != nil {
 			t.Errorf("l.Last() from %v got %s", l.ToSlice(), err)
 		}
 
-		l.Remove(nl) // Remove last node.
+		// Test remove.
+		nl = l.Remove(nl) // Remove last node.
+		l.Remove(nl)      // Remove already removed node.
+		l.Remove(nil)     // Remove nil.
 		if err := checkListPointers(l, ns[:len(ns)-1]); err != nil {
 			t.Errorf("l.Remove(%v) from %v got %s", nl.Data, l.ToSlice(), err)
 		}
-		for n := l.First(); n != nil; n = l.First() {
-			l.Remove(n) // Remove first node.
+		for n := l.head; n != nil; n = l.head {
+			l.Remove(n) // Clean-up list by removing heads.
 		}
-		l.Remove(nil) // Remove nil.
 		if err := checkListPointers(l, []*Node{}); err != nil {
 			t.Errorf("l.Remove from %v got %s", l.ToSlice(), err)
 		}

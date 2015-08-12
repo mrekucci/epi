@@ -18,53 +18,55 @@ type List struct {
 
 // Insert inserts node n at the end of this list.
 // The complexity is Θ(n).
-func (l *List) Insert(n *Node) {
+func (l *List) Insert(n *Node) *Node {
 	l.len++
 	if l.head == nil {
 		l.head = n
-		return
+		return n
 	}
 	p := l.head
 	for p.next != nil {
 		p = p.next
 	}
 	p.next = n
+	return n
 }
 
 // Remove removes node n from this list.
 // The complexity is O(n)
-func (l *List) Remove(n *Node) {
+func (l *List) Remove(n *Node) *Node {
 	switch {
-	case n == nil, l.head == nil: // Nothing to remove, or list is empty.
-		return
+	case n == nil || l.head == nil: // Nothing to remove, or list is empty.
+		return nil
 	case l.head == n: // If n is the first node remove it.
 		l.head = l.head.next
 		n.next = nil
 		l.len--
-		return
+		return n
 	}
 	for p := l.head; p.next != nil; p = p.next {
 		if p.next == n { // If n is the next node remove it.
 			p.next = p.next.next
 			n.next = nil
 			l.len--
-			return
+			return n
 		}
 	}
+	return nil
 }
 
-// First returns the first element of this list or nil.
+// First returns the first Node.Data of this list or nil.
 // The complexity is Θ(1).
-func (l *List) First() *Node { return l.head }
+func (l *List) First() interface{} { return l.head.Data }
 
-// Last returns last Node of this list.
+// Last returns last Node.Data of this list.
 // The complexity is Θ(n).
-func (l *List) Last() *Node {
+func (l *List) Last() interface{} {
 	p := l.head
 	for p.next != nil {
 		p = p.next
 	}
-	return p
+	return p.Data
 }
 
 // Len returns the number of elements of list l.
@@ -94,7 +96,7 @@ func NewFromSlice(data []interface{}) *List {
 // value doesn't contain any data. The ok is set to false when the
 // first value isn't of type int.
 func PopInt(l *List) (int, *Node, bool) {
-	n := l.First()
+	n := l.head
 	if n == nil || n.Data == nil {
 		return 0, n, true
 	}

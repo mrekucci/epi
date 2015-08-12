@@ -30,7 +30,7 @@ func TestMergeSorted(t *testing.T) {
 	} {
 		l, f := NewFromSlice(test.l), NewFromSlice(test.f)
 		m, ok := MergeSorted(l, f)
-		if test.ok && (l.First() != nil || f.First() != nil) {
+		if test.ok && (l.head != nil || f.head != nil) {
 			t.Errorf("MergeSorted(%v, %v) got l.First() = %v, f.First() = %v; want <nil>, <nil>", test.l, test.f, l.First(), f.First())
 		}
 		if got := m.ToSlice(); ok != test.ok || !reflect.DeepEqual(got, test.want) {

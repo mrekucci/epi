@@ -30,8 +30,7 @@ func MergeSorted(l, f *List) (*List, bool) {
 			ll, n = f, nf
 		}
 
-		ll.Remove(n)
-		m.Insert(n)
+		m.Insert(ll.Remove(n))
 	}
 	return m, true
 }
