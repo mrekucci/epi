@@ -25,7 +25,7 @@ func MergeSorted(l, f *List) (*List, bool) {
 		case l.Len() == 0:
 			ll, n = f, nf
 		case f.Len() == 0:
-			ll, n = l, n
+			ll, n = l, nl
 		case vl > vf:
 			ll, n = f, nf
 		}
