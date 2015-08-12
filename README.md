@@ -48,6 +48,7 @@ Linked List
 | Problem                                                  | Test         |
 |----------------------------------------------------------|:------------:|
 | [Merge two sorted lists][28]                             | [tests][29]  |
+| [Test for cyclicity][30]                                 | [tests][31]  |
 
 [1]: http://elementsofprogramminginterviews.com
 [2]: ptypes/parity.go
@@ -78,3 +79,5 @@ Linked List
 [27]: strings/index_test.go
 [28]: lists/mergesorted.go
 [29]: lists/mergesorted_test.go
+[30]: lists/checkcycle.go
+[31]: lists/checkcycle_test.go
