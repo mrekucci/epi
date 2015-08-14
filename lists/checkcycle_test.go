@@ -30,7 +30,9 @@ func createCycleList(data []interface{}, ci int) (*List, *Node) {
 	return l, csn
 }
 
-func TestHasCycle(t *testing.T) {
+type hasCycleFn func(l *List) *Node
+
+func testHasCycleFn(t *testing.T, fn hasCycleFn, fnName string) {
 	for _, test := range []struct {
 		l []interface{}
 		i int
@@ -49,26 +51,32 @@ func TestHasCycle(t *testing.T) {
 		{[]interface{}{0, 1, 2, 3, 4, 5, 6}, 7},
 	} {
 		l, want := createCycleList(test.l, test.i)
-		if got := HasCycle(l); got != want {
-			t.Errorf("HasCycle(%v) = %v; want %v", test.l, got, want)
+		if got := fn(l); got != want {
+			t.Errorf("%s(%v) = %v; want %v", fnName, test.l, got, want)
 		}
 	}
 }
 
-func benchHasCycle(b *testing.B, size int) {
+func TestHasCycle(t *testing.T)    { testHasCycleFn(t, HasCycle, "HasCycle") }
+func TestHasCycleAlt(t *testing.T) { testHasCycleFn(t, HasCycleAlt, "HasCycleAlt") }
+
+func benchHasCycleFn(b *testing.B, size int, fn hasCycleFn, fnName string) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
 		data := make([]interface{}, size) // We don't care about content but about pointers.
 		l, n := createCycleList(data, 0)
 		b.StartTimer()
-		csn := HasCycle(l)
+		csn := fn(l)
 		b.StopTimer()
 		if n != csn {
-			b.Error("HasCycle did not find the cycle")
+			b.Errorf("%s did not find the cycle", fnName)
 		}
 	}
 }
 
-func BenchmarkHasCycle1e1(b *testing.B) { benchHasCycle(b, 1e1) }
-func BenchmarkHasCycle1e2(b *testing.B) { benchHasCycle(b, 1e2) }
-func BenchmarkHasCycle1e3(b *testing.B) { benchHasCycle(b, 1e3) }
+func BenchmarkHasCycle1e2(b *testing.B)    { benchHasCycleFn(b, 1e2, HasCycle, "HasCycle") }
+func BenchmarkHasCycleAlt1e2(b *testing.B) { benchHasCycleFn(b, 1e2, HasCycleAlt, "HasCycleAlt") }
+func BenchmarkHasCycle2e2(b *testing.B)    { benchHasCycleFn(b, 2e2, HasCycle, "HasCycle") }
+func BenchmarkHasCycleAlt2e2(b *testing.B) { benchHasCycleFn(b, 2e2, HasCycleAlt, "HasCycleAlt") }
+func BenchmarkHasCycle3e2(b *testing.B)    { benchHasCycleFn(b, 3e2, HasCycle, "HasCycle") }
+func BenchmarkHasCycleAlt3e2(b *testing.B) { benchHasCycleFn(b, 3e2, HasCycleAlt, "HasCycleAlt") }
