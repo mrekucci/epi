@@ -43,12 +43,13 @@ func testHasCycleFn(t *testing.T, fn hasCycleFn, fnName string) {
 		// Test lists without cycle.
 		{[]interface{}{0}, -1},
 		{[]interface{}{0, 1, 2, 3, 4, 5, 6}, -1},
+		{[]interface{}{0, 1, 2, 3, 4, 5, 6}, 7},
 
 		// Test lists with cycle.
 		{[]interface{}{0}, 0},
 		{[]interface{}{0, 1, 2, 3, 4, 5, 6}, 0},
 		{[]interface{}{0, 1, 2, 3, 4, 5, 6}, 3},
-		{[]interface{}{0, 1, 2, 3, 4, 5, 6}, 7},
+		{[]interface{}{0, 1, 2, 3, 4, 5, 6}, 6},
 	} {
 		l, want := createCycleList(test.l, test.i)
 		if got := fn(l); got != want {
