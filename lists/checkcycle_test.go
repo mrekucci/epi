@@ -21,8 +21,8 @@ func createCycleList(data []interface{}, ci int) (*List, *Node) {
 	for i := 0; i <= ci; i++ {
 		csn = l.Insert(&Node{Data: data[i]})
 	}
-	var ln *Node
-	for i := ci; i < len(data); i++ {
+	ln := csn
+	for i := ci + 1; i < len(data); i++ {
 		ln = l.Insert(&Node{Data: data[i]})
 	}
 	ln.next = csn // Create a cycle from the ln to the csn.
