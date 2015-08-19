@@ -70,7 +70,7 @@ func (l *List) Last() interface{} {
 }
 
 // Len returns the number of elements of list l.
-// The complexity is Θ(n).
+// The complexity is Θ(1).
 func (l *List) Len() int { return l.len }
 
 // ToSlice returns data of this list as a slice.
