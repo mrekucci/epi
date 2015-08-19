@@ -49,6 +49,7 @@ Linked List
 |----------------------------------------------------------|:------------:|
 | [Merge two sorted lists][28]                             | [tests][29]  |
 | [Test for cyclicity][30]                                 | [tests][31]  |
+| [Compute the median of a sorted circular linked list][32]| [tests][33]  |
 
 [1]: http://elementsofprogramminginterviews.com
 [2]: ptypes/parity.go
@@ -81,3 +82,5 @@ Linked List
 [29]: lists/mergesorted_test.go
 [30]: lists/checkcycle.go
 [31]: lists/checkcycle_test.go
+[32]: lists/median.go
+[33]: lists/median_test.go
