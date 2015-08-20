@@ -8,7 +8,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/mrekucci/epi/epiutil"
+	"github.com/mrekucci/epi/internal/epiutil"
 )
 
 func TestReverseWords(t *testing.T) {
