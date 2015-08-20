@@ -14,7 +14,7 @@ func IntWeight(x uint64) (w int) {
 }
 
 // ClosestInt returns integer closest to x with the same weight.
-func ClosestInt(x uint64) (uint64, bool) {
+func ClosestInt(x uint64) (ci uint64, ok bool) {
 	for i := uint(0); i < 63; i++ {
 		if (x>>i)&1 != (x >> (i + 1) & 1) {
 			x ^= 1<<i | 1<<(i+1)

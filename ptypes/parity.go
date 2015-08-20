@@ -19,12 +19,12 @@ func initParityTable() []uint16 {
 }
 
 // Parity returns 1 if the number of bits set to 1 in x is odd, otherwise O.
-func Parity(x uint16) (res uint16) {
+func Parity(x uint16) (p uint16) {
 	for x > 0 {
-		res ^= 1
+		p ^= 1
 		x &= (x - 1)
 	}
-	return res
+	return p
 }
 
 // ParityLookup returns 1 if the number of bits set to 1 in x is odd, otherwise O.

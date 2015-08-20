@@ -8,8 +8,8 @@ package lists
 // Note: when l or f contains different type from int then false is returned and
 // merged list will contains some value(s) merged from l or f up to the different
 // type.
-func MergeSorted(l, f *List) (*List, bool) {
-	m := new(List)
+func MergeSorted(l, f *List) (m *List, ok bool) {
+	m = new(List)
 	for l.Len() > 0 || f.Len() > 0 {
 		vl, nl, okl := PopInt(l)
 		if !okl {

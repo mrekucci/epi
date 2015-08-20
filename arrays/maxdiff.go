@@ -31,16 +31,13 @@ func min(x, y int) int {
 //
 // This algorithm finds the biggest difference
 // (in ASC order) between two points in O(n) time.
-func MinBatteryCap(heights []int) (int, bool) {
+func MinBatteryCap(heights []int) (cap int, ok bool) {
 	if len(heights) == 0 {
 		return 0, true
 	}
 
-	cap := 0
-	hm := heights[0] // We don't set it to maxInt, 'cause we wanna avoid to return false overflow indication when 1st element is negative.
-
-	// We assume that z is the vertical dimension (height). Energy usage depends on the change in height.
-	for _, h := range heights {
+	hm := heights[0]            // We don't set it to maxInt, 'cause we wan avoid to return false overflow indication when 1st element is negative.
+	for _, h := range heights { // We assume that z is the vertical dimension (height). Energy usage depends on the change in height.
 		if (h > 0 && -hm > maxInt-h) || (h < 0 && -hm < minInt-h) { // Check for overflow.
 			return 0, false
 		}
