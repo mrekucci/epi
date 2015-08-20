@@ -10,21 +10,19 @@ import (
 )
 
 // ErrSort indicates that a list isn't sorted.
-var ErrSort = errors.New("MedianOfSortedCircular: list isn't sorted")
+var ErrSort = errors.New("MedianOfSorted: list isn't sorted")
 
 // ErrNode indicates that a list doesn't contain the node.
-var ErrNode = errors.New("MedianOfSortedCircular: list doesn't contain node")
-
-// ErrNode indicates that a list doesn't contain the node.
-var ErrCycle = errors.New("MedianOfSortedCircular: list doesn't contain cycle")
+var ErrNode = errors.New("MedianOfSorted: list doesn't contain node")
 
 // ErrType indicates that a value has different type than expected.
-var ErrType = errors.New("MedianOfSortedCircular: value is not of the type int")
+var ErrType = errors.New("MedianOfSorted: value is not of the type int")
 
-// MedianOfSortedCircular returns a median of sorted circular linked list of
-// integer values. An error is returned when the list isn't sorted, isn't
-// circular, doesn't contain the node, or contains a value other than int type.
-func MedianOfSortedCircular(l *List, csn *Node) (*big.Rat, error) {
+// MedianOfSorted returns a median of sorted linked list that contains integer
+// values. A non-nil cns indicates that list contains a cycle. An error is
+// returned when the list isn't sorted, doesn't contain the node, or contains a
+// value other than int type.
+func MedianOfSorted(l *List, csn *Node) (*big.Rat, error) {
 	if l.head == nil {
 		return nil, nil
 	}
@@ -48,11 +46,8 @@ func MedianOfSortedCircular(l *List, csn *Node) (*big.Rat, error) {
 			return nil, ErrSort
 		}
 	}
-	switch cnt {
-	case 0:
+	if csn != nil && cnt == 0 {
 		return nil, ErrNode
-	case 1:
-		return nil, ErrCycle
 	}
 
 	// Find the middle node(s).
