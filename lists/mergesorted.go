@@ -12,11 +12,8 @@ func MergeSorted(l, f *List) (m *List, ok bool) {
 	m = new(List)
 	for l.Len() > 0 || f.Len() > 0 {
 		vl, nl, okl := PopInt(l)
-		if !okl {
-			return m, false
-		}
 		vf, nf, okf := PopInt(f)
-		if !okf {
+		if !okl || !okf {
 			return m, false
 		}
 
