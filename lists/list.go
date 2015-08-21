@@ -95,14 +95,14 @@ func NewFromSlice(data []interface{}) *List {
 // A zero value for node is returned when l is empty or the first
 // value doesn't contain any data. The ok is set to false when the
 // first value isn't of type int.
-func PopInt(l *List) (int, *Node, bool) {
-	n := l.head
+func PopInt(l *List) (v int, n *Node, ok bool) {
+	n = l.head
 	if n == nil || n.Data == nil {
 		return 0, n, true
 	}
-	i, ok := n.Data.(int)
+	v, ok = n.Data.(int)
 	if !ok {
-		return i, nil, ok
+		return v, nil, ok
 	}
-	return i, n, ok
+	return v, n, ok
 }
