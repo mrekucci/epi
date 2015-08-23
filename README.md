@@ -51,6 +51,15 @@ Linked List
 | [Test for cyclicity][30]                                 | [tests][31]  |
 | [Compute the median of a sorted circular linked list][32]| [tests][33]  |
 
+Stacks and Queues
+------------------
+
+### Stacks
+
+| Problem                                                  | Test         |
+|----------------------------------------------------------|:------------:|
+| [Implement a stack with max API][34]                     | [tests][35]  |
+
 [1]: http://elementsofprogramminginterviews.com
 [2]: ptypes/parity.go
 [3]: ptypes/parity_test.go
@@ -84,3 +93,5 @@ Linked List
 [31]: lists/checkcycle_test.go
 [32]: lists/median.go
 [33]: lists/median_test.go
+[34]: stacks/max.go
+[35]: stacks/max_test.go
