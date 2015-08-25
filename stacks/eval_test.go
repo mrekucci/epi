@@ -7,8 +7,6 @@ package stacks
 import (
 	"reflect"
 	"testing"
-
-	"github.com/mrekucci/epi/ptypes"
 )
 
 func TestEvalRPN(t *testing.T) {
@@ -47,10 +45,12 @@ func TestEvalRPN(t *testing.T) {
 		{"1,2,3,4,5,+,-,*,/,3,4,*,+", 24, nil},
 
 		// Error tests.
-		{"0,0,&", 0, ptypes.ErrSyntax},
-		{"9223372036854775808,0,+", 0, ptypes.ErrRange},
+		{"-", 0, &ErrParse{ErrParseOp, 0, "-"}},
+		{"x,0,-", 0, &ErrParse{ErrParseNum, 0, "x"}},
+		{"0,0,&", 0, &ErrParse{ErrParseNum, 4, "&"}},
+		{"0,9223372036854775808,+", 0, &ErrParse{ErrParseNum, 2, "9223372036854775808"}},
 	} {
-		if got, err := EvalRPN(test.rpn); !reflect.DeepEqual(got, test.want) || err != test.err {
+		if got, err := EvalRPN(test.rpn); !reflect.DeepEqual(got, test.want) || !reflect.DeepEqual(err, test.err) {
 			t.Errorf("EvalRPN(%q) = %v, %v; want %v, %v", test.rpn, got, err, test.want, test.err)
 		}
 	}

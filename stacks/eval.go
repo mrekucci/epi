@@ -5,10 +5,29 @@
 package stacks
 
 import (
+	"errors"
+	"fmt"
 	"strings"
 
 	"github.com/mrekucci/epi/ptypes"
 )
+
+// ErrParseOp indicates that a parsed token should be a valid operand.
+var ErrParseOp = errors.New("expect a valid operand")
+
+// ErrParseNum indicates that a parsed token should be a valid integer number.
+var ErrParseNum = errors.New("expect a valid integer number")
+
+// ErrParse represents a parsing error with additional records of failed parsing.
+type ErrParse struct {
+	error
+	Index int
+	Token string
+}
+
+func (e *ErrParse) Error() string {
+	return fmt.Sprintf("EvalRPN: parsed token %q at index %d: %v", e.Token, e.Index, e.error)
+}
 
 // evalFn is an evaluation function template.
 type evalFn func(a, b int) int
@@ -27,15 +46,18 @@ var operations = map[string]evalFn{
 // An error is returned if rpn protocol is malformed.
 func EvalRPN(rpn string) (int, error) {
 	s := new(IntStack)
-	for _, t := range strings.Split(rpn, ",") {
+	for i, t := range strings.Split(rpn, ",") {
 		var o interface{}
 		if eval, ok := operations[t]; ok {
-			a, b := s.Pop().(int), s.Pop().(int) // Always be int.
-			o = eval(a, b)
+			a, b := s.Pop(), s.Pop()
+			if a == nil || b == nil {
+				return 0, &ErrParse{ErrParseOp, i * 2, t} // i*2 'cause we stripped "," from rpn.
+			}
+			o = eval(a.(int), b.(int))
 		} else {
 			n, err := ptypes.StringToInt(t)
 			if err != nil {
-				return 0, err
+				return 0, &ErrParse{ErrParseNum, i * 2, t} // i*2 'cause we stripped "," from rpn.
 			}
 			o = int(n)
 		}
