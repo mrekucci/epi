@@ -59,6 +59,7 @@ Stacks and Queues
 | Problem                                                  | Test         |
 |----------------------------------------------------------|:------------:|
 | [Implement a stack with max API][34]                     | [tests][35]  |
+| [Evaluate RPN expressions][36]                           | [tests][37]  |
 
 [1]: http://elementsofprogramminginterviews.com
 [2]: ptypes/parity.go
@@ -95,3 +96,5 @@ Stacks and Queues
 [33]: lists/median_test.go
 [34]: stacks/max.go
 [35]: stacks/max_test.go
+[36]: stacks/eval.go
+[37]: stacks/eval_test.go
