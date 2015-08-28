@@ -50,7 +50,8 @@ func TestEvalRPN(t *testing.T) {
 		{"0,0,&", 0, &ErrParse{ErrParseNum, 4, "&"}},
 		{"0,9223372036854775808,+", 0, &ErrParse{ErrParseNum, 2, "9223372036854775808"}},
 	} {
-		if got, err := EvalRPN(test.rpn); !reflect.DeepEqual(got, test.want) || !reflect.DeepEqual(err, test.err) {
+		got, err := EvalRPN(test.rpn)
+		if !reflect.DeepEqual(got, test.want) || !reflect.DeepEqual(err, test.err) {
 			t.Errorf("EvalRPN(%q) = %v, %v; want %v, %v", test.rpn, got, err, test.want, test.err)
 		}
 	}
