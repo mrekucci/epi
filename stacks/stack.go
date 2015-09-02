@@ -41,7 +41,7 @@ func (s *IntStack) Pop() (e interface{}) {
 	if s.Len() == 0 {
 		return nil
 	}
-	e, *s = (*s)[len(*s)-1], (*s)[:len(*s)-1]
+	e, *s = (*s)[s.Len()-1], (*s)[:s.Len()-1]
 	return e
 }
 
