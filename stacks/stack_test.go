@@ -47,7 +47,7 @@ func testStackInterface(t *testing.T, s Stack, tests []stackTest) error {
 		}
 	}
 
-	// Test pop all pushed elms.
+	// Test pop all pushed elements.
 	for i := range tests {
 		test := tests[len(tests)-i-1]
 		if test.err == nil {
