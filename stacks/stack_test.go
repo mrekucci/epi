@@ -36,25 +36,29 @@ func testStackInterface(t *testing.T, s Stack, tests []stackTest) error {
 	}
 
 	// Test push.
-	for i, test := range tests {
+	pushed := 0
+	for _, test := range tests {
 		if err := s.Push(test.e); err != test.err { // Test push error.
 			return fmt.Errorf("s.Push(%v) = %v; want %v", test.e, err, test.err)
 		}
-		if test.err == nil { // Check len when test doesn't have an error.
-			if err := checkLength(s, len(tests[:i+1])); err != nil {
+		if test.err == nil { // Check length when test doesn't have an error.
+			pushed++
+			if err := checkLength(s, pushed); err != nil {
 				return fmt.Errorf("s.Push(%v) got %v", test.e, err)
 			}
 		}
 	}
 
 	// Test pop all pushed elements.
-	for i := range tests {
-		test := tests[len(tests)-i-1]
+	len := len(tests) - 1
+	for i := len; i >= 0; i-- {
+		test := tests[i]
 		if test.err == nil {
 			if got, want := s.Pop(), test.e; got != want {
 				return fmt.Errorf("s.Pop() = %v; want %v", got, want)
 			}
-			if err := checkLength(s, len(tests)-i-1); err != nil {
+			len--
+			if err := checkLength(s, len); err != nil {
 				return fmt.Errorf("s.Pop() got %v", err)
 			}
 		}
@@ -72,6 +76,7 @@ func TestIntStack(t *testing.T) {
 	ifaceTests := []stackTest{
 		{0, nil},
 		{1, nil},
+		{2, nil},
 		{3, nil},
 		{4, nil},
 		{5, nil},

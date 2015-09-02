@@ -25,7 +25,7 @@ type Stack interface {
 type IntStack []int
 
 // Push adds e on top of the stack. An error is returned if e is not of type int.
-// The time complexity is O(1)
+// The time complexity is O(1) amortized.
 func (s *IntStack) Push(e interface{}) error {
 	v, ok := e.(int)
 	if !ok {
