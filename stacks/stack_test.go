@@ -54,7 +54,7 @@ func testStackInterface(t *testing.T, s Stack, tests []stackTest) error {
 			if got, want := s.Pop(), test.e; got != want {
 				return fmt.Errorf("s.Pop() = %v; want %v", got, want)
 			}
-			if err := checkLength(s, len(tests[:len(tests)-i-1])); err != nil {
+			if err := checkLength(s, len(tests)-i-1); err != nil {
 				return fmt.Errorf("s.Pop() got %v", err)
 			}
 		}
