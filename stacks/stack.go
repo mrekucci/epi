@@ -11,7 +11,6 @@ var ErrType = errors.New("stacks: unexpected type")
 
 // Stack interface define a basic stack operations.
 type Stack interface {
-
 	// Push adds e on top of the stack. An error is returned if e was not added.
 	Push(e interface{}) error
 
