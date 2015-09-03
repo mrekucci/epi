@@ -31,8 +31,7 @@ func (s *IntStackMax) Push(e interface{}) error {
 		return nil
 	}
 
-	peek := s.m[len(s.m)-1]
-	switch {
+	switch peek := s.m[len(s.m)-1]; {
 	case peek.max == v:
 		peek.cnt++
 		s.m[len(s.m)-1] = peek
