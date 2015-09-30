@@ -36,12 +36,17 @@ func (s *IntStack) Push(e interface{}) error {
 }
 
 // Pop removes and returns the last added integer element from this stack.
-// The time complexity is O(1)
+// The time complexity is O(1) amortized.
 func (s *IntStack) Pop() (e interface{}) {
 	if s.Len() == 0 {
 		return nil
 	}
-	e, *s = (*s)[s.Len()-1], (*s)[:s.Len()-1]
+	e = (*s)[s.Len()-1]
+	if cap(*s) > 64 && float64(s.Len()/cap(*s)) < 0.75 { // Free memory when the length of a slice shrunk enough.
+		*s = append([]int(nil), (*s)[:s.Len()-1]...)
+	} else {
+		*s = (*s)[:s.Len()-1]
+	}
 	return e
 }
 
