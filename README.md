@@ -2,7 +2,7 @@ epi
 ===
 
 [![Build Status](https://travis-ci.org/mrekucci/epi.svg)](https://travis-ci.org/mrekucci/epi)
-[![Coverage Status](https://coveralls.io/repos/mrekucci/epi/badge.svg?branch=master)](https://coveralls.io/r/mrekucci/epi?branch=master)
+[![Coverage Status](https://coveralls.io/repos/mrekucci/epi/badge.svg?branch=master&service=github)](https://coveralls.io/github/mrekucci/epi?branch=master)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE.txt)
 
 This is a work-in-progress, solutions for [Elements of Programming Interviews][1] problems written in Golang.
