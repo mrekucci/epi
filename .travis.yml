@@ -4,4 +4,4 @@ go:
   - 1.5.1
 
 script:
-    - ./test-coverage.sh
+    - ./test_coverage.sh
