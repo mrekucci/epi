@@ -7,9 +7,8 @@ package stacks
 import (
 	"errors"
 	"fmt"
+	"strconv"
 	"strings"
-
-	"github.com/mrekucci/epi/ptypes"
 )
 
 // ErrParseOp indicates that a parsed token should be a valid operand.
@@ -55,7 +54,7 @@ func EvalRPN(rpn string) (int, error) {
 			}
 			o = eval(a.(int), b.(int))
 		} else {
-			n, err := ptypes.StringToInt(t)
+			n, err := strconv.Atoi(t)
 			if err != nil {
 				return 0, &ErrParse{ErrParseNum, i * 2, t} // i*2 'cause we stripped "," from rpn.
 			}

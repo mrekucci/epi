@@ -4,6 +4,30 @@
 
 package lists
 
+// CreateCycle returns cycled linked list created from data.
+// The cycle in the list is created to node on index ci of data.
+// The returned node represents the reference to the start of the
+// cycle or nil is returned when there is no cycle in returned list.
+// If ci < 0 || ci >= len(data), then a list without cycle is returned.
+func CreateCycle(data []interface{}, ci int) (*List, *Node) {
+	if ci < 0 || ci >= len(data) {
+		return NewFromSlice(data), nil
+	}
+
+	l := new(List)
+	var csn *Node
+	for i := 0; i <= ci; i++ {
+		csn = l.Insert(&Node{Data: data[i]})
+	}
+	ln := csn
+	for i := ci + 1; i < len(data); i++ {
+		ln = l.Insert(&Node{Data: data[i]})
+	}
+	ln.next = csn // Create a cycle from the ln to the csn.
+
+	return l, csn
+}
+
 // HasCycle returns *Node that represents the start of
 // the cycle in l or nil when there is no cycle in l.
 // The time complexity is O(n); the space efficiency is O(1).

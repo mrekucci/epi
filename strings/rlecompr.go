@@ -4,8 +4,6 @@
 
 package strings
 
-import "github.com/mrekucci/epi/ptypes"
-
 // RLEEncode encode successive repeated characters
 // by the repetition count and the character.
 // "", false will be returned if s contains digit.
@@ -17,7 +15,7 @@ func RLEEncode(s string) (es string, ok bool) {
 		case '0' <= s[i] && s[i] <= '9':
 			return "", false
 		case len(s) == i+1 || s[i] != s[i+1]:
-			e = append(append(e, ptypes.IntToString(int64(cnt))...), s[i])
+			e = append(append(e, IntToString(int64(cnt))...), s[i])
 			cnt = 1
 		default:
 			cnt++

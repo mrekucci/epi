@@ -2,15 +2,14 @@
 // Use of this source code is governed by a MIT-style
 // license that can be found in the LICENSE.txt file.
 
-package stacks
+package recursion
 
 import (
 	"bytes"
 	"fmt"
-)
 
-// intSize is the size in bits of an int.
-const intSize = 32 << (^uint(0) >> 63)
+	"github.com/mrekucci/epi/stacks"
+)
 
 // recorder records the steps and the number of steps during the rings movement.
 type recorder struct {
@@ -36,7 +35,7 @@ type recorder struct {
 // 	p0->p1  7     []      | [2,1,0] | []
 //
 // Every step is written together with step count and error to r.
-func move(p [3]*IntStack, n, s, d, m int, r *recorder) {
+func move(p [3]*stacks.IntStack, n, s, d, m int, r *recorder) {
 	if n > 0 {
 		move(p, n-1, s, m, d, r)
 		p[d].Push(p[s].Pop())
@@ -54,7 +53,7 @@ func HanoiSteps(n int) (cnt int, steps string, ok bool) {
 	if n > intSize {
 		return 0, "", false
 	}
-	p := [...]*IntStack{new(IntStack), new(IntStack), new(IntStack)}
+	p := [...]*stacks.IntStack{new(stacks.IntStack), new(stacks.IntStack), new(stacks.IntStack)}
 	for i := n - 1; i >= 0; i-- {
 		p[0].Push(interface{}(i))
 	}

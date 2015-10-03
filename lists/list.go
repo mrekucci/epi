@@ -10,6 +10,14 @@ type Node struct {
 	next *Node
 }
 
+// Next returns the next list element or nil.
+func (n *Node) Next() *Node {
+	if n != nil {
+		return n.next
+	}
+	return nil
+}
+
 // List represents a linked list.
 type List struct {
 	head *Node
@@ -55,18 +63,18 @@ func (l *List) Remove(n *Node) *Node {
 	return nil
 }
 
-// First returns the first Node.Data of this list or nil.
+// First returns the first Node of this list.
 // The complexity is Θ(1).
-func (l *List) First() interface{} { return l.head.Data }
+func (l *List) First() *Node { return l.head }
 
-// Last returns last Node.Data of this list.
+// Last returns last Node of this list.
 // The complexity is Θ(n).
-func (l *List) Last() interface{} {
+func (l *List) Last() *Node {
 	p := l.head
 	for p.next != nil {
 		p = p.next
 	}
-	return p.Data
+	return p
 }
 
 // Len returns the number of elements of list l.
