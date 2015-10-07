@@ -59,7 +59,5 @@ func (q *IntListQueue) Len() int {
 
 // NewIntListQueue returns an initialized IntListQueue.
 func NewIntListQueue() *IntListQueue {
-	q := new(IntListQueue)
-	q.l = list.New()
-	return q
+	return &IntListQueue{list.New()}
 }
