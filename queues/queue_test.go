@@ -41,7 +41,7 @@ func testQueueInterface(t *testing.T, q Queue, tests []queueTest) error {
 		if err := q.Enqueue(test.e); err != test.err { // Test enqueue error.
 			return fmt.Errorf("q.Enqueue(%v) = %v; want %v", test.e, err, test.err)
 		}
-		if test.err == nil { // Check len when test doesn't have an error.
+		if test.err == nil { // Check len when test doesn't expect an error.
 			enqueued++
 			if err := checkLength(q, enqueued); err != nil {
 				return fmt.Errorf("q.Enqueue(%v) got %v", test.e, err)
@@ -87,7 +87,7 @@ func TestIntListQueue(t *testing.T) {
 		{maxInt, nil},
 		{"x", ErrType},
 	}
-	if err := testQueueInterface(t, NewIntListQueue(), ifaceTests); err != nil {
+	if err := testQueueInterface(t, new(IntListQueue), ifaceTests); err != nil {
 		t.Error(err)
 	}
 }

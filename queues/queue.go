@@ -4,10 +4,7 @@
 
 package queues
 
-import (
-	"container/list"
-	"errors"
-)
+import "errors"
 
 // ErrType indicates that a value is no of the expected type.
 var ErrType = errors.New("queues: unexpected type")
@@ -25,39 +22,63 @@ type Queue interface {
 	Len() int
 }
 
-// IntListQueue is an implementation of the Queue interface
-// for integer values backed by doubly linked list.
-type IntListQueue struct {
-	l *list.List
+type node struct {
+	data int
+	next *node
 }
 
-// Enqueue inserts e e at the back of the queue.
+// IntListQueue is an implementation of the Queue interface
+// for integer values implemented by circular linked list.
+type IntListQueue struct {
+	head, tail *node
+	len        int
+}
+
+// Enqueue inserts e element at the back of the queue.
 // An error is returned if e is not of type int.
 // The time complexity is O(1)
 func (q *IntListQueue) Enqueue(e interface{}) error {
-	if _, ok := e.(int); !ok {
+	v, ok := e.(int)
+	if !ok {
 		return ErrType
 	}
-	q.l.PushBack(e)
+	n := &node{data: v}
+	if q.head == nil {
+		q.head = n
+		n.next = q.head
+		q.tail = q.head
+	} else {
+		q.tail.next = n
+		n.next = q.head
+		q.tail = n
+	}
+	q.len++
 	return nil
 }
 
 // Dequeue removes and returns the front integer element from this queue.
 // The time complexity is O(1)
 func (q *IntListQueue) Dequeue() interface{} {
-	if q.Len() == 0 {
+	switch q.len {
+	case 0:
 		return nil
+	case 1:
+		v := q.head.data
+		q.head = nil
+		q.tail = nil
+		q.len = 0
+		return v
 	}
-	return q.l.Remove(q.l.Front())
+	n := q.head
+	q.head = n.next
+	q.tail.next = q.head
+	n.next = nil // Avoid memory leaks.
+	q.len--
+	return n.data
 }
 
 // Len returns the length of this queue.
 // The time complexity is O(1)
 func (q *IntListQueue) Len() int {
-	return q.l.Len()
-}
-
-// NewIntListQueue returns an initialized IntListQueue.
-func NewIntListQueue() *IntListQueue {
-	return &IntListQueue{list.New()}
+	return q.len
 }
