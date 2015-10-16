@@ -50,14 +50,13 @@ func testQueueInterface(t *testing.T, q Queue, tests []queueTest) error {
 	}
 
 	// Test dequeue of all enqueued elements.
-	len := len(tests) - 1
 	for _, test := range tests {
 		if test.err == nil {
 			if got, want := q.Dequeue(), test.e; got != want {
 				return fmt.Errorf("q.Dequeue() = %v; want %v", got, want)
 			}
-			len--
-			if err := checkLength(q, len); err != nil {
+			enqueued--
+			if err := checkLength(q, enqueued); err != nil {
 				return fmt.Errorf("q.Dequeue() got %v", err)
 			}
 		}
