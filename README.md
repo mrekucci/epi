@@ -114,7 +114,7 @@ Stacks and Queues
 | Problem                                                                  | Test         | Implemented |
 |--------------------------------------------------------------------------|:------------:|:-----------:|
 | [Compute binary tree nodes in order of increasing depth][136]            | [tests][137] |             |
-| [Implement a circular queue][138]                                        | [tests][139] |             |
+| [Implement a circular queue][138]                                        | [tests][139] |      ✓      |
 | [Implement a queue using stacks][140]                                    | [tests][141] |             |
 | [Implement a queue with max API][142]                                    | [tests][143] |             |
 
@@ -534,8 +534,8 @@ Honors Class
 [135]: in_progress.md
 [136]: in_progress.md
 [137]: in_progress.md
-[138]: in_progress.md
-[139]: in_progress.md
+[138]: queues/circqueue.go
+[139]: queues/circqueue_test.go
 [140]: in_progress.md
 [141]: in_progress.md
 [142]: in_progress.md
