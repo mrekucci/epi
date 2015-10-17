@@ -15,6 +15,11 @@ const (
 	minInt = -maxInt - 1
 )
 
+type queueTest struct {
+	e   interface{}
+	err error
+}
+
 // checkLength returns an error if q.Len() != len.
 func checkLength(q Queue, len int) error {
 	if q.Len() != len {
@@ -23,49 +28,70 @@ func checkLength(q Queue, len int) error {
 	return nil
 }
 
-// testQueueInterface tests Queue interface method implementation.
-func testQueueInterface(t *testing.T, q Queue, tests []queueTest) error {
-	// Test dequeue of empty queue.
-	if got, want := q.Dequeue(), interface{}(nil); got != want {
-		return fmt.Errorf("q.Dequeue() = %v; want %v", got, want)
+// checkEnqueue returns an error if enqueue test has failed.
+func checkEnqueue(q Queue, test queueTest, cnt *int) error {
+	if err := q.Enqueue(test.e); err != test.err { // Test enqueue error.
+		return fmt.Errorf("q.Enqueue(%v) = %v; want %v", test.e, err, test.err)
 	}
-
-	// Test len of empty queue.
-	if err := checkLength(q, 0); err != nil {
-		return err
-	}
-
-	// Test enqueue.
-	enqueued := 0
-	for _, test := range tests {
-		if err := q.Enqueue(test.e); err != test.err { // Test enqueue error.
-			return fmt.Errorf("q.Enqueue(%v) = %v; want %v", test.e, err, test.err)
-		}
-		if test.err == nil { // Check len when test doesn't expect an error.
-			enqueued++
-			if err := checkLength(q, enqueued); err != nil {
-				return fmt.Errorf("q.Enqueue(%v) got %v", test.e, err)
-			}
+	if test.err == nil { // Check len when test doesn't expect an error.
+		*cnt++
+		if err := checkLength(q, *cnt); err != nil {
+			return fmt.Errorf("q.Enqueue(%v) got %v", test.e, err)
 		}
 	}
-
-	// Test dequeue of all enqueued elements.
-	for _, test := range tests {
-		if test.err == nil {
-			if got, want := q.Dequeue(), test.e; got != want {
-				return fmt.Errorf("q.Dequeue() = %v; want %v", got, want)
-			}
-			enqueued--
-			if err := checkLength(q, enqueued); err != nil {
-				return fmt.Errorf("q.Dequeue() got %v", err)
-			}
-		}
-	}
-
 	return nil
 }
 
-type queueTest struct {
-	e   interface{}
-	err error
+// checkDequeue returns an error if dequeue test has failed.
+func checkDequeue(q Queue, test queueTest, cnt *int) error {
+	if test.err != nil {
+		return nil
+	}
+	if got, want := q.Dequeue(), test.e; got != want {
+		return fmt.Errorf("q.Dequeue() = %v; want %v", got, want)
+	}
+	*cnt--
+	if err := checkLength(q, *cnt); err != nil {
+		return fmt.Errorf("q.Dequeue() got %v", err)
+	}
+	return nil
+}
+
+// testQueueInterface tests Queue interface method implementation.
+func testQueueInterface(t *testing.T, q Queue, tests []queueTest) {
+	enqueued := 1
+	// Test dequeue of empty queue.
+	if err := checkDequeue(q, queueTest{nil, nil}, &enqueued); err != nil {
+		t.Error(err)
+	}
+	// Test enqueue first 2/3 of the elements.
+	for i := 0; i < 2*len(tests)/3; i++ {
+		if err := checkEnqueue(q, tests[i], &enqueued); err != nil {
+			t.Error(err)
+		}
+	}
+	// Test dequeue first 1/3 of the elements from queue.
+	for i := 0; i < len(tests)/3; i++ {
+		if err := checkDequeue(q, tests[i], &enqueued); err != nil {
+			t.Error(err)
+		}
+	}
+	// Test enqueue last 2/3 of the elements.
+	for i := enqueued; i < len(tests); i++ {
+		if err := checkEnqueue(q, tests[i], &enqueued); err != nil {
+			t.Error(err)
+		}
+	}
+	// Test dequeue middle 1/3 of the element from queue.
+	for i := len(tests) / 3; i < 2*len(tests)/3; i++ {
+		if err := checkDequeue(q, tests[i], &enqueued); err != nil {
+			t.Error(err)
+		}
+	}
+	// Test dequeue last 2/3 of the element from queue.
+	for i := len(tests) / 3; i < len(tests); i++ {
+		if err := checkDequeue(q, tests[i], &enqueued); err != nil {
+			t.Error(err)
+		}
+	}
 }

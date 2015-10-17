@@ -22,9 +22,7 @@ func TestIntListQueue(t *testing.T) {
 		{maxInt, nil},
 		{"x", ErrType},
 	}
-	if err := testQueueInterface(t, new(IntListQueue), ifaceTests); err != nil {
-		t.Error(err)
-	}
+	testQueueInterface(t, new(IntListQueue), ifaceTests)
 }
 
 func BenchmarkIntListQueue(b *testing.B) {
