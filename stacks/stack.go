@@ -4,7 +4,10 @@
 
 package stacks
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 // ErrType indicates that a value is no of the expected type.
 var ErrType = errors.New("stacks: unexpected type")
@@ -32,6 +35,7 @@ func (s *IntStack) Push(e interface{}) error {
 		return ErrType
 	}
 	*s = append(*s, v)
+	fmt.Println(*s)
 	return nil
 }
 
@@ -47,6 +51,7 @@ func (s *IntStack) Pop() (e interface{}) {
 	} else {
 		*s = (*s)[:s.Len()-1]
 	}
+	fmt.Println(*s)
 	return e
 }
 

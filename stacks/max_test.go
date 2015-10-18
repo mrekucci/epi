@@ -11,9 +11,7 @@ import (
 
 func TestIntStackMax(t *testing.T) {
 	ifaceTests := []stackTest{{minInt, nil}, {0, nil}, {maxInt, nil}, {"x", ErrType}}
-	if err := testStackInterface(t, new(IntStackMax), ifaceTests); err != nil {
-		t.Fatal(err)
-	}
+	testStackInterface(t, new(IntStackMax), ifaceTests)
 
 	// Order of tests matter!
 	tests := []struct {
