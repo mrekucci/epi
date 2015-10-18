@@ -77,7 +77,7 @@ func testQueueInterface(t *testing.T, q Queue, tests []queueTest) {
 		}
 	}
 	// Test enqueue last 2/3 of the elements.
-	for i := enqueued; i < len(tests); i++ {
+	for i := len(tests) / 3; i < len(tests); i++ {
 		if err := checkEnqueue(q, tests[i], &enqueued); err != nil {
 			t.Error(err)
 		}
