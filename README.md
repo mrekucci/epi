@@ -124,7 +124,7 @@ Binary Trees
 | Problem                                                                  | Test         | Implemented |
 |--------------------------------------------------------------------------|:------------:|:-----------:|
 | [Test if a binary tree is balanced][144]                                 | [tests][145] |      ✓      |
-| [Test if a binary tree is symmetric][146]                                | [tests][147] |             |
+| [Test if a binary tree is symmetric][146]                                | [tests][147] |      ✓      |
 | [Compute the lowest common ancestor in a binary tree][148]               | [tests][149] |             |
 | [Compute the LCA when nodes have parent pointers][150]                   | [tests][151] |             |
 | [Sum the root-to-leaf paths in a binary tree][152]                       | [tests][153] |             |
@@ -542,8 +542,8 @@ Honors Class
 [143]: in_progress.md
 [144]: btrees/balanced.go
 [145]: btrees/balanced_test.go
-[146]: in_progress.md
-[147]: in_progress.md
+[146]: btrees/symmetric.go
+[147]: btrees/symmetric_test.go
 [148]: in_progress.md
 [149]: in_progress.md
 [150]: in_progress.md
