@@ -123,7 +123,7 @@ Binary Trees
 
 | Problem                                                                  | Test         | Implemented |
 |--------------------------------------------------------------------------|:------------:|:-----------:|
-| [Test if a binary tree is balanced][144]                                 | [tests][145] |             |
+| [Test if a binary tree is balanced][144]                                 | [tests][145] |      ✓      |
 | [Test if a binary tree is symmetric][146]                                | [tests][147] |             |
 | [Compute the lowest common ancestor in a binary tree][148]               | [tests][149] |             |
 | [Compute the LCA when nodes have parent pointers][150]                   | [tests][151] |             |
@@ -540,8 +540,8 @@ Honors Class
 [141]: queues/stackqueue_test.go
 [142]: in_progress.md
 [143]: in_progress.md
-[144]: in_progress.md
-[145]: in_progress.md
+[144]: btrees/balanced.go
+[145]: btrees/balanced_test.go
 [146]: in_progress.md
 [147]: in_progress.md
 [148]: in_progress.md
