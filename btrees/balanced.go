@@ -4,38 +4,36 @@
 
 package btrees
 
-// state represents the state of the binary tree.
-type state struct {
-	isBalanced bool
-	height     int
-}
-
-// checkState returns the status of the binary tree t.
-func checkState(t *BTree) state {
+// checkBalance returns the height and balance
+// information about the binary tree t.
+func checkBalance(t *BTree) (height int, isBalanced bool) {
 	if t == nil {
-		return state{true, -1} // Base case.
+		return -1, true // Base case.
 	}
 
 	// Postorder walk.
-	lt := checkState(t.left)
-	if !lt.isBalanced {
-		return lt
+	lh, lb := checkBalance(t.left)
+	if !lb {
+		return lh, lb
 	}
-	rt := checkState(t.right)
-	if !rt.isBalanced {
-		return rt
+	rh, rb := checkBalance(t.right)
+	if !rb {
+		return rh, rb
 	}
 
-	d := lt.height - rt.height
-	max := lt.height
-	if lt.height < rt.height {
-		max = rt.height
+	d := lh - rh
+	max := lh
+	if lh < rh {
+		max = rh
 	}
-	return state{d <= 1 && d >= -1, max + 1}
+	return max + 1, d <= 1 && d >= -1
 
 }
 
 // IsBalanced returns true if t is a balanced binary tree.
 // The time complexity is O(n). The O(h) additional space
 // is needed (where h is the height of the tree).
-func IsBalanced(t *BTree) bool { return checkState(t).isBalanced }
+func IsBalanced(t *BTree) bool {
+	_, b := checkBalance(t)
+	return b
+}
