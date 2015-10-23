@@ -44,6 +44,6 @@ func (q *IntStackQueue) Len() int {
 }
 
 // NewIntStackQueue returns a new initialized *IntStackQueue.
-func NewIntStackQueue() *IntStackQueue {
+func NewIntStackQueue() Queue {
 	return &IntStackQueue{stacks.IntStack{}, stacks.IntStack{}}
 }
