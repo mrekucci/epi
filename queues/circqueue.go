@@ -4,39 +4,33 @@
 
 package queues
 
-// IntArrayQueue is an implementation of the Queue interface
-// for integer values implemented by array.
-type IntArrayQueue struct {
+// ArrayQueue is an implementation of the Queue interface implemented by array.
+type ArrayQueue struct {
 	head, tail int
 	len        int
-	an         []int
+	an         []interface{}
 }
 
 // Enqueue inserts e element at the back of the queue.
-// An error is returned if e is not of type int.
 // The time complexity is O(1) amortized.
-func (q *IntArrayQueue) Enqueue(e interface{}) error {
-	v, ok := e.(int)
-	if !ok {
-		return ErrType
-	}
+func (q *ArrayQueue) Enqueue(e interface{}) error {
 	if q.Len() == cap(q.an) { // Resize.
-		an := make([]int, 2*cap(q.an))
+		an := make([]interface{}, 2*cap(q.an))
 		n := copy(an, q.an[q.head:])
 		copy(an[n:], q.an[:q.tail])
 		q.head = 0
 		q.tail = q.Len()
 		q.an = an
 	}
-	q.an[q.tail] = v
+	q.an[q.tail] = e
 	q.tail = (q.tail + 1) % cap(q.an)
 	q.len++
 	return nil
 }
 
-// Dequeue removes and returns the front integer element from this queue.
+// Dequeue removes and returns the front element from this queue.
 // The time complexity is O(1)
-func (q *IntArrayQueue) Dequeue() interface{} {
+func (q *ArrayQueue) Dequeue() interface{} {
 	if q.Len() == 0 {
 		return nil
 	}
@@ -48,15 +42,15 @@ func (q *IntArrayQueue) Dequeue() interface{} {
 
 // Len returns the length of this queue.
 // The time complexity is O(1)
-func (q *IntArrayQueue) Len() int {
+func (q *ArrayQueue) Len() int {
 	return q.len
 }
 
-// NewIntArrayQueue returns a new *IntArrayQueue with given size.
+// NewArrayQueue returns a new *ArrayQueue with given size.
 // The size is set automatically to 2 if given size is less then 2.
-func NewIntArrayQueue(size int) *IntArrayQueue {
+func NewArrayQueue(size int) Queue {
 	if size < 2 {
 		size = 2
 	}
-	return &IntArrayQueue{an: make([]int, size)}
+	return &ArrayQueue{an: make([]interface{}, size)}
 }

@@ -6,7 +6,7 @@ package queues
 
 import "testing"
 
-func TestIntArrayQueue(t *testing.T) {
+func TestArrayQueue(t *testing.T) {
 	ifaceTests := []queueTest{
 		{0, nil},
 		{1, nil},
@@ -20,14 +20,16 @@ func TestIntArrayQueue(t *testing.T) {
 		{9, nil},
 		{minInt, nil},
 		{maxInt, nil},
-		{"x", ErrType},
+		{"x", nil},
+		{1.5, nil},
+		{1 + 1.5i, nil},
 	}
-	testQueueInterface(t, NewIntArrayQueue(0), ifaceTests)
+	testQueueInterface(t, NewArrayQueue(0), ifaceTests)
 }
 
-func BenchmarkIntArrayQueue(b *testing.B) {
+func BenchmarkArrayQueue(b *testing.B) {
 	b.StopTimer()
-	q := NewIntArrayQueue(0)
+	q := NewArrayQueue(0)
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
 		q.Enqueue(i)
