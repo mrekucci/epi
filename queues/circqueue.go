@@ -15,7 +15,7 @@ type arrayQueue struct {
 // The time complexity is O(1) amortized.
 func (q *arrayQueue) Enqueue(e interface{}) error {
 	if q.Len() == cap(q.an) { // Resize.
-		an := make([]interface{}, 2*cap(q.an))
+		an := make([]interface{}, 2*cap(q.an)+1)
 		n := copy(an, q.an[q.head:])
 		copy(an[n:], q.an[:q.tail])
 		q.head = 0
@@ -47,10 +47,6 @@ func (q *arrayQueue) Len() int {
 }
 
 // NewArrayQueue returns a new Queue with given size.
-// The size is set automatically to 2 if given size is less then 2.
 func NewArrayQueue(size int) Queue {
-	if size < 2 {
-		size = 2
-	}
-	return &arrayQueue{an: make([]interface{}, size)}
+	return &arrayQueue{an: []interface{}{}}
 }
