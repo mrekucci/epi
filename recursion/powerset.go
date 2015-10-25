@@ -18,10 +18,10 @@ func PowerSet(s []interface{}) (ps []interface{}, ok bool) {
 		for x > 0 {
 			lsb := x & -x // x & -x is same as x & ^(x - 1).
 
-			// Compute index of x's least significant bit.
+			// Compute the index of x's least significant bit.
 			i := 0
 			p := 1
-			for lsb&p == 0 { // lsb mast be greater then 0, which is always true 'cause x > 0.
+			for lsb&p == 0 { // lsb must always be greater then 0, which is always true 'cause x > 0.
 				p <<= 1
 				i++
 			}
