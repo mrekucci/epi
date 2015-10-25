@@ -25,7 +25,6 @@ func TestPowerSet(t *testing.T) {
 				[]interface{}{"A", "B"}},
 			true,
 		},
-
 		{
 			[]interface{}{"A", "B", "C"},
 			[]interface{}{
