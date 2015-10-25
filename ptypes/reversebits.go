@@ -22,10 +22,8 @@ func initReverseBitsTable() []uint16 {
 // ReverseBits reverse bits in x.
 func ReverseBits(x uint16) uint16 {
 	rx := uint64(x)
-	i := uint64(0)
-	for i < 16/2 {
+	for i := uint64(0); i < 16/2; i++ {
 		rx = SwapBits(rx, i, (15 - i))
-		i++
 	}
 	return uint16(rx)
 }
