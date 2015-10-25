@@ -237,8 +237,8 @@ Recursion
 |--------------------------------------------------------------------------|:------------:|:-----------:|
 | [The Tower of Hanoi problem][296]                                        | [tests][297] |      ✓      |
 | [Generate all nonattacking placements of *n*-Queens][298]                | [tests][299] |             |
-| [Generate permutations][300]                                             | [tests][301] |      ✓      |
-| [Generate the power set][302]                                            | [tests][303] |             |
+| [Generate permutations][300]                                             | [tests][301] |             |
+| [Generate the power set][302]                                            | [tests][303] |      ✓      |
 | [Generate all subsets of size *k*][304]                                  | [tests][305] |             |
 | [Generate strings of matched parens][306]                                | [tests][307] |             |
 | [Generate palindromic decompositions][308]                               | [tests][309] |             |
