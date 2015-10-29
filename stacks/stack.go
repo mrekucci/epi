@@ -4,18 +4,10 @@
 
 package stacks
 
-import (
-	"errors"
-	"fmt"
-)
-
-// ErrType indicates that a value is no of the expected type.
-var ErrType = errors.New("stacks: unexpected type")
-
 // Stack interface define a basic stack operations.
 type Stack interface {
-	// Push adds e on top of the stack. An error is returned if e was not added.
-	Push(e interface{}) error
+	// Push adds e on top of the stack.
+	Push(e interface{})
 
 	// Remove and return last added element from this stack.
 	Pop() interface{}
@@ -27,17 +19,9 @@ type Stack interface {
 // IntStack is an implementation of the Stack interface for integer values.
 type IntStack []int
 
-// Push adds e on top of the stack. An error is returned if e is not of type int.
+// Push adds e on top of the stack.
 // The time complexity is O(1) amortized.
-func (s *IntStack) Push(e interface{}) error {
-	v, ok := e.(int)
-	if !ok {
-		return ErrType
-	}
-	*s = append(*s, v)
-	fmt.Println(*s)
-	return nil
-}
+func (s *IntStack) Push(e interface{}) { *s = append(*s, e.(int)) }
 
 // Pop removes and returns the last added integer element from this stack.
 // The time complexity is O(1) amortized.
@@ -51,11 +35,8 @@ func (s *IntStack) Pop() (e interface{}) {
 	} else {
 		*s = (*s)[:s.Len()-1]
 	}
-	fmt.Println(*s)
 	return e
 }
 
 // Len returns the length of this stack.
-func (s *IntStack) Len() int {
-	return len(*s)
-}
+func (s *IntStack) Len() int { return len(*s) }

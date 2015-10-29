@@ -18,17 +18,14 @@ type IntStackMax struct {
 	m []maxCnt // Records maxim through push and delete them through pop.
 }
 
-// Push adds e on top of the stack. An error is returned if e is not of type int.
+// Push adds e on top of the stack.
 // The time complexity is O(1)
-func (s *IntStackMax) Push(e interface{}) error {
-	if err := s.IntStack.Push(e); err != nil {
-		return err
-	}
-
+func (s *IntStackMax) Push(e interface{}) {
 	v := e.(int)
+	s.IntStack.Push(v)
 	if len(s.m) == 0 {
 		s.m = append(s.m, maxCnt{v, 1})
-		return nil
+		return
 	}
 
 	switch peek := s.m[len(s.m)-1]; {
@@ -38,7 +35,6 @@ func (s *IntStackMax) Push(e interface{}) error {
 	case peek.max < v:
 		s.m = append(s.m, maxCnt{v, 1})
 	}
-	return nil
 }
 
 // Pop removes and returns the last added integer element from this stack.

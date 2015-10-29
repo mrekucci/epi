@@ -10,8 +10,7 @@ import (
 )
 
 func TestIntStackMax(t *testing.T) {
-	ifaceTests := []stackTest{{minInt, nil}, {0, nil}, {maxInt, nil}, {"x", ErrType}}
-	testStackInterface(t, new(IntStackMax), ifaceTests)
+	testStackInterface(t, new(IntStackMax), []interface{}{minInt, 0, maxInt})
 
 	// Order of tests matter!
 	tests := []struct {
@@ -33,7 +32,7 @@ func TestIntStackMax(t *testing.T) {
 	}
 	s := new(IntStackMax)
 	for _, test := range tests {
-		if test.in != nil { // Don't push a value.
+		if test.in != nil { // Don't push a nil value.
 			s.Push(test.in)
 		}
 		if got := s.Max(); got != test.want {
