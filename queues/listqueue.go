@@ -17,14 +17,9 @@ type IntListQueue struct {
 }
 
 // Enqueue inserts e element at the back of the queue.
-// An error is returned if e is not of type int.
 // The time complexity is O(1)
-func (q *IntListQueue) Enqueue(e interface{}) error {
-	v, ok := e.(int)
-	if !ok {
-		return ErrType
-	}
-	n := &node{data: v}
+func (q *IntListQueue) Enqueue(e interface{}) {
+	n := &node{data: e.(int)}
 	if q.head == nil {
 		q.head = n
 		n.next = q.head
@@ -35,7 +30,6 @@ func (q *IntListQueue) Enqueue(e interface{}) error {
 		q.tail = n
 	}
 	q.len++
-	return nil
 }
 
 // Dequeue removes and returns the front integer element from this queue.
@@ -61,6 +55,4 @@ func (q *IntListQueue) Dequeue() interface{} {
 
 // Len returns the length of this queue.
 // The time complexity is O(1)
-func (q *IntListQueue) Len() int {
-	return q.len
-}
+func (q *IntListQueue) Len() int { return q.len }

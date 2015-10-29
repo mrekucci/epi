@@ -13,14 +13,8 @@ type IntStackQueue struct {
 }
 
 // Enqueue inserts e element at the back of the queue.
-// An error is returned if e is not of type int.
 // The time complexity is O(1) amortized.
-func (q *IntStackQueue) Enqueue(e interface{}) error {
-	if err := q.enq.Push(e); err != nil {
-		return ErrType
-	}
-	return nil
-}
+func (q *IntStackQueue) Enqueue(e interface{}) { q.enq.Push(e) }
 
 // Dequeue removes and returns the front integer element from this queue.
 // The time complexity is O(1) amortized.
@@ -39,9 +33,7 @@ func (q *IntStackQueue) Dequeue() interface{} {
 
 // Len returns the length of this queue.
 // The time complexity is O(1).
-func (q *IntStackQueue) Len() int {
-	return q.enq.Len() + q.deq.Len()
-}
+func (q *IntStackQueue) Len() int { return q.enq.Len() + q.deq.Len() }
 
 // NewIntStackQueue returns a new initialized *IntStackQueue.
 func NewIntStackQueue() Queue {

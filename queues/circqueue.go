@@ -13,7 +13,7 @@ type arrayQueue struct {
 
 // Enqueue inserts e element at the back of the queue.
 // The time complexity is O(1) amortized.
-func (q *arrayQueue) Enqueue(e interface{}) error {
+func (q *arrayQueue) Enqueue(e interface{}) {
 	if q.Len() == cap(q.an) { // Resize.
 		an := make([]interface{}, 2*cap(q.an)+1)
 		n := copy(an, q.an[q.head:])
@@ -25,7 +25,6 @@ func (q *arrayQueue) Enqueue(e interface{}) error {
 	q.an[q.tail] = e
 	q.tail = (q.tail + 1) % cap(q.an)
 	q.len++
-	return nil
 }
 
 // Dequeue removes and returns the front element from this queue.
@@ -42,11 +41,7 @@ func (q *arrayQueue) Dequeue() interface{} {
 
 // Len returns the length of this queue.
 // The time complexity is O(1)
-func (q *arrayQueue) Len() int {
-	return q.len
-}
+func (q *arrayQueue) Len() int { return q.len }
 
 // NewArrayQueue returns a new Queue with given size.
-func NewArrayQueue(size int) Queue {
-	return &arrayQueue{an: []interface{}{}}
-}
+func NewArrayQueue(size int) Queue { return &arrayQueue{an: []interface{}{}} }

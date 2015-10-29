@@ -7,22 +7,7 @@ package queues
 import "testing"
 
 func TestIntStackQueue(t *testing.T) {
-	ifaceTests := []queueTest{
-		{0, nil},
-		{1, nil},
-		{2, nil},
-		{3, nil},
-		{4, nil},
-		{5, nil},
-		{6, nil},
-		{7, nil},
-		{8, nil},
-		{9, nil},
-		{minInt, nil},
-		{maxInt, nil},
-		{"x", ErrType},
-	}
-	testQueueInterface(t, NewIntStackQueue(), ifaceTests)
+	testQueueInterface(t, NewIntStackQueue(), []interface{}{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, minInt, maxInt})
 }
 
 func BenchmarkIntStackQueue(b *testing.B) {

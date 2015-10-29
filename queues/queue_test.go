@@ -15,11 +15,6 @@ const (
 	minInt = -maxInt - 1
 )
 
-type queueTest struct {
-	e   interface{}
-	err error
-}
-
 // checkLength returns an error if q.Len() != len.
 func checkLength(q Queue, len int) error {
 	if q.Len() != len {
@@ -29,25 +24,18 @@ func checkLength(q Queue, len int) error {
 }
 
 // checkEnqueue returns an error if enqueue test has failed.
-func checkEnqueue(q Queue, test queueTest, cnt *int) error {
-	if err := q.Enqueue(test.e); err != test.err { // Test enqueue error.
-		return fmt.Errorf("q.Enqueue(%v) = %v; want %v", test.e, err, test.err)
-	}
-	if test.err == nil { // Check len when test doesn't expect an error.
-		*cnt++
-		if err := checkLength(q, *cnt); err != nil {
-			return fmt.Errorf("q.Enqueue(%v) got %v", test.e, err)
-		}
+func checkEnqueue(q Queue, e interface{}, cnt *int) error {
+	q.Enqueue(e)
+	*cnt++
+	if err := checkLength(q, *cnt); err != nil {
+		return fmt.Errorf("q.Enqueue(%v) got %v", e, err)
 	}
 	return nil
 }
 
 // checkDequeue returns an error if dequeue test has failed.
-func checkDequeue(q Queue, test queueTest, cnt *int) error {
-	if test.err != nil {
-		return nil
-	}
-	if got, want := q.Dequeue(), test.e; got != want {
+func checkDequeue(q Queue, want interface{}, cnt *int) error {
+	if got := q.Dequeue(); got != want {
 		return fmt.Errorf("q.Dequeue() = %v; want %v", got, want)
 	}
 	*cnt--
@@ -58,10 +46,10 @@ func checkDequeue(q Queue, test queueTest, cnt *int) error {
 }
 
 // testQueueInterface tests Queue interface method implementation.
-func testQueueInterface(t *testing.T, q Queue, tests []queueTest) {
+func testQueueInterface(t *testing.T, q Queue, tests []interface{}) {
 	enqueued := 1
 	// Test dequeue of empty queue.
-	if err := checkDequeue(q, queueTest{nil, nil}, &enqueued); err != nil {
+	if err := checkDequeue(q, nil, &enqueued); err != nil {
 		t.Error(err)
 	}
 	// Test enqueue first 2/3 of the elements.
