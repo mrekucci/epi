@@ -144,7 +144,7 @@ Heaps
 
 | Problem                                                                  | Test         | Implemented |
 |--------------------------------------------------------------------------|:------------:|:-----------:|
-| [Merge sorted files][174]                                                | [tests][175] |             |
+| [Merge sorted files][174]                                                | [tests][175] |      ✓      |
 | [Sort an increasing-decreasing array][176]                               | [tests][177] |             |
 | [Sort an almost-sorted array][178]                                       | [tests][179] |             |
 | [Compute the *k* closest stars][180]                                     | [tests][181] |             |
@@ -570,8 +570,8 @@ Honors Class
 [171]: in_progress.md
 [172]: in_progress.md
 [173]: in_progress.md
-[174]: in_progress.md
-[175]: in_progress.md
+[174]: heaps/merge.go
+[175]: heaps/merge_test.go
 [176]: in_progress.md
 [177]: in_progress.md
 [178]: in_progress.md
