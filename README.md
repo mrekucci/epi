@@ -570,8 +570,8 @@ Honors Class
 [171]: in_progress.md
 [172]: in_progress.md
 [173]: in_progress.md
-[174]: heaps/merge.go
-[175]: heaps/merge_test.go
+[174]: heaps/mergesorted.go
+[175]: heaps/mergesorted_test.go
 [176]: in_progress.md
 [177]: in_progress.md
 [178]: in_progress.md
