@@ -28,13 +28,13 @@ func (h *minIntHeap) Pop() (v interface{}) {
 
 func (h *minIntHeap) Push(v interface{}) { *h = append(*h, v.(*entry)) }
 
-// MergeSortedSlices merges given slice of already
+// MergeSorted merges given slice of already
 // sorted slices into one sorted slice that slice.
 // The time complexity is O(n*log(k)) where n is the total number
 // of elements combining all slices together and k = len(ss).
-// O(k) additional space is needed (beyond the space needed
+// The O(k) additional space is needed (beyond the space needed
 // to write the final result).
-func MergeSortedSlices(ss [][]int) (m []int) {
+func MergeSorted(ss [][]int) (m []int) {
 	h := new(minIntHeap)
 	idx := make([]int, len(ss)) // Stores the next index of element from particular slice.
 	for i, s := range ss {      // Add first entry from each slice to the heap.
