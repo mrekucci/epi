@@ -155,6 +155,8 @@ Heaps
 Searching
 ---------
 
+### Binary Search
+
 | Problem                                                                  | Test         | Implemented |
 |--------------------------------------------------------------------------|:------------:|:-----------:|
 | [Search a sorted array for first occurrence of *k*][188]                 | [tests][189] |             |
@@ -163,6 +165,11 @@ Searching
 | [Search a cyclically sorted array][194]                                  | [tests][195] |             |
 | [Compute the integer square root][196]                                   | [tests][197] |             |
 | [Compute the real square root][198]                                      | [tests][199] |             |
+
+### Generalized Search
+
+| Problem                                                                  | Test         | Implemented |
+|--------------------------------------------------------------------------|:------------:|:-----------:|
 | [Search in a 2D sorted array][200]                                       | [tests][201] |             |
 | [Find the min and max simultaneously][202]                               | [tests][203] |             |
 | [Find the *k*th largest element][204]                                    | [tests][205] |             |
