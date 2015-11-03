@@ -159,7 +159,7 @@ Searching
 
 | Problem                                                                  | Test         | Implemented |
 |--------------------------------------------------------------------------|:------------:|:-----------:|
-| [Search a sorted array for first occurrence of *k*][188]                 | [tests][189] |             |
+| [Search a sorted array for first occurrence of *k*][188]                 | [tests][189] |      ✓      |
 | [Search a sorted array for the first element greater than *k*][190]      | [tests][191] |             |
 | [Search a sorted array for entry equal to its index][192]                | [tests][193] |             |
 | [Search a cyclically sorted array][194]                                  | [tests][195] |             |
@@ -591,8 +591,8 @@ Honors Class
 [185]: in_progress.md
 [186]: in_progress.md
 [187]: in_progress.md
-[188]: in_progress.md
-[189]: in_progress.md
+[188]: bsearch/firstk.go
+[189]: bsearch/firstk_test.go
 [190]: in_progress.md
 [191]: in_progress.md
 [192]: in_progress.md
