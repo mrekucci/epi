@@ -161,7 +161,7 @@ Searching
 |--------------------------------------------------------------------------|:------------:|:-----------:|
 | [Search a sorted array for first occurrence of *k*][188]                 | [tests][189] |      ✓      |
 | [Search a sorted array for the first element greater than *k*][190]      | [tests][191] |      ✓      |
-| [Search a sorted array for entry equal to its index][192]                | [tests][193] |             |
+| [Search a sorted array for entry equal to its index][192]                | [tests][193] |      ✓      |
 | [Search a cyclically sorted array][194]                                  | [tests][195] |             |
 | [Compute the integer square root][196]                                   | [tests][197] |             |
 | [Compute the real square root][198]                                      | [tests][199] |             |
@@ -595,8 +595,8 @@ Honors Class
 [189]: bsearch/firstk_test.go
 [190]: bsearch/greaterk.go
 [191]: bsearch/greaterk_test.go
-[192]: in_progress.md
-[193]: in_progress.md
+[192]: bsearch/equals.go
+[193]: bsearch/equals_test.go
 [194]: in_progress.md
 [195]: in_progress.md
 [196]: in_progress.md
