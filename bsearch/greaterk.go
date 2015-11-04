@@ -6,7 +6,7 @@ package bsearch
 
 // FirstGreaterK returns the index of the first element in an greater then k.
 // The time complexity is O(log(n)). The O(1) additional space is needed.
-func FirstGreaterK(k int, an []int) int {
+func FirstGreaterK(an []int, k int) int {
 	g := -1
 	l, r := 0, len(an)-1
 	for l <= r {

@@ -6,17 +6,17 @@ package bsearch
 
 // FirstK returns the index of the first leftmost occurrence of k in an.
 // The time complexity is O(log(n)). The O(1) additional space is needed.
-func FirstK(k int, an []int) int {
+func FirstK(an []int, k int) int {
 	f := -1
 	l, r := 0, len(an)-1
 	for l <= r {
 		m := l + (r-l)/2 // Not (r+l)/2 'cause we want to avoid overflow.
-		switch {
-		case k < an[m]:
+		switch e := an[m]; {
+		case e > k:
 			r = m - 1
-		case k == an[m]:
+		case e == k:
 			f, r = m, m-1
-		case k > an[m]:
+		case e < k:
 			l = m + 1
 		}
 	}
