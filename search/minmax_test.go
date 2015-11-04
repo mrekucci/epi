@@ -19,7 +19,9 @@ func testMinMaxFn(t *testing.T, fn minMaxFn, fnName string) {
 		{[]int(nil), 0, 0},
 		{[]int{1}, 1, 1},
 		{[]int{-1, 1}, -1, 1},
+		{[]int{1, -1}, -1, 1},
 		{[]int{-1, 0, 1}, -1, 1},
+		{[]int{1, 0, -1}, -1, 1},
 		{[]int{3, 2, 5, 1, 2, 4}, 1, 5},
 	} {
 		if gotMin, gotMax := fn(test.in); gotMin != test.min || gotMax != test.max {
