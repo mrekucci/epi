@@ -170,7 +170,7 @@ Searching
 
 | Problem                                                                  | Test         | Implemented |
 |--------------------------------------------------------------------------|:------------:|:-----------:|
-| [Search in a 2D sorted array][200]                                       | [tests][201] |             |
+| [Search in a 2D sorted array][200]                                       | [tests][201] |      ✓      |
 | [Find the min and max simultaneously][202]                               | [tests][203] |             |
 | [Find the *k*th largest element][204]                                    | [tests][205] |             |
 | [Compute the optimum mailbox placement][206]                             | [tests][207] |             |
@@ -603,8 +603,8 @@ Honors Class
 [197]: in_progress.md
 [198]: in_progress.md
 [199]: in_progress.md
-[200]: in_progress.md
-[201]: in_progress.md
+[200]: search/matrix.go
+[201]: search/matrix_test.go
 [202]: in_progress.md
 [203]: in_progress.md
 [204]: in_progress.md
