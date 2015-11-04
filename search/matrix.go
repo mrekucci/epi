@@ -10,12 +10,12 @@ package search
 func Matrix(m [][]int, x int) bool {
 	r, c := 0, len(m)-1
 	for r < len(m) && c >= 0 {
-		switch e := m[r][c]; {
-		case e == x:
+		switch v := m[r][c]; {
+		case v == x:
 			return true
-		case e > x:
+		case v > x:
 			c--
-		case e < x:
+		case v < x:
 			r++
 		}
 	}

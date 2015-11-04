@@ -11,12 +11,12 @@ func FirstK(an []int, k int) int {
 	l, r := 0, len(an)-1
 	for l <= r {
 		m := l + (r-l)/2 // Not (r+l)/2 'cause we want to avoid overflow.
-		switch e := an[m]; {
-		case e > k:
+		switch v := an[m]; {
+		case v > k:
 			r = m - 1
-		case e == k:
+		case v == k:
 			f, r = m, m-1
-		case e < k:
+		case v < k:
 			l = m + 1
 		}
 	}
