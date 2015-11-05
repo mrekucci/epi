@@ -172,7 +172,7 @@ Searching
 |--------------------------------------------------------------------------|:------------:|:-----------:|
 | [Search in a 2D sorted array][200]                                       | [tests][201] |      ✓      |
 | [Find the min and max simultaneously][202]                               | [tests][203] |      ✓      |
-| [Find the *k*th largest element][204]                                    | [tests][205] |             |
+| [Find the *k*th largest element][204]                                    | [tests][205] |      ✓      |
 | [Compute the optimum mailbox placement][206]                             | [tests][207] |             |
 | [Find the missing IP address][208]                                       | [tests][209] |             |
 | [Find the duplicate and missing elements][210]                           | [tests][211] |             |
@@ -607,8 +607,8 @@ Honors Class
 [201]: search/matrix_test.go
 [202]: search/minmax.go
 [203]: search/minmax_test.go
-[204]: in_progress.md
-[205]: in_progress.md
+[204]: search/largestkth.go
+[205]: search/largestkth_test.go
 [206]: in_progress.md
 [207]: in_progress.md
 [208]: in_progress.md
