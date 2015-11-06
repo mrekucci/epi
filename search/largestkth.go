@@ -6,7 +6,7 @@ package search
 
 import "math/rand"
 
-// partition returns a index of the new pivot and partitions elements in an such
+// partition returns an index of the new pivot and partitions elements in an such
 // as: an[l:pivot] contains elements that are less then the pivot and
 // an[pivot+1:r+1] contains elements that are greater then the pivot.
 func partition(an []int, l, r, p int) int {
