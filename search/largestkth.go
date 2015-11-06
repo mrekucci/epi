@@ -9,11 +9,11 @@ import "math/rand"
 // partition returns an index of the new pivot and partitions elements in an such
 // as: an[l:pivot] contains elements that are less then the pivot and
 // an[pivot+1:r+1] contains elements that are greater then the pivot.
-func partition(an []int, l, r, p int) int {
-	v := an[p]
+func partition(an []int, l, r int) int {
+	p := rand.Intn(r-l+1) + l
 	an[p], an[r] = an[r], an[p]
 	for i := l; i < r; i++ {
-		if an[i] > v {
+		if an[i] > an[r] {
 			an[i], an[l] = an[l], an[i]
 			l++
 		}
@@ -25,7 +25,7 @@ func partition(an []int, l, r, p int) int {
 // LargestKth returns the value of k-th largest element in an.
 // Slice must contain only distinct values an k must be from range: 0 < k >= len(an).
 // The an may be modified during the function execution.
-// The time complexity is O(n). The O(1) additional space is needed.
+// The time complexity is O(n) in average. The O(1) additional space is needed.
 func LargestKth(an []int, k int) (e int, ok bool) {
 	if k <= 0 || k > len(an) {
 		return 0, false
@@ -33,8 +33,7 @@ func LargestKth(an []int, k int) (e int, ok bool) {
 
 	l, r := 0, len(an)-1
 	for l <= r {
-		p := rand.Intn(r-l+1) + l
-		switch np := partition(an, l, r, p); {
+		switch np := partition(an, l, r); {
 		case np == k-1:
 			return an[np], true
 		case np > k-1:
