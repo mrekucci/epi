@@ -25,6 +25,9 @@ func TestLargestKth(t *testing.T) {
 		{[]int{0, 1, 2, 3, 4}, 3, 2, true},
 		{[]int{0, 1, 2, 3, 4}, 4, 1, true},
 		{[]int{0, 1, 2, 3, 4}, 5, 0, true},
+		{[]int{-4, -3, -2, -1, 0}, 1, 0, true},
+		{[]int{-4, -3, -2, -1, 0}, 3, -2, true},
+		{[]int{-4, -3, -2, -1, 0}, 5, -4, true},
 	} {
 		an := append([]int(nil), test.an...) // Copy the slice to avoid modification of the original slice.
 		if got, ok := LargestKth(an, test.k); got != test.e || ok != test.ok {
