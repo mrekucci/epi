@@ -32,7 +32,7 @@ func TestSortIncDecK(t *testing.T) {
 	} {
 		want := append([]int(nil), test...)
 		sort.Ints(want)
-		if got := SortK(test); !reflect.DeepEqual(got, want) {
+		if got := SortK(append([]int(nil), test...)); !reflect.DeepEqual(got, want) {
 			t.Errorf("SortIncDecK(%v)", test)
 			t.Error(" got ", got)
 			t.Error("want ", want)

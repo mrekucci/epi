@@ -15,19 +15,18 @@ func reverseInts(an []int, i, j int) {
 
 // SortK sorts k-increasing-decreasing slice an and returns the result.
 // The time complexity is O(n*log(k)). Beyond the space needed to write
-// the final result, the O(n+k) additional space is needed (n+k because we
-// do a copy of entire slice to avoid it's modification).
+// the final result, the O(k) additional space is needed.
+// The an can be modified during the function execution.
 func SortK(an []int) []int {
-	s := append([]int(nil), an...) // We don't want to modify the original slice.
 	i := 0
 	o := 1 // Order: 1 - increasing, -1 decreasing.
 	var ss [][]int
-	for j := 1; j <= len(s); j++ {
-		if j == len(s) || o > 0 && s[j-1] > s[j] || o < 0 && s[j-1] < s[j] {
+	for j := 1; j <= len(an); j++ {
+		if j == len(an) || o > 0 && an[j-1] > an[j] || o < 0 && an[j-1] < an[j] {
 			if o < 0 {
-				reverseInts(s, i, j-1)
+				reverseInts(an, i, j-1)
 			}
-			ss = append(ss, s[i:j])
+			ss = append(ss, an[i:j])
 			i, o = j, -o
 		}
 	}
