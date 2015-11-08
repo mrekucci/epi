@@ -15,6 +15,7 @@ func reverseInts(a []int, s, e int) {
 
 // NextPerm returns next permutation of p under lexicographical order.
 // Returns empty slice if p already contains last permutation.
+// The time complexity is O(n) and O(1) additional space is needed.
 func NextPerm(p []int) []int {
 	k := len(p) - 2
 	for k >= 0 && p[k] >= p[k+1] {
@@ -26,7 +27,7 @@ func NextPerm(p []int) []int {
 	}
 
 	l := 0
-	for i := k + 1; i < len(p); i++ { // Find the largest index l such that p[k] < p[l].
+	for i := k + 1; i < len(p); i++ { // Find the smallest entry in p[k+1:] decreasing suffix that is largest then p[k].
 		if p[k] < p[i] {
 			l = i
 		} else {
@@ -36,7 +37,7 @@ func NextPerm(p []int) []int {
 
 	pn := append([]int(nil), p...)
 	pn[k], pn[l] = pn[l], pn[k]
-	// Because swapping leaves the sequence after position k in decreasing order, we
+	// Because swapping pn[k] and pn[l] leaves the sequence after position k in decreasing order, we
 	// must reverse this sub-sequence to produce its lexicographically minimal permutation.
 	reverseInts(pn, k+1, len(pn)-1)
 
