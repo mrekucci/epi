@@ -184,7 +184,7 @@ Hash Tables
 |--------------------------------------------------------------------------|:------------:|:-----------:|
 | [Partition into anagrams][212]                                           | [tests][213] |      ✓      |
 | [Test for palindromic permutations][214]                                 | [tests][215] |      ✓      |
-| [Is an anonymous letter constructible?][216]                             | [tests][217] |             |
+| [Is an anonymous letter constructible?][216]                             | [tests][217] |      ✓      |
 | [Implement an ISBN cache][218]                                           | [tests][219] |             |
 | [Compute the LCA, optimizing for close ancestors][220]                   | [tests][221] |             |
 | [Compute the *k* most frequent queries][222]                             | [tests][223] |             |
@@ -619,8 +619,8 @@ Honors Class
 [213]: htables/anagram_test.go
 [214]: htables/palindrom.go
 [215]: htables/palindrom_test.go
-[216]: in_progress.md
-[217]: in_progress.md
+[216]: htables/letter.go
+[217]: htables/letter_test.go
 [218]: in_progress.md
 [219]: in_progress.md
 [220]: in_progress.md
