@@ -182,7 +182,7 @@ Hash Tables
 
 | Problem                                                                  | Test         | Implemented |
 |--------------------------------------------------------------------------|:------------:|:-----------:|
-| [Partition into anagrams][212]                                           | [tests][213] |             |
+| [Partition into anagrams][212]                                           | [tests][213] |      ✓      |
 | [Test for palindromic permutations][214]                                 | [tests][215] |             |
 | [Is an anonymous letter constructible?][216]                             | [tests][217] |             |
 | [Implement an ISBN cache][218]                                           | [tests][219] |             |
@@ -615,8 +615,8 @@ Honors Class
 [209]: in_progress.md
 [210]: in_progress.md
 [211]: in_progress.md
-[212]: in_progress.md
-[213]: in_progress.md
+[212]: htables/anagram.go
+[213]: htables/anagram_test.go
 [214]: in_progress.md
 [215]: in_progress.md
 [216]: in_progress.md
