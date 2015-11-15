@@ -14,6 +14,8 @@ func reverseBytes(a []byte, s, e int) {
 }
 
 // ReverseWords returns a new string containing the words from s in reverse order.
+// Note: this implementation works only for ASCII table characters.
+// The time complexity is O(n) and O(n) additional space is needed.
 func ReverseWords(s string) string {
 	r := []byte(s)
 
