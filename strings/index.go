@@ -29,7 +29,7 @@ func IndexNaive(s, p string) int {
 // 	- worst: Θ((n−m+1)*m)
 //
 func IndexRK(s, p string) int {
-	const b = 977 // Base (a prime).
+	const b = 977 // We use prime number as a base to reduce number of collisions in hash.
 
 	n := len(s)
 	m := len(p)
@@ -48,7 +48,7 @@ func IndexRK(s, p string) int {
 
 	// We don't manually reduce the computed hash values (and base power) by modulus.
 	// Instead we use the fact that overflow of integer multiplication and addition acts as a modulus.
-	// For example, overflow of the two unit32 values: a*b == (a*b)%(2**32).
+	// For example, overflow of the two unit32 values: a*b == (a*b)%(2**32-1).
 	// The increased number of potential collisions, when modulus isn't a large
 	// prime, is outweighed by the fact that we wouldn't need to explicitly use
 	// modular reduction for every addition and multiplication. This results in
@@ -57,11 +57,11 @@ func IndexRK(s, p string) int {
 	// Pre-processing.
 	var bp, ph, sh uint32 = 1, 0, 0
 	for i := 0; i < m; i++ {
-		if i > 0 { // Base power: bp = b**(m-1)%(2**32).
-			bp *= b // Implicit modulus 2**32.
+		if i > 0 { // Base power: bp = b**(m-1)%(2**32-1).
+			bp *= b // Implicit modulus 2**32-1.
 		}
-		ph = b*ph + uint32(p[i]) // Implicit modulus 2**32.
-		sh = b*sh + uint32(s[i]) // Implicit modulus 2**32.
+		ph = b*ph + uint32(p[i]) // Implicit modulus 2**32-1.
+		sh = b*sh + uint32(s[i]) // Implicit modulus 2**32-1.
 	}
 
 	// Matching.
@@ -72,7 +72,7 @@ func IndexRK(s, p string) int {
 			}
 		}
 		if i < n {
-			// Slide right the rolling hash window (include implicit modulus 2**32).
+			// Slide right the rolling hash window (include implicit modulus 2**32-1).
 			sh -= bp * uint32(s[i-m]) // Remove previous value.
 			sh = b*sh + uint32(s[i])  // Add next value.
 		}
