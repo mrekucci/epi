@@ -35,9 +35,10 @@ func TestRLEEncode(t *testing.T) {
 
 		{"1", "", false},
 		{"a1", "", false},
+		{"☺世", "", false},
 	} {
 		if got, ok := RLEEncode(test.in); got != test.want || ok != test.ok {
-			t.Errorf("RLEEncode(%s) = %s, %t; want %s, %t", test.in, got, ok, test.want, test.ok)
+			t.Errorf("RLEEncode(%q) = %q, %t; want %q, %t", test.in, got, ok, test.want, test.ok)
 		}
 	}
 }
@@ -77,14 +78,18 @@ func TestRLEDecode(t *testing.T) {
 		{"4A1B3C2A", "AAAABCCCAA", true},
 		{"20a1b", "aaaaaaaaaaaaaaaaaaaab", true},
 		{"20A1b", "AAAAAAAAAAAAAAAAAAAAb", true},
+		{"2@", "@@", true},
+		{"\x32\x7F", "\x7F\x7F", true},
 
 		{"1", "", false},
 		{"a", "", false},
 		{"a1", "", false},
 		{"1ab", "", false},
+		{"1☺", "", false},
+		{"1世", "", false},
 	} {
 		if got, ok := RLEDecode(test.in); got != test.want || ok != test.ok {
-			t.Errorf("RLEDecode(%s) = %s, %t; want %s, %t", test.in, got, ok, test.want, test.ok)
+			t.Errorf("RLEDecode(%q) = %q, %t; want %q, %t", test.in, got, ok, test.want, test.ok)
 		}
 	}
 }

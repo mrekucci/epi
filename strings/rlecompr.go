@@ -7,12 +7,14 @@ package strings
 // RLEEncode encode successive repeated characters
 // by the repetition count and the character.
 // "", false will be returned if s contains digit.
+// Note: this implementation works only for ASCII table characters.
+// The time complexity is O(n) where n is the length of the string s.
 func RLEEncode(s string) (es string, ok bool) {
 	var e []byte
 	cnt := 1
 	for i := 0; i < len(s); i++ {
 		switch {
-		case '0' <= s[i] && s[i] <= '9':
+		case s[i] > 127 || '0' <= s[i] && s[i] <= '9':
 			return "", false
 		case len(s) == i+1 || s[i] != s[i+1]:
 			e = append(append(e, IntToString(int64(cnt))...), s[i])
@@ -28,6 +30,8 @@ func RLEEncode(s string) (es string, ok bool) {
 // RLEDecode decode string s encoded as the repetition count
 // of successive repeated characters and the character.
 // "", false will be returned if encoding of s is broken.
+// Note: this implementation works only for ASCII table characters.
+// The time complexity is O(n) where n is the length of the string s.
 func RLEDecode(s string) (ds string, ok bool) {
 	if len(s) == 1 {
 		return "", false
@@ -38,17 +42,17 @@ func RLEDecode(s string) (ds string, ok bool) {
 	cnt := 0
 	for _, c := range s {
 		switch {
-		case mbd && !('0' <= c && c <= '9'):
+		case c > 127 || mbd && !('0' <= c && c <= '9'):
 			return "", false
 		case '0' <= c && c <= '9':
 			cnt = cnt*10 + int(c-'0')
 			mbd = false
 		default:
-			for j := 0; j < cnt; j++ {
+			for cnt > 0 {
 				d = append(d, byte(c))
+				cnt--
 			}
 			mbd = true
-			cnt = 0
 		}
 	}
 
