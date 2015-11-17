@@ -25,3 +25,23 @@ func BubbleSort(data sort.Interface) {
 		}
 	}
 }
+
+// SelectionSort sorts given data and has next properties:
+//
+// - Not stable
+// - O(1) extra space
+// - Θ(n*n) comparisons
+// - Θ(n) swaps
+// - Not adaptive
+//
+func SelectionSort(data sort.Interface) {
+	for i := 0; i < data.Len()-1; i++ { // Invariant: data[0:i] holds the number of i smallest elements in sorted order from data[:].
+		k := i
+		for j := i + 1; j < data.Len(); j++ { // Invariant: data[k] is the smallest element in data[i:j].
+			if data.Less(j, k) {
+				k = j
+			}
+		}
+		data.Swap(i, k)
+	}
+}
