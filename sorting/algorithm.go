@@ -61,3 +61,41 @@ func InsertionSort(data sort.Interface) {
 		}
 	}
 }
+
+// InsertionSort sorts given data and has next properties:
+//
+// - Not stable
+// - O(1) extra space
+// - O(n*lg(n)) time
+// - Not really adaptive
+//
+func HeapSort(data sort.Interface) {
+	// down restores order of heap.
+	down := func(root, n int) {
+		for {
+			lch := 2*root + 1
+			if lch >= n || lch < 0 { // child < 0 when int overflow.
+				break
+			}
+			if rch := lch + 1; rch < n && data.Less(lch, rch) { // lch+1 == 2*root + 2 // Right child.
+				lch = rch
+			}
+			if !data.Less(root, lch) { // Heap is ordered.
+				return
+			}
+			data.Swap(root, lch)
+			root = lch
+		}
+	}
+
+	// Heapify (build a max heap).
+	for i := (data.Len() - 1) / 2; i >= 0; i-- {
+		down(i, data.Len())
+	}
+
+	// Pop elements, largest first, into end of data.
+	for i := data.Len() - 1; i >= 0; i-- { // Invariant: data[i:] contains the data.Len()-1-i largest elements of maxHeap and the maxHeap contains i+1 smallest elements.
+		data.Swap(0, i)
+		down(0, i)
+	}
+}
