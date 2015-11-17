@@ -45,3 +45,19 @@ func SelectionSort(data sort.Interface) {
 		data.Swap(i, k)
 	}
 }
+
+// InsertionSort sorts given data and has next properties:
+//
+// - Stable
+// - O(1) extra space
+// - O(n*n) comparisons and swaps
+// - Adaptive: O(n) time when nearly sorted
+// - Very low overhead
+//
+func InsertionSort(data sort.Interface) {
+	for i := 1; i < data.Len(); i++ { // Invariant: at the start of each iteration, the data[0:i] consist of the elements originally in data[0:i], but in sorted order.
+		for k := i; k > 0 && data.Less(k, k-1); k-- { // Invariant: data[k:i] will have the smallest element on position k.
+			data.Swap(k, k-1)
+		}
+	}
+}

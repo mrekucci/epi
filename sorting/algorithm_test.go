@@ -43,6 +43,7 @@ func testSortFn(t *testing.T, fn sortFn, fnName string) {
 
 func TestBubbleSort(t *testing.T)    { testSortFn(t, BubbleSort, "BubbleSort") }
 func TestSelectionSort(t *testing.T) { testSortFn(t, SelectionSort, "SelectionSort") }
+func TestInsertionSort(t *testing.T) { testSortFn(t, InsertionSort, "InsertionSort") }
 
 func benchRandom(b *testing.B, fn sortFn, size int) {
 	b.StopTimer()
@@ -97,27 +98,42 @@ func benchReversed(b *testing.B, fn sortFn, size int) {
 	}
 }
 
-func BenchmarkBubbleSortRandom1e1(b *testing.B)          { benchRandom(b, BubbleSort, 1e1) }
-func BenchmarkSelectionSortRandom1e1(b *testing.B)       { benchRandom(b, SelectionSort, 1e1) }
-func BenchmarkBubbleSortRandom1e2(b *testing.B)          { benchRandom(b, BubbleSort, 1e2) }
-func BenchmarkSelectionSortRandom1e2(b *testing.B)       { benchRandom(b, SelectionSort, 1e2) }
-func BenchmarkBubbleSortRandom1e3(b *testing.B)          { benchRandom(b, BubbleSort, 1e3) }
-func BenchmarkSelectionSortRandom1e3(b *testing.B)       { benchRandom(b, SelectionSort, 1e3) }
+func BenchmarkBubbleSortRandom1e1(b *testing.B)    { benchRandom(b, BubbleSort, 1e1) }
+func BenchmarkSelectionSortRandom1e1(b *testing.B) { benchRandom(b, SelectionSort, 1e1) }
+func BenchmarkInsertionSortRandom1e1(b *testing.B) { benchRandom(b, InsertionSort, 1e1) }
+func BenchmarkBubbleSortRandom1e2(b *testing.B)    { benchRandom(b, BubbleSort, 1e2) }
+func BenchmarkSelectionSortRandom1e2(b *testing.B) { benchRandom(b, SelectionSort, 1e2) }
+func BenchmarkInsertionSortRandom1e2(b *testing.B) { benchRandom(b, InsertionSort, 1e2) }
+func BenchmarkBubbleSortRandom1e3(b *testing.B)    { benchRandom(b, BubbleSort, 1e3) }
+func BenchmarkSelectionSortRandom1e3(b *testing.B) { benchRandom(b, SelectionSort, 1e3) }
+func BenchmarkInsertionSortRandom1e3(b *testing.B) { benchRandom(b, InsertionSort, 1e3) }
+
 func BenchmarkBubbleSortNearlySorted1e1(b *testing.B)    { benchNearlySorted(b, BubbleSort, 1e1) }
 func BenchmarkSelectionSortNearlySorted1e1(b *testing.B) { benchNearlySorted(b, SelectionSort, 1e1) }
+func BenchmarkInsertionSortNearlySorted1e1(b *testing.B) { benchNearlySorted(b, InsertionSort, 1e1) }
 func BenchmarkBubbleSortNearlySorted1e2(b *testing.B)    { benchNearlySorted(b, BubbleSort, 1e2) }
 func BenchmarkSelectionSortNearlySorted1e2(b *testing.B) { benchNearlySorted(b, SelectionSort, 1e2) }
+func BenchmarkInsertionSortNearlySorted1e2(b *testing.B) { benchNearlySorted(b, InsertionSort, 1e2) }
 func BenchmarkBubbleSortNearlySorted1e3(b *testing.B)    { benchNearlySorted(b, BubbleSort, 1e3) }
 func BenchmarkSelectionSortNearlySorted1e3(b *testing.B) { benchNearlySorted(b, SelectionSort, 1e3) }
-func BenchmarkBubbleSortSorted1e1(b *testing.B)          { benchSorted(b, BubbleSort, 1e1) }
-func BenchmarkSelectionSortSorted1e1(b *testing.B)       { benchSorted(b, SelectionSort, 1e1) }
-func BenchmarkBubbleSortSorted1e2(b *testing.B)          { benchSorted(b, BubbleSort, 1e2) }
-func BenchmarkSelectionSortSorted1e2(b *testing.B)       { benchSorted(b, SelectionSort, 1e2) }
-func BenchmarkBubbleSortSorted1e3(b *testing.B)          { benchSorted(b, BubbleSort, 1e3) }
-func BenchmarkSelectionSortSorted1e3(b *testing.B)       { benchSorted(b, SelectionSort, 1e3) }
-func BenchmarkBubbleSortReversed1e1(b *testing.B)        { benchReversed(b, BubbleSort, 1e1) }
-func BenchmarkSelectionSortReversed1e1(b *testing.B)     { benchReversed(b, SelectionSort, 1e1) }
-func BenchmarkBubbleSortReversed1e2(b *testing.B)        { benchReversed(b, BubbleSort, 1e2) }
-func BenchmarkSelectionSortReversed1e2(b *testing.B)     { benchReversed(b, SelectionSort, 1e2) }
-func BenchmarkBubbleSortReversed1e3(b *testing.B)        { benchReversed(b, BubbleSort, 1e3) }
-func BenchmarkSelectionSortReversed1e3(b *testing.B)     { benchReversed(b, SelectionSort, 1e3) }
+func BenchmarkInsertionSortNearlySorted1e3(b *testing.B) { benchNearlySorted(b, InsertionSort, 1e3) }
+
+func BenchmarkBubbleSortSorted1e1(b *testing.B)    { benchSorted(b, BubbleSort, 1e1) }
+func BenchmarkSelectionSortSorted1e1(b *testing.B) { benchSorted(b, SelectionSort, 1e1) }
+func BenchmarkInsertionSortSorted1e1(b *testing.B) { benchSorted(b, InsertionSort, 1e1) }
+func BenchmarkBubbleSortSorted1e2(b *testing.B)    { benchSorted(b, BubbleSort, 1e2) }
+func BenchmarkSelectionSortSorted1e2(b *testing.B) { benchSorted(b, SelectionSort, 1e2) }
+func BenchmarkInsertionSortSorted1e2(b *testing.B) { benchSorted(b, InsertionSort, 1e2) }
+func BenchmarkBubbleSortSorted1e3(b *testing.B)    { benchSorted(b, BubbleSort, 1e3) }
+func BenchmarkSelectionSortSorted1e3(b *testing.B) { benchSorted(b, SelectionSort, 1e3) }
+func BenchmarkInsertionSortSorted1e3(b *testing.B) { benchSorted(b, InsertionSort, 1e3) }
+
+func BenchmarkBubbleSortReversed1e1(b *testing.B)    { benchReversed(b, BubbleSort, 1e1) }
+func BenchmarkSelectionSortReversed1e1(b *testing.B) { benchReversed(b, SelectionSort, 1e1) }
+func BenchmarkInsertionSortReversed1e1(b *testing.B) { benchReversed(b, InsertionSort, 1e1) }
+func BenchmarkBubbleSortReversed1e2(b *testing.B)    { benchReversed(b, BubbleSort, 1e2) }
+func BenchmarkSelectionSortReversed1e2(b *testing.B) { benchReversed(b, SelectionSort, 1e2) }
+func BenchmarkInsertionSortReversed1e2(b *testing.B) { benchReversed(b, InsertionSort, 1e2) }
+func BenchmarkBubbleSortReversed1e3(b *testing.B)    { benchReversed(b, BubbleSort, 1e3) }
+func BenchmarkSelectionSortReversed1e3(b *testing.B) { benchReversed(b, SelectionSort, 1e3) }
+func BenchmarkInsertionSortReversed1e3(b *testing.B) { benchReversed(b, InsertionSort, 1e3) }
