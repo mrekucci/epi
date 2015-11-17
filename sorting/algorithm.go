@@ -4,7 +4,10 @@
 
 package sorting
 
-import "sort"
+import (
+	"math/rand"
+	"sort"
+)
 
 // BubbleSort sorts given data and has next properties:
 //
@@ -98,4 +101,40 @@ func HeapSort(data sort.Interface) {
 		data.Swap(0, i)
 		down(0, i)
 	}
+}
+
+// quickSortFn is a recursive function that sorts data[l:r+1].
+func quickSortFn(data sort.Interface, p, r int) {
+	if p < r {
+		// Partition (divide). The time complexity is O(n). The O(1) additional space is needed.
+		q := p
+		data.Swap(rand.Intn(r-p+1)+p, r) // Select random pivot and move it on r position (the end position).
+		// Invariant:
+		// each element in data[p:q] is less than or equal to the pivot;
+		// each element in data[q:u] is greater than the pivot;
+		// each element in data[u:r] is unsorted;
+		// the element data[r] holds the pivot.
+		for u := q; u < r; u++ {
+			if data.Less(u, r) {
+				data.Swap(u, q)
+				q++
+			}
+		}
+		data.Swap(r, q)
+
+		quickSortFn(data, p, q-1) // Conquer.
+		quickSortFn(data, q+1, r) // Conquer.
+		// Because the sub-arrays are already sorted, no work is needed to combine them.
+	}
+}
+
+// InsertionSort sorts given data and has next properties:
+//
+// - Not stable
+// - O(n) extra space in worst case; O(lg(n)) typically
+// - O(n*n) time when few unique keys, but typically O(n*lg(n)) time
+// - Not adaptive
+//
+func QuickSort(data sort.Interface) {
+	quickSortFn(data, 0, data.Len()-1)
 }
