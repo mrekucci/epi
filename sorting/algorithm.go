@@ -18,9 +18,13 @@ import (
 //
 func BubbleSort(data sort.Interface) {
 	var isSorted bool
-	for i := 1; !isSorted && i < data.Len(); i++ { // Invariant: data[0:i-1] consist of sorted elements that are smaller (or equal) then data[i:len(data)].
+	// Loop invariant: data[0:i-1] consist of sorted elements
+	// that are smaller (or equal) then data[i:len(data)].
+	for i := 1; !isSorted && i < data.Len(); i++ {
 		isSorted = true
-		for j := data.Len() - 1; j >= i; j-- { // Invariant: data[j:len(data)] will have the smallest element on position j.
+		// Loop invariant: data[j:len(data)] will
+		// have the smallest element on position j.
+		for j := data.Len() - 1; j >= i; j-- {
 			if data.Less(j, j-1) {
 				data.Swap(j, j-1)
 				isSorted = false
@@ -38,9 +42,12 @@ func BubbleSort(data sort.Interface) {
 // - Not adaptive
 //
 func SelectionSort(data sort.Interface) {
-	for i := 0; i < data.Len()-1; i++ { // Invariant: data[0:i] holds the number of i smallest elements in sorted order from data[:].
+	// Loop invariant: data[0:i] holds the number of i
+	// smallest elements in sorted order from data[:].
+	for i := 0; i < data.Len()-1; i++ {
 		k := i
-		for j := i + 1; j < data.Len(); j++ { // Invariant: data[k] is the smallest element in data[i:j].
+		// Loop invariant: data[k] is the smallest element in data[i:j].
+		for j := i + 1; j < data.Len(); j++ {
 			if data.Less(j, k) {
 				k = j
 			}
@@ -58,8 +65,11 @@ func SelectionSort(data sort.Interface) {
 // - Very low overhead
 //
 func InsertionSort(data sort.Interface) {
-	for i := 1; i < data.Len(); i++ { // Invariant: at the start of each iteration, the data[0:i] consist of the elements originally in data[0:i], but in sorted order.
-		for k := i; k > 0 && data.Less(k, k-1); k-- { // Invariant: data[k:i] will have the smallest element on position k.
+	// Loop invariant: at the start of each iteration, the data[0:i] consist
+	// of the elements originally in data[0:i], but in sorted order.
+	for i := 1; i < data.Len(); i++ {
+		// Loop invariant: data[k:i] will have the smallest element on position k.
+		for k := i; k > 0 && data.Less(k, k-1); k-- {
 			data.Swap(k, k-1)
 		}
 	}
@@ -97,7 +107,9 @@ func HeapSort(data sort.Interface) {
 	}
 
 	// Pop elements, largest first, into end of data.
-	for i := data.Len() - 1; i >= 0; i-- { // Invariant: data[i:] contains the data.Len()-1-i largest elements of maxHeap and the maxHeap contains i+1 smallest elements.
+	// Loop invariant: data[i:] contains the data.Len()-1-i largest elements
+	// of maxHeap and the maxHeap contains i+1 smallest elements.
+	for i := data.Len() - 1; i >= 0; i-- {
 		data.Swap(0, i)
 		down(0, i)
 	}
@@ -109,7 +121,7 @@ func quickSortFn(data sort.Interface, p, r int) {
 		// Partition (divide). The time complexity is O(n). The O(1) additional space is needed.
 		q := p
 		data.Swap(rand.Intn(r-p+1)+p, r) // Select random pivot and move it on r position (the end position).
-		// Invariant:
+		// Loop invariant:
 		// each element in data[p:q] is less than or equal to the pivot;
 		// each element in data[q:u] is greater than the pivot;
 		// each element in data[u:r] is unsorted;
