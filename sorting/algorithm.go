@@ -4,10 +4,7 @@
 
 package sorting
 
-import (
-	"math/rand"
-	"sort"
-)
+import "sort"
 
 // BubbleSort sorts given data and has next properties:
 //
@@ -115,12 +112,31 @@ func HeapSort(data sort.Interface) {
 	}
 }
 
+// median moves the median of data[a], data[b], data[c] into data[b].
+// Selecting a median helps avoid to cause worst-case behavior on already
+// sorted (or reverse-sorted) data, and gives a better estimate of the optimal
+// pivot than selecting any single element, when no information about the
+// ordering of the input is known.
+func median(data sort.Interface, a, b, c int) {
+	if data.Less(b, a) {
+		data.Swap(b, a)
+	}
+	if data.Less(c, b) {
+		data.Swap(c, b)
+		if data.Less(b, a) {
+			data.Swap(b, a)
+		}
+	}
+}
+
 // quickSortFn is a recursive function that sorts data[l:r+1].
 func quickSortFn(data sort.Interface, p, r int) {
 	if p < r {
 		// Partition (divide). The time complexity is O(n). The O(1) additional space is needed.
 		q := p
-		data.Swap(rand.Intn(r-p+1)+p, r) // Select random pivot and move it on r position (the end position).
+		pivot := p + (r-p)/2
+		median(data, p, pivot, r) // Is much faster then rand.Intn(r-p+1)+p.
+		data.Swap(pivot, r)       // Move the pivot value into the position r.
 		// Loop invariant:
 		// each element in data[p:q] is less than or equal to the pivot;
 		// each element in data[q:u] is greater than the pivot;
@@ -144,7 +160,7 @@ func quickSortFn(data sort.Interface, p, r int) {
 //
 // - Not stable
 // - O(n) extra space in worst case; O(lg(n)) typically
-// - O(n*n) time when few unique keys, but typically O(n*lg(n)) time
+// - O(n*n) time when few unique keys or is sorted, but typically O(n*lg(n)) time
 // - Not adaptive
 //
 func QuickSort(data sort.Interface) {
