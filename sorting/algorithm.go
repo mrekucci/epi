@@ -112,6 +112,52 @@ func HeapSort(data sort.Interface) {
 	}
 }
 
+// move moves the largest element in data[s:e+1] into the position e.
+// It has O(n) time complexity (n=e-s) and O(1) additional space is needed.
+func move(data sort.Interface, s, e int) {
+	for i := s; i < e; i++ {
+		if data.Less(i+1, i) {
+			data.Swap(i+1, i)
+		}
+	}
+}
+
+// merge combines sorted data[p:q+1] and data[q+1:r+1] together.
+func merge(data sort.Interface, p, q, r int) {
+	for i := p; i <= q; i++ {
+		if data.Less(q+1, i) {
+			data.Swap(q+1, i)
+			move(data, q+1, r)
+		}
+	}
+}
+
+// mergeSortFn is a recursive function that sorts data[l:r+1].
+func mergeSortFn(ints sort.Interface, p, r int) {
+	switch cnt := r - p; {
+	case cnt == 1: // Two elements left.
+		if ints.Less(r, p) {
+			ints.Swap(p, r)
+		}
+	case cnt > 1:
+		q := p + (r-p)/2
+		mergeSortFn(ints, p, q)   // Divide.
+		mergeSortFn(ints, q+1, r) // Divide.
+		merge(ints, p, q, r)      // Combine and Conquer.
+	}
+}
+
+// MergeSort (in-place version) sorts given data and has next properties:
+//
+// - Not stable
+// - O(1) extra space
+// - O(n*lg(n)) time worst case
+// - Adaptive (not for reverse sorted)
+//
+func MergeSort(data sort.Interface) {
+	mergeSortFn(data, 0, data.Len()-1)
+}
+
 // median moves the median of data[a], data[b], data[c] into data[b].
 // Selecting a median helps avoid to cause worst-case behavior on already
 // sorted (or reverse-sorted) data, and gives a better estimate of the optimal
