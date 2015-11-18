@@ -10,16 +10,22 @@ import "math/rand"
 // as: an[l:pivot] contains elements that are less then the pivot and
 // an[pivot+1:r+1] contains elements that are greater then the pivot.
 func partition(an []int, l, r int) int {
-	p := rand.Intn(r-l+1) + l
-	an[p], an[r] = an[r], an[p]
-	for i := l; i < r; i++ {
-		if an[i] > an[r] {
-			an[i], an[l] = an[l], an[i]
-			l++
+	q := l
+	pivot := rand.Intn(r-l+1) + l
+	an[pivot], an[r] = an[r], an[pivot]
+	// Loop invariant:
+	// each element in data[l:q] is less than the pivot (elements are distinct);
+	// each element in data[q:u] is greater than the pivot;
+	// each element in data[u:r] is unsorted;
+	// the element data[r] holds the pivot.
+	for u := q; u < r; u++ {
+		if an[u] > an[r] {
+			an[u], an[q] = an[q], an[u]
+			q++
 		}
 	}
-	an[r], an[l] = an[l], an[r]
-	return l
+	an[r], an[q] = an[q], an[r]
+	return q
 }
 
 // LargestKth returns the value of k-th largest element in an.
