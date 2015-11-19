@@ -204,7 +204,7 @@ Sorting
 
 | Problem                                                                  | Test         | Implemented |
 |--------------------------------------------------------------------------|:------------:|:-----------:|
-| [Compute the intersection of two sorted arrays][244]                     | [tests][245] |             |
+| [Compute the intersection of two sorted arrays][244]                     | [tests][245] |      ✓      |
 | [Implement mergesort in-place][246]                                      | [tests][247] |             |
 | [Count the frequencies of characters in a sentence][248]                 | [tests][249] |             |
 | [Find unique elements][250]                                              | [tests][251] |             |
@@ -647,8 +647,8 @@ Honors Class
 [241]: in_progress.md
 [242]: in_progress.md
 [243]: in_progress.md
-[244]: in_progress.md
-[245]: in_progress.md
+[244]: sorting/intersection.go
+[245]: sorting/intersection_test.go
 [246]: in_progress.md
 [247]: in_progress.md
 [248]: in_progress.md
