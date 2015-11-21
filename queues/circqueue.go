@@ -42,6 +42,3 @@ func (q *arrayQueue) Dequeue() interface{} {
 // Len returns the length of this queue.
 // The time complexity is O(1)
 func (q *arrayQueue) Len() int { return q.len }
-
-// NewArrayQueue returns a new Queue with given size.
-func NewArrayQueue(size int) Queue { return &arrayQueue{an: []interface{}{}} }

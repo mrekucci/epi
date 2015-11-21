@@ -7,12 +7,12 @@ package queues
 import "testing"
 
 func TestArrayQueue(t *testing.T) {
-	testQueueInterface(t, NewArrayQueue(0), []interface{}{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, minInt, maxInt, 1.5, 1 + 1.5i, "x"})
+	testQueueInterface(t, new(arrayQueue), []interface{}{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, minInt, maxInt, 1.5, 1 + 1.5i, "x"})
 }
 
 func BenchmarkArrayQueue(b *testing.B) {
 	b.StopTimer()
-	q := NewArrayQueue(0)
+	q := new(arrayQueue)
 	b.StartTimer()
 	for i := 0; i < b.N; i++ {
 		q.Enqueue(i)

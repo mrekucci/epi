@@ -18,7 +18,7 @@ type IntBTree struct {
 func DepthOrder(t *IntBTree) [][]int {
 	var r [][]int
 	var l []int
-	pq := NewArrayQueue(1)
+	pq := new(arrayQueue)
 	pq.Enqueue(t) // Add root.
 	c := pq.Len() // Number of elements on the same level.
 	for pq.Len() != 0 {
