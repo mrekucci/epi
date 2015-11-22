@@ -72,7 +72,7 @@ func InsertionSort(data sort.Interface) {
 	}
 }
 
-// InsertionSort sorts given data and has next properties:
+// HeapSort sorts given data and has next properties:
 //
 // - Not stable
 // - O(1) extra space
@@ -202,7 +202,7 @@ func quickSortFn(data sort.Interface, p, r int) {
 	}
 }
 
-// InsertionSort sorts given data and has next properties:
+// QuickSort sorts given data and has next properties:
 //
 // - Not stable
 // - O(n) extra space in worst case; O(lg(n)) typically
