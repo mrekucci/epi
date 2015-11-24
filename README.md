@@ -206,7 +206,7 @@ Sorting
 |--------------------------------------------------------------------------|:------------:|:-----------:|
 | [Compute the intersection of two sorted arrays][244]                     | [tests][245] |      ✓      |
 | [Implement mergesort in-place][246]                                      | [tests][247] |      ✓      |
-| [Count the frequencies of characters in a sentence][248]                 | [tests][249] |             |
+| [Count the frequencies of characters in a sentence][248]                 | [tests][249] |      ✓      |
 | [Find unique elements][250]                                              | [tests][251] |             |
 | [Render a calendar][252]                                                 | [tests][253] |             |
 | [Sets of disjoint intervals][254]                                        | [tests][255] |             |
@@ -651,8 +651,8 @@ Honors Class
 [245]: sorting/intersection_test.go
 [246]: sorting/merge.go
 [247]: sorting/merge_test.go
-[248]: in_progress.md
-[249]: in_progress.md
+[248]: sorting/charfreq.go
+[249]: sorting/charfreq_test.go
 [250]: in_progress.md
 [251]: in_progress.md
 [252]: in_progress.md
