@@ -123,7 +123,10 @@ func move(data sort.Interface, s, e int) {
 }
 
 // merge combines sorted data[p:q+1] and data[q+1:r+1] together.
+// The time complexity is O((q-p)*(r-q+1)). No additional space is needed.
 func merge(data sort.Interface, p, q, r int) {
+	// Loop invariant: data[0:i], data[i:q+1] and data[q+1:r+1] are sorted, and every
+	// elements in data[0:i] are less or equal to the data[q+1].
 	for i := p; i <= q; i++ {
 		if data.Less(q+1, i) {
 			data.Swap(q+1, i)
@@ -151,8 +154,12 @@ func mergeSortFn(ints sort.Interface, p, r int) {
 //
 // - Not stable
 // - O(1) extra space
-// - O(n*lg(n)) time worst case
-// - Adaptive (not for reverse sorted)
+// - O(n*n*lg(n)) time worst case (when array is: reverse sorted/few unique/random)
+// - O(n*lg(n)) time best case (when array is: sorted/nearly sorted)
+// - Adaptive
+//
+// Note: For regular Merge Sort (not in-place version) the worst
+// case is O(n*lg(n)) and O(n) additional space is needed.
 //
 func MergeSort(data sort.Interface) {
 	mergeSortFn(data, 0, data.Len()-1)
