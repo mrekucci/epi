@@ -221,7 +221,7 @@ Binary Search Trees
 
 | Problem                                                                  | Test         | Implemented |
 |--------------------------------------------------------------------------|:------------:|:-----------:|
-| [Test if a binary tree satisfies the BST property][266]                  | [tests][267] |             |
+| [Test if a binary tree satisfies the BST property][266]                  | [tests][267] |      ✓      |
 | [Find the first occurrence of a key in a BST][268]                       | [tests][269] |             |
 | [Find the first key larger than a given value in a BST][270]             | [tests][271] |             |
 | [Find the *k* largest elements in a BST][272]                            | [tests][273] |             |
@@ -669,8 +669,8 @@ Honors Class
 [263]: in_progress.md
 [264]: in_progress.md
 [265]: in_progress.md
-[266]: in_progress.md
-[267]: in_progress.md
+[266]: bstrees/property.go
+[267]: bstrees/property_test.go
 [268]: in_progress.md
 [269]: in_progress.md
 [270]: in_progress.md
