@@ -223,7 +223,7 @@ Binary Search Trees
 |--------------------------------------------------------------------------|:------------:|:-----------:|
 | [Test if a binary tree satisfies the BST property][266]                  | [tests][267] |      ✓      |
 | [Find the first occurrence of a key in a BST][268]                       | [tests][269] |      ✓      |
-| [Find the first key larger than a given value in a BST][270]             | [tests][271] |             |
+| [Find the first key larger than a given value in a BST][270]             | [tests][271] |      ✓      |
 | [Find the *k* largest elements in a BST][272]                            | [tests][273] |             |
 | [Compute the LCA in a BST][274]                                          | [tests][275] |             |
 | [Reconstruct a BST from traversal data][276]                             | [tests][277] |             |
@@ -673,8 +673,8 @@ Honors Class
 [267]: bstrees/property_test.go
 [268]: bstrees/firstk.go
 [269]: bstrees/firstk_test.go
-[270]: in_progress.md
-[271]: in_progress.md
+[270]: bstrees/greaterk.go
+[271]: bstrees/greaterk_test.go
 [272]: in_progress.md
 [273]: in_progress.md
 [274]: in_progress.md
