@@ -295,7 +295,7 @@ Graphs
 | Problem                                                                  | Test         | Implemented |
 |--------------------------------------------------------------------------|:------------:|:-----------:|
 | [Identify the celebrity][364]                                            | [tests][365] |      ✓      |
-| [Search a maze][366]                                                     | [tests][367] |             |
+| [Search a maze][366]                                                     | [tests][367] |      ✓      |
 | [Paint a Boolean matrix][368]                                            | [tests][369] |             |
 | [Compute enclosed regions][370]                                          | [tests][371] |             |
 | [Degrees of connectedness—1][372]                                        | [tests][373] |             |
@@ -769,8 +769,8 @@ Honors Class
 [363]: in_progress.md
 [364]: graphs/celebrity.go
 [365]: graphs/celebrity_test.go
-[366]: in_progress.md
-[367]: in_progress.md
+[366]: graphs/maze.go
+[367]: graphs/maze_test.go
 [368]: in_progress.md
 [369]: in_progress.md
 [370]: in_progress.md
