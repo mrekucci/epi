@@ -4,19 +4,6 @@
 
 package graphs
 
-// Coordinate represents concrete position in maze.
-type Coordinate struct {
-	x, y int
-}
-
-// represents shift of Coordinate.
-var (
-	right = Coordinate{0, 1}
-	left  = Coordinate{0, -1}
-	down  = Coordinate{1, 0}
-	up    = Coordinate{-1, 0}
-)
-
 // isFeasible returns true if c is inside the maze and is white.
 func isFeasible(maze [][]bool, c Coordinate) bool {
 	return c.x >= 0 && c.x < len(maze) && c.y >= 0 && c.y < len(maze[c.x]) && maze[c.x][c.y] == white

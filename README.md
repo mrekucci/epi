@@ -296,7 +296,7 @@ Graphs
 |--------------------------------------------------------------------------|:------------:|:-----------:|
 | [Identify the celebrity][364]                                            | [tests][365] |      ✓      |
 | [Search a maze][366]                                                     | [tests][367] |      ✓      |
-| [Paint a Boolean matrix][368]                                            | [tests][369] |             |
+| [Paint a Boolean matrix][368]                                            | [tests][369] |      ✓      |
 | [Compute enclosed regions][370]                                          | [tests][371] |             |
 | [Degrees of connectedness—1][372]                                        | [tests][373] |             |
 | [Clone a graph][374]                                                     | [tests][375] |             |
@@ -771,8 +771,8 @@ Honors Class
 [365]: graphs/celebrity_test.go
 [366]: graphs/maze.go
 [367]: graphs/maze_test.go
-[368]: in_progress.md
-[369]: in_progress.md
+[368]: graphs/flipcolor.go
+[369]: graphs/flipcolor_test.go
 [370]: in_progress.md
 [371]: in_progress.md
 [372]: in_progress.md
