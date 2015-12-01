@@ -298,7 +298,7 @@ Graphs
 | [Search a maze][366]                                                     | [tests][367] |      ✓      |
 | [Paint a Boolean matrix][368]                                            | [tests][369] |      ✓      |
 | [Compute enclosed regions][370]                                          | [tests][371] |             |
-| [Degrees of connectedness—1][372]                                        | [tests][373] |             |
+| [Degrees of connectedness—1][372]                                        | [tests][373] |      ✓      |
 | [Clone a graph][374]                                                     | [tests][375] |             |
 | [Making wired connections][376]                                          | [tests][377] |             |
 | [Transform one string to another][378]                                   | [tests][379] |             |
@@ -775,8 +775,8 @@ Honors Class
 [369]: graphs/flipcolor_test.go
 [370]: in_progress.md
 [371]: in_progress.md
-[372]: in_progress.md
-[373]: in_progress.md
+[372]: graphs/minconnected.go
+[373]: graphs/minconnected_test.go
 [374]: in_progress.md
 [375]: in_progress.md
 [376]: in_progress.md
