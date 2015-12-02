@@ -16,10 +16,20 @@ func TestMatrix(t *testing.T) {
 		x    int
 		want bool
 	}{
-		{[][]int{[]int{0, 1}, []int{1, 2}}, 2, true},
-		{[][]int{[]int{0, 1}, []int{1, 2}}, -1, false},
-		{[][]int{[]int{0, 1, 2}, []int{1, 2, 3}, []int{2, 3, 4}}, 2, true},
-		{[][]int{[]int{0, 1, 2}, []int{1, 2, 3}, []int{2, 3, 4}}, -1, false},
+		{[][]int{
+			{0, 1},
+			{1, 2}}, 2, true},
+		{[][]int{
+			{0, 1},
+			{1, 2}}, -1, false},
+		{[][]int{
+			{0, 1, 2},
+			{1, 2, 3},
+			{2, 3, 4}}, 2, true},
+		{[][]int{
+			{0, 1, 2},
+			{1, 2, 3},
+			{2, 3, 4}}, -1, false},
 	} {
 		if got := Matrix(test.m, test.x); got != test.want {
 			t.Errorf("Matrix(%v, %d) = %t; want %t", test.m, test.x, got, test.want)
