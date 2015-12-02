@@ -48,7 +48,7 @@ func MinMaxAlt(an []int) (min, max int) {
 		_, max = compare(nMax, max)
 	}
 
-	if len(an) != 0 { // We need to compare the last element if length of an is odd.
+	if len(an)%2 != 0 { // We need to compare the last element if length of an is odd.
 		v := an[len(an)-1]
 		if v < min {
 			min = v
