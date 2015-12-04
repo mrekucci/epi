@@ -12,13 +12,14 @@ const (
 	processed
 )
 
-type vertex struct {
+// Vertex represents a Graph vertex with its connection edges to another vertices.
+type Vertex struct {
 	label string
 	state state // Default is undiscovered.
-	edges []*vertex
+	edges []*Vertex
 }
 
-func hasCycle(c, p *vertex) bool {
+func hasCycle(c, p *Vertex) bool {
 	if c.state == discovered { // Base case.
 		return true
 	}
@@ -37,7 +38,7 @@ func hasCycle(c, p *vertex) bool {
 // The time complexity is O(v+e) where v is the number of vertices and e is the
 // number of edges. However, if given graph is an undirected graph with no cycles
 // then the time complexity is O(v). The O(v) additional space is needed.
-func IsMinimallyConnected(graph []*vertex) bool {
+func IsMinimallyConnected(graph []*Vertex) bool {
 	if len(graph) == 0 {
 		return true
 	}
