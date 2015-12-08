@@ -17,30 +17,30 @@ type recorder struct {
 	cnt int
 }
 
-// move transfers n rings from p0 to p1 as follows:
-// - Recursively move n-1 rings from p0 to p2 using p1 (this leaves disc n alone on p0).
-// - Move the ring numbered n-1 from p0 to p1.
-// - Recursively move the n-1 rings on p2 to p1, using p0 (so they sit on disc n).
+// move transfers n rings from src to dst using aux as follows:
+// - Recursively move n-1 rings from src to aux using dst (this leaves disc n alone on src).
+// - Move the ring numbered n from src to dst.
+// - Recursively move the n-1 rings from aux to dst, using src (so they sit on disc n).
 // E.g.:
 //
-//	step    cnt    p0        p1        p2
+//	step      cnt   src      dst       aux
 //	---------------------------------------
-// 	   -    0     [2,1,0] | []      | []
-// 	p0->p1  1     [2,1]   | [0]     | []
-// 	p0->p2  2     [2]     | [0]     | [1]
-// 	p1->p2  3     [2]     | []      | [1,0]
-// 	p0->p1  4     []      | [2]     | [1,0]
-// 	p2->p0  5     [0]     | [2]     | [1]
-// 	p2->p1  6     [0]     | [2,1]   | []
-// 	p0->p1  7     []      | [2,1,0] | []
+// 	   -      0     [2,1,0] | []      | []
+// 	src->dst  1     [2,1]   | [0]     | []
+// 	src->aux  2     [2]     | [0]     | [1]
+// 	dst->aux  3     [2]     | []      | [1,0]
+// 	src->dst  4     []      | [2]     | [1,0]
+// 	aux->src  5     [0]     | [2]     | [1]
+// 	aux->dst  6     [0]     | [2,1]   | []
+// 	src->dst  7     []      | [2,1,0] | []
 //
 // Every step is written together with step count and error to r.
-func move(p [3]*stacks.IntStack, n, s, d, m int, r *recorder) {
+func move(p [3]*stacks.IntStack, n, src, dst, aux int, r *recorder) {
 	if n > 0 {
-		move(p, n-1, s, m, d, r)
-		p[d].Push(p[s].Pop())
-		fmt.Fprintf(&r.buf, "{p%d->p%d}", s, d) // We don't check for error 'cause writing to bytes.Buffer has always nil err.
-		move(p, n-1, m, d, s, r)
+		move(p, n-1, src, aux, dst, r)
+		p[dst].Push(p[src].Pop())
+		fmt.Fprintf(&r.buf, "{p%d->p%d}", src, dst) // We don't check for error 'cause writing to bytes.Buffer has always nil err.
+		move(p, n-1, aux, dst, src, r)
 		r.cnt++
 	}
 }
@@ -49,6 +49,7 @@ func move(p [3]*stacks.IntStack, n, s, d, m int, r *recorder) {
 // one peg to another peg with using one help peg. The rings on every peg must
 // be in ordered ascending. The number of steps is defined by function: cnt = 2**n - 1.
 // If the n is bigger then size of int, then zero values and false is returned.
+// The time complexity is O(2**n) and O(1) additional space is needed.
 func HanoiSteps(n int) (cnt int, steps string, ok bool) {
 	if n > intSize {
 		return 0, "", false
@@ -58,7 +59,7 @@ func HanoiSteps(n int) (cnt int, steps string, ok bool) {
 		p[0].Push(interface{}(i))
 	}
 
-	var r recorder
-	move(p, n, 0, 1, 2, &r)
+	r := new(recorder)
+	move(p, n, 0, 1, 2, r)
 	return r.cnt, r.buf.String(), true
 }
