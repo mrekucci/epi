@@ -9,18 +9,18 @@ package graphs
 // doesn't exists in f or if a person exists who doesn't know the celebrity.
 // The time complexity is O(n), and O(1) additional space is needed.
 func FindCelebrity(f [][]bool) int {
-	r, c := 0, 1 // c starts at 1 'cause it's after start of diagonal (A<->A, B<->B, C<->C, ...)
-	for c < len(f) {
-		if f[r][c] {
-			r, c = c, c+1 // All candidates less then c are not celebrity candidates.
+	row, col := 0, 1 // col starts at 1 'cause it's after start of a diagonal (A<->A, B<->B, C<->C, ...)
+	for col < len(f) {
+		if f[row][col] {
+			row, col = col, col+1 // All candidates less then col are not celebrity candidates.
 		} else {
-			c++ // r is still a celebrity candidate but c is not.
+			col++ // row is still a celebrity candidate but col is not.
 		}
 	}
-	for _, status := range f[r] { // Check if selected candidate is really a celebrity.
+	for _, status := range f[row] { // Check if selected candidate is really a celebrity.
 		if status {
 			return -1
 		}
 	}
-	return r
+	return row
 }
