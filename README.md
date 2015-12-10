@@ -243,7 +243,7 @@ Recursion
 | Problem                                                                  | Test         | Solved  |
 |--------------------------------------------------------------------------|:------------:|:-------:|
 | [The Tower of Hanoi problem][296]                                        | [tests][297] |    ✓    |
-| [Generate all nonattacking placements of *n*-Queens][298]                | [tests][299] |         |
+| [Generate all nonattacking placements of *n*-Queens][298]                | [tests][299] |    ✓    |
 | [Generate permutations][300]                                             | [tests][301] |         |
 | [Generate the power set][302]                                            | [tests][303] |    ✓    |
 | [Generate all subsets of size *k*][304]                                  | [tests][305] |         |
@@ -701,8 +701,8 @@ Honors Class
 [295]: in_progress.md
 [296]: recursion/hanoitowers.go
 [297]: recursion/hanoitowers_test.go
-[298]: in_progress.md
-[299]: in_progress.md
+[298]: recursion/nqueens.go
+[299]: recursion/nqueens_test.go
 [300]: in_progress.md
 [301]: in_progress.md
 [302]: recursion/powerset.go
