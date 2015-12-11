@@ -244,7 +244,7 @@ Recursion
 |--------------------------------------------------------------------------|:------------:|:-------:|
 | [The Tower of Hanoi problem][296]                                        | [tests][297] |    ✓    |
 | [Generate all nonattacking placements of *n*-Queens][298]                | [tests][299] |    ✓    |
-| [Generate permutations][300]                                             | [tests][301] |         |
+| [Generate permutations][300]                                             | [tests][301] |    ✓    |
 | [Generate the power set][302]                                            | [tests][303] |    ✓    |
 | [Generate all subsets of size *k*][304]                                  | [tests][305] |         |
 | [Generate strings of matched parens][306]                                | [tests][307] |         |
@@ -703,8 +703,8 @@ Honors Class
 [297]: recursion/hanoitowers_test.go
 [298]: recursion/nqueens.go
 [299]: recursion/nqueens_test.go
-[300]: in_progress.md
-[301]: in_progress.md
+[300]: recursion/perm.go
+[301]: recursion/perm_test.go
 [302]: recursion/powerset.go
 [303]: recursion/powerset_test.go
 [304]: in_progress.md
