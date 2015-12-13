@@ -4,15 +4,13 @@
 
 package ptypes
 
-import "math"
-
 // parityTable is a parity cache for all 16-bit non-negative integers.
 var parityTable = initParityTable()
 
 // initParityTable computes and returns parities for all 16-bit non-negative integers.
 func initParityTable() []uint16 {
 	pt := make([]uint16, 1<<16)
-	for i := 0; i <= math.MaxUint16; i++ {
+	for i := 0; i < len(pt); i++ {
 		pt[i] = Parity(uint16(i))
 	}
 	return pt
