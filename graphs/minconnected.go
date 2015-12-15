@@ -19,18 +19,18 @@ type Vertex struct {
 	edges []*Vertex
 }
 
-func hasCycle(c, p *Vertex) bool {
-	if c.state == discovered { // Base case.
+func hasCycle(curr, prev *Vertex) bool {
+	if curr.state == discovered { // Base case.
 		return true
 	}
 
-	c.state = discovered // In process.
-	for _, n := range c.edges {
-		if n != p && n.state != processed && hasCycle(n, c) {
+	curr.state = discovered // In process.
+	for _, next := range curr.edges {
+		if next != prev && next.state != processed && hasCycle(next, curr) {
 			return true
 		}
 	}
-	c.state = processed // Done.
+	curr.state = processed // Done.
 	return false
 }
 
