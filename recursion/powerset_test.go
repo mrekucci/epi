@@ -10,54 +10,40 @@ import (
 	"testing"
 )
 
-func TestPowerSet(t *testing.T) {
-	for _, test := range []struct {
-		in   []interface{}
-		want []interface{}
-		ok   bool
-	}{
-		{
-			[]interface{}{"A", "B"},
-			[]interface{}{
-				[]interface{}(nil),
-				[]interface{}{"A"},
-				[]interface{}{"B"},
-				[]interface{}{"A", "B"}},
-			true,
-		},
-		{
-			[]interface{}{"A", "B", "C"},
-			[]interface{}{
-				[]interface{}(nil),
-				[]interface{}{"A"},
-				[]interface{}{"B"},
-				[]interface{}{"A", "B"},
-				[]interface{}{"C"},
-				[]interface{}{"A", "C"},
-				[]interface{}{"B", "C"},
-				[]interface{}{"A", "B", "C"}},
-			true,
-		},
-		{
-			[]interface{}(nil), // Will be initialized, before the test will run, to 32 or 64 elements (according to the architecture).
-			[]interface{}(nil),
-			false,
-		},
-	} {
-		if !test.ok {
-			l := intSize
-			for i := 0; i < l; i++ {
-				test.in = append(test.in, "0")
-			}
-		}
+type powerSetFn func(s []interface{}) ([][]interface{}, bool)
 
-		if got, ok := PowerSet(test.in); !reflect.DeepEqual(got, test.want) || ok != test.ok {
-			t.Errorf("PowerSet(%#v) = %#v, %t; want %#v, %t", test.in, got, ok, test.want, test.ok)
+type powerSetTest struct {
+	in   []interface{}
+	want [][]interface{}
+	ok   bool
+}
+
+func testPowerSetFn(t *testing.T, fn powerSetFn, fnName string, tests []powerSetTest) {
+	for _, test := range tests {
+		if got, ok := fn(test.in); !reflect.DeepEqual(got, test.want) || ok != test.ok {
+			t.Errorf("%s(%v) = %v, %t; want %v, %t", fnName, test.in, got, ok, test.want, test.ok)
 		}
 	}
 }
 
-func benchPowerSet(b *testing.B, size int) {
+func TestPowerSetRec(t *testing.T) {
+	tests := []powerSetTest{
+		{[]interface{}{"A", "B"}, [][]interface{}{{"A", "B"}, {"A"}, {"B"}, nil}, true},
+		{[]interface{}{"A", "B", "C"}, [][]interface{}{{"A", "B", "C"}, {"A", "B"}, {"A", "C"}, {"A"}, {"B", "C"}, {"B"}, {"C"}, nil}, true},
+		{[]interface{}(nil), [][]interface{}{nil}, true}}
+	testPowerSetFn(t, PowerSetRec, "PowerSetRec", tests)
+}
+
+func TestPowerSetBin(t *testing.T) {
+	tests := []powerSetTest{
+		{[]interface{}{"A", "B"}, [][]interface{}{nil, {"A"}, {"B"}, {"A", "B"}}, true},
+		{[]interface{}{"A", "B", "C"}, [][]interface{}{nil, {"A"}, {"B"}, {"A", "B"}, {"C"}, {"A", "C"}, {"B", "C"}, {"A", "B", "C"}}, true},
+		{[]interface{}(nil), [][]interface{}{nil}, true},
+		{make([]interface{}, intSize), [][]interface{}(nil), false}}
+	testPowerSetFn(t, PowerSetBin, "PowerSetBin", tests)
+}
+
+func benchPowerSetFn(b *testing.B, size int, fn powerSetFn) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
 		data := make([]interface{}, size)
@@ -65,11 +51,14 @@ func benchPowerSet(b *testing.B, size int) {
 			data[j] = p
 		}
 		b.StartTimer()
-		PowerSet(data)
+		fn(data)
 		b.StopTimer()
 	}
 }
 
-func BenchmarkPowerSetIntSizeDiv8(b *testing.B) { benchPowerSet(b, intSize/8) }
-func BenchmarkPowerSetIntSizeDiv6(b *testing.B) { benchPowerSet(b, intSize/6) }
-func BenchmarkPowerSetIntSizeDiv4(b *testing.B) { benchPowerSet(b, intSize/4) }
+func BenchmarkPowerSetRec4(b *testing.B) { benchPowerSetFn(b, 4, PowerSetRec) }
+func BenchmarkPowerSetBin4(b *testing.B) { benchPowerSetFn(b, 4, PowerSetBin) }
+func BenchmarkPowerSetRec6(b *testing.B) { benchPowerSetFn(b, 6, PowerSetRec) }
+func BenchmarkPowerSetBin6(b *testing.B) { benchPowerSetFn(b, 6, PowerSetBin) }
+func BenchmarkPowerSetRec8(b *testing.B) { benchPowerSetFn(b, 8, PowerSetRec) }
+func BenchmarkPowerSetBin8(b *testing.B) { benchPowerSetFn(b, 8, PowerSetBin) }
