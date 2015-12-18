@@ -4,33 +4,32 @@
 
 package ptypes
 
-import "math"
-
 // reverseBitsTable is a reverse bits cache for all 16-bit non-negative integers.
-var reverseBitsTable = initReverseBitsTable()
+var reverseBitsTable = createReverseBitsTable()
 
-// initReverseBitsTable computes and returns reverse
+// createReverseBitsTable computes and returns reverse
 // bits for all 16-bit non-negative integers.
-func initReverseBitsTable() []uint16 {
-	bt := make([]uint16, 1<<16)
-	for i := 0; i <= math.MaxUint16; i++ {
-		bt[i] = ReverseBits(uint16(i))
+func createReverseBitsTable() (bt [1 << 16]uint16) {
+	for i := 0; i < len(bt); i++ {
+		bt[i] = uint16(ReverseBits(uint64(i)) >> 48)
 	}
 	return bt
 }
 
 // ReverseBits reverse bits in x.
-func ReverseBits(x uint16) uint16 {
-	rx := uint64(x)
-	for i := uint64(0); i < 16/2; i++ {
-		rx = SwapBits(rx, i, (15 - i))
+// The time complexity is O(n) where n is the word size.
+// The space complexity is O(1).
+func ReverseBits(x uint64) uint64 {
+	for i := uint64(0); i < 64/2; i++ {
+		x = SwapBits(x, i, 63-i)
 	}
-	return uint16(rx)
+	return x
 }
 
 // ReverseBitsLookup reverse bits in x.
-// This function is good for reverse bits of a very
-// large number of 64-bit non-negative integers.
+// The time complexity is O(n/l) where n is the word size and l is the width
+// of a word of cache key. The space complexity is O(1) beyond the 1<<l space
+// is needed to cache precomputed results, which is constant.
 func ReverseBitsLookup(x uint64) uint64 {
 	return uint64(reverseBitsTable[(x>>48)&0xffff]) |
 		uint64(reverseBitsTable[(x>>32)&0xffff])<<16 |

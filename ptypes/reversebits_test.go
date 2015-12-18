@@ -6,33 +6,9 @@ package ptypes
 
 import "testing"
 
-func TestReverseBits(t *testing.T) {
-	for _, test := range []struct {
-		in   uint16
-		want uint16
-	}{
-		{1, 1 << 15},
-		{2, 1 << 14},
-		{4, 1 << 13},
-		{8, 1 << 12},
-		{0x000f, 0xf000},
-		{0x00f0, 0x0f00},
-		{0x00ff, 0xff00},
-		{0xffff, 0xffff},
-	} {
-		if got := ReverseBits(test.in); got != test.want {
-			t.Errorf("ReverseBits(%#x) = %#x; want %#x", test.in, got, test.want)
-		}
-	}
-}
+type reverseBitsFn func(uint64) uint64
 
-func BenchmarkReverseBits(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		ReverseBits(uint16(i))
-	}
-}
-
-func TestReverseBitsLookup(t *testing.T) {
+func testReverseBitsFn(t *testing.T, fn reverseBitsFn, fnName string) {
 	for _, test := range []struct {
 		in   uint64
 		want uint64
@@ -46,14 +22,20 @@ func TestReverseBitsLookup(t *testing.T) {
 		{0x00000000ff000000, 0x000000ff00000000},
 		{0xffffffffffffffff, 0xffffffffffffffff},
 	} {
-		if got := ReverseBitsLookup(test.in); got != test.want {
-			t.Errorf("ReverseBitsLookup(%#x) = % #x; want %#x", test.in, got, test.want)
+		if got := fn(test.in); got != test.want {
+			t.Errorf("%s(%#.16x) = %#.16x; want %#.16x", fnName, test.in, got, test.want)
 		}
 	}
 }
 
-func BenchmarkReverseBitsLookup(b *testing.B) {
+func TestReverseBits(t *testing.T)       { testReverseBitsFn(t, ReverseBits, "ReverseBits") }
+func TestReverseBitsLookup(t *testing.T) { testReverseBitsFn(t, ReverseBitsLookup, "ReverseBitsLookup") }
+
+func benchReverseBitsFn(b *testing.B, fn reverseBitsFn) {
 	for i := 0; i < b.N; i++ {
-		ReverseBitsLookup(uint64(i))
+		fn(uint64(i))
 	}
 }
+
+func BenchmarkReverseBits(b *testing.B)       { benchReverseBitsFn(b, ReverseBits) }
+func BenchmarkReverseBitsLookup(b *testing.B) { benchReverseBitsFn(b, ReverseBitsLookup) }
