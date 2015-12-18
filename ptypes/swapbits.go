@@ -5,6 +5,7 @@
 package ptypes
 
 // SwapBits swaps the bits of x at indices i and j, and returns the result.
+// The time and space complexity is O(1), independent of word size.
 func SwapBits(x uint64, i, j uint64) uint64 {
 	if (x >> i & 1) != (x >> j & 1) {
 		x ^= (1<<i | 1<<j)
