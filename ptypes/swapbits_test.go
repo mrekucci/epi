@@ -8,9 +8,8 @@ import "testing"
 
 func TestSwapBits(t *testing.T) {
 	for _, test := range []struct {
-		x    uint64
-		i, j uint64
-		want uint64
+		x, i, j uint64
+		want    uint64
 	}{
 		{1, 0, 1, 1 << 1},
 		{5, 2, 4, 17},
@@ -18,7 +17,7 @@ func TestSwapBits(t *testing.T) {
 		{1, 0, 63, 1 << 63},
 	} {
 		if got := SwapBits(test.x, test.i, test.j); got != test.want {
-			t.Errorf("SwapBits(%d, %d, %d) = %d; want %d", test.x, test.i, test.j, got, test.want)
+			t.Errorf("SwapBits(%.64b, %d, %d) = %.64b; want %.64b", test.x, test.i, test.j, got, test.want)
 		}
 	}
 }
