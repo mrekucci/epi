@@ -14,22 +14,13 @@ const (
 	even = 0
 )
 
-type parityFn func(x int64) uint16
+type parityFn func(x uint64) uint16
 
 func testParityFn(t *testing.T, fn parityFn, fnName string) {
 	for _, test := range []struct {
-		in   int64
+		in   uint64
 		want uint16
 	}{
-		{-9, odd},
-		{-8, odd},
-		{-7, even},
-		{-6, even},
-		{-5, odd},
-		{-4, even},
-		{-3, odd},
-		{-2, odd},
-		{-1, even},
 		{0, even},
 		{1, odd},
 		{2, odd},
@@ -40,11 +31,10 @@ func testParityFn(t *testing.T, fn parityFn, fnName string) {
 		{7, odd},
 		{8, odd},
 		{9, even},
-		{math.MinInt64, odd},
-		{math.MaxInt64, odd},
+		{math.MaxUint64, even},
 	} {
 		if got := fn(test.in); got != test.want {
-			t.Errorf("%s(%.64b) = %d; want %d", fnName, uint64(test.in), got, test.want)
+			t.Errorf("%s(%.64b) = %d; want %d", fnName, test.in, got, test.want)
 		}
 	}
 }
@@ -55,7 +45,7 @@ func TestParityLookup(t *testing.T) { testParityFn(t, ParityLookup, "ParityLooku
 
 func benchParityFn(b *testing.B, fn parityFn) {
 	for i := 0; i < b.N; i++ {
-		fn(int64(i))
+		fn(uint64(i))
 	}
 }
 
