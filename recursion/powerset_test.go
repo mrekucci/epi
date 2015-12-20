@@ -34,13 +34,13 @@ func TestPowerSetRec(t *testing.T) {
 	testPowerSetFn(t, PowerSetRec, "PowerSetRec", tests)
 }
 
-func TestPowerSetBin(t *testing.T) {
+func TestPowerSetItr(t *testing.T) {
 	tests := []powerSetTest{
 		{[]interface{}{"A", "B"}, [][]interface{}{nil, {"A"}, {"B"}, {"A", "B"}}, true},
 		{[]interface{}{"A", "B", "C"}, [][]interface{}{nil, {"A"}, {"B"}, {"A", "B"}, {"C"}, {"A", "C"}, {"B", "C"}, {"A", "B", "C"}}, true},
 		{[]interface{}(nil), [][]interface{}{nil}, true},
 		{make([]interface{}, intSize), [][]interface{}(nil), false}}
-	testPowerSetFn(t, PowerSetBin, "PowerSetBin", tests)
+	testPowerSetFn(t, PowerSetItr, "PowerSetItr", tests)
 }
 
 func benchPowerSetFn(b *testing.B, size int, fn powerSetFn) {
@@ -57,8 +57,8 @@ func benchPowerSetFn(b *testing.B, size int, fn powerSetFn) {
 }
 
 func BenchmarkPowerSetRec4(b *testing.B) { benchPowerSetFn(b, 4, PowerSetRec) }
-func BenchmarkPowerSetBin4(b *testing.B) { benchPowerSetFn(b, 4, PowerSetBin) }
+func BenchmarkPowerSetItr4(b *testing.B) { benchPowerSetFn(b, 4, PowerSetItr) }
 func BenchmarkPowerSetRec6(b *testing.B) { benchPowerSetFn(b, 6, PowerSetRec) }
-func BenchmarkPowerSetBin6(b *testing.B) { benchPowerSetFn(b, 6, PowerSetBin) }
+func BenchmarkPowerSetItr6(b *testing.B) { benchPowerSetFn(b, 6, PowerSetItr) }
 func BenchmarkPowerSetRec8(b *testing.B) { benchPowerSetFn(b, 8, PowerSetRec) }
-func BenchmarkPowerSetBin8(b *testing.B) { benchPowerSetFn(b, 8, PowerSetBin) }
+func BenchmarkPowerSetItr8(b *testing.B) { benchPowerSetFn(b, 8, PowerSetItr) }

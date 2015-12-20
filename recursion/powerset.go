@@ -22,11 +22,11 @@ func PowerSetRec(s []interface{}) (ps [][]interface{}, ok bool) {
 	return ps, true
 }
 
-// PowerSetBin returns a power set of s (it uses mapping to integer bits to generate the set).
+// PowerSetItr returns a power set of s (it uses mapping to integer bits to generate the set).
 // The time complexity is O(n*(2**n)). The space complexity is O(2**n)
 // The nil, false is returned if the length of s is equal or bigger
 // then size of int of actual architecture.
-func PowerSetBin(s []interface{}) (ps [][]interface{}, ok bool) {
+func PowerSetItr(s []interface{}) (ps [][]interface{}, ok bool) {
 	if len(s) >= intSize {
 		return ps, false
 	}
