@@ -6,6 +6,7 @@ package strings
 
 // ReverseItr returns reversed string s.
 // Note it uses iterative way to reverse the string.
+// The time complexity is O(n), and O(1) additional space is needed.
 func ReverseItr(s string) string {
 	r := []rune(s)
 	i, j := 0, len(r)-1
@@ -26,6 +27,7 @@ func reverseAux(r []rune, i, j int) {
 }
 
 // ReverseRecAux returns reversed string s.
+// The time complexity is O(n).
 // Note: it uses recursive way with auxiliary variables to reverse the string.
 // Warning: may cause stack overflow for long strings.
 func ReverseRecAux(s string) string {
@@ -43,6 +45,7 @@ func reversePure(r []rune) []rune {
 }
 
 // ReverseRecPure returns reversed string s.
+// The time complexity is O(n).
 // Note: it uses pure recursive way to reverse the string.
 // Warning: may cause stack overflow for long strings.
 func ReverseRecPure(s string) string {
