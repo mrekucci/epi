@@ -277,12 +277,19 @@ Dynamic Programming
 Greedy Algorithms and Invariants
 --------------------------------
 
+### Greedy Algorithms
+
 | Problem                                                                  | Test         | Solved  |
 |--------------------------------------------------------------------------|:------------:|:-------:|
 | [Implement Huffman coding][346]                                          | [tests][347] |         |
 | [Compute an optimum assignment of tasks][348]                            | [tests][349] |         |
 | [Implement a schedule which minimizes waiting time][350]                 | [tests][351] |         |
 | [The interval covering problem][352]                                     | [tests][353] |         |
+
+### Invariants
+
+| Problem                                                                  | Test         | Solved  |
+|--------------------------------------------------------------------------|:------------:|:-------:|
 | [The 3-sum problem][354]                                                 | [tests][355] |         |
 | [Find the majority element][356]                                         | [tests][357] |         |
 | [The gasup problem][358]                                                 | [tests][359] |         |
