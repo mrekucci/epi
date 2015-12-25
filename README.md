@@ -283,7 +283,7 @@ Greedy Algorithms and Invariants
 |--------------------------------------------------------------------------|:------------:|:-------:|
 | [Implement Huffman coding][346]                                          | [tests][347] |    ✓    |
 | [Compute an optimum assignment of tasks][348]                            | [tests][349] |    ✓    |
-| [Implement a schedule which minimizes waiting time][350]                 | [tests][351] |         |
+| [Implement a schedule which minimizes waiting time][350]                 | [tests][351] |    ✓    |
 | [The interval covering problem][352]                                     | [tests][353] |         |
 
 ### Invariants
@@ -760,8 +760,8 @@ Honors Class
 [347]: greedy/huffman_test.go
 [348]: greedy/pairtasks.go
 [349]: greedy/pairtasks_test.go
-[350]: in_progress.md
-[351]: in_progress.md
+[350]: greedy/schedule.go
+[351]: greedy/schedule_test.go
 [352]: in_progress.md
 [353]: in_progress.md
 [354]: in_progress.md
