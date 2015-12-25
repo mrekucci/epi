@@ -290,7 +290,7 @@ Greedy Algorithms and Invariants
 
 | Problem                                                                  | Test         | Solved  |
 |--------------------------------------------------------------------------|:------------:|:-------:|
-| [The 3-sum problem][354]                                                 | [tests][355] |         |
+| [The 3-sum problem][354]                                                 | [tests][355] |    ✓    |
 | [Find the majority element][356]                                         | [tests][357] |         |
 | [The gasup problem][358]                                                 | [tests][359] |         |
 | [Compute the maximum water trapped by a pair of vertical lines][360]     | [tests][361] |         |
@@ -764,8 +764,8 @@ Honors Class
 [351]: greedy/schedule_test.go
 [352]: in_progress.md
 [353]: in_progress.md
-[354]: in_progress.md
-[355]: in_progress.md
+[354]: invariants/threesum.go
+[355]: invariants/threesum_test.go
 [356]: in_progress.md
 [357]: in_progress.md
 [358]: in_progress.md
