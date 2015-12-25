@@ -93,7 +93,7 @@ func TestHuffmanEncoding(t *testing.T) {
 			t.Errorf("HuffmanEncoding(%v): got %v; want %v", test.in, got, test.want)
 			for i, s := range got {
 				if !reflect.DeepEqual(s, test.want[i]) {
-					t.Errorf("symbol %q got %v; want %v", test.in, s.c, s, test.want[i])
+					t.Errorf("symbol %q got %v; want %v", s.c, s, test.want[i])
 				}
 			}
 		}
