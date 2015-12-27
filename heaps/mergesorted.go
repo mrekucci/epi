@@ -12,21 +12,21 @@ type entry struct {
 	i int
 }
 
-// minIntHeap is an implementation of min heap for entry values.
-type minIntHeap []*entry
+// minHeap is an implementation of min heap for entry values.
+type minHeap []*entry
 
-func (h *minIntHeap) Less(i, j int) bool { return (*h)[i].v < (*h)[j].v }
-func (h *minIntHeap) Swap(i, j int)      { (*h)[i], (*h)[j] = (*h)[j], (*h)[i] }
-func (h *minIntHeap) Len() int           { return len(*h) }
+func (h *minHeap) Less(i, j int) bool { return (*h)[i].v < (*h)[j].v }
+func (h *minHeap) Swap(i, j int)      { (*h)[i], (*h)[j] = (*h)[j], (*h)[i] }
+func (h *minHeap) Len() int           { return len(*h) }
 
-func (h *minIntHeap) Pop() (v interface{}) {
+func (h *minHeap) Pop() (v interface{}) {
 	v = (*h)[h.Len()-1]
 	(*h)[h.Len()-1] = nil
 	*h = (*h)[:h.Len()-1]
 	return v
 }
 
-func (h *minIntHeap) Push(v interface{}) { *h = append(*h, v.(*entry)) }
+func (h *minHeap) Push(v interface{}) { *h = append(*h, v.(*entry)) }
 
 // MergeSorted merges given slice of already
 // sorted slices into one sorted slice that slice.
@@ -35,7 +35,7 @@ func (h *minIntHeap) Push(v interface{}) { *h = append(*h, v.(*entry)) }
 // The O(k) additional space is needed (beyond the space needed
 // to write the final result).
 func MergeSorted(ss [][]int) (m []int) {
-	h := new(minIntHeap)
+	h := new(minHeap)
 	idx := make([]int, len(ss)) // Stores the next index of element from particular slice.
 	for i, s := range ss {      // Add first entry from each slice to the heap.
 		if len(s) > 0 {
