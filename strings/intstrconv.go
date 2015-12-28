@@ -17,8 +17,6 @@ var ErrRange = errors.New("StringToInt: value out of range")
 
 // StringToInt converts number represented by string with base 10 to integer.
 func StringToInt(s string) (int64, error) {
-	const cutoff = math.MaxInt64/10 + 1 // The first smallest number such that cutoff*10 > MaxInt64.
-
 	if len(s) == 0 {
 		return 0, ErrSyntax
 	}
@@ -32,23 +30,15 @@ func StringToInt(s string) (int64, error) {
 	}
 
 	var u uint64
-	for i := range s {
-		if s[i] < '0' || s[i] > '9' {
+	for _, c := range s {
+		if c < '0' || c > '9' {
 			return 0, ErrSyntax
 		}
 
-		if u >= cutoff {
-			// u*10 overflows.
+		u = u*10 + uint64(c-'0')
+		if neg && u > -math.MinInt64 || !neg && u > math.MaxInt64 { // Check for overflows: -n < math.MinInt64 || n > math.MaxInt64
 			return 0, ErrRange
 		}
-		u *= 10
-
-		nu := u + uint64(s[i]-'0')
-		if neg && nu > -math.MinInt64 || !neg && nu > math.MaxInt64 {
-			// u+v overflows.
-			return 0, ErrRange
-		}
-		u = nu
 	}
 
 	n := int64(u)
