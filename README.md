@@ -22,7 +22,7 @@ Primitive Types
 | [Compute *x × y* without arithmetical operators][10]                     | [tests][11]  |         |
 | [Compute *x/y*][12]                                                      | [tests][13]  |         |
 | [Compute *x^y*][14]                                                      | [tests][15]  |         |
-| [Reverse digits][16]                                                     | [tests][17]  |         |
+| [Reverse digits][16]                                                     | [tests][17]  |    ✓    |
 | [Check if a decimal integer is a palindrome][18]                         | [tests][19]  |         |
 | [Generate uniform random numbers][20]                                    | [tests][21]  |         |
 | [Rectangle intersection][22]                                             | [tests][23]  |         |
@@ -426,8 +426,8 @@ Honors Class
 [13]:  in_progress.md
 [14]:  in_progress.md
 [15]:  in_progress.md
-[16]:  in_progress.md
-[17]:  in_progress.md
+[16]:  ptypes/reverseint.go
+[17]:  ptypes/reverseint_test.go
 [18]:  in_progress.md
 [19]:  in_progress.md
 [20]:  in_progress.md
