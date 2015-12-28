@@ -12,7 +12,7 @@ import (
 func TestHasThreeSum(t *testing.T) {
 	for _, test := range []struct {
 		an   []int
-		t    int
+		k    int
 		want bool
 	}{
 		{nil, 0, false},
@@ -21,14 +21,17 @@ func TestHasThreeSum(t *testing.T) {
 		{[]int{1, 2}, 3, true},
 		{[]int{1, 2}, 4, true},
 		{[]int{1, 2}, 5, true},
+		{[]int{-1, 2}, 0, true},
+		{[]int{-1, -2}, -5, true},
 		{[]int{1, 1, 1}, 1, false},
 		{[]int{1, 1, 1}, 2, false},
 		{[]int{1, 1, 1}, 3, true},
 		{[]int{1, 1, 1}, 4, false},
 		{[]int{5, 7, 2, 3, 11}, 21, true},
+		{[]int{-3, 7, -5, 2, 9}, -1, true},
 	} {
-		if got := HasThreeSum(test.an, test.t); got != test.want {
-			t.Errorf("HasThreeSum(%v, %d) = %t; want %t", test.an, test.t, got, test.want)
+		if got := HasThreeSum(test.an, test.k); got != test.want {
+			t.Errorf("HasThreeSum(%v, %d) = %t; want %t", test.an, test.k, got, test.want)
 		}
 	}
 }
