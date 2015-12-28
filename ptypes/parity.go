@@ -28,7 +28,7 @@ func Parity(x uint64) (p uint16) {
 	return uint16(x & 1)
 }
 
-// Parity returns 1 if the number of bits set to 1 in x is odd, otherwise O.
+// ParityAlt returns 1 if the number of bits set to 1 in x is odd, otherwise O.
 // The time complexity is O(k) where k is the number of bits in x set to 1.
 // The space complexity is O(1).
 func ParityAlt(x uint64) (p uint16) {
