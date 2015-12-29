@@ -37,7 +37,7 @@ Arrays
 | [Multiply two arbitrary-precision integers][28]                          | [tests][29]  |         |
 | [Advancing through an array][30]                                         | [tests][31]  |         |
 | [Delete a key from an array][32]                                         | [tests][33]  |         |
-| [Delete duplicates from a sorted array][34]                              | [tests][35]  |         |
+| [Delete duplicates from a sorted array][34]                              | [tests][35]  |    ✓    |
 | [Robot's minimum battery capacity][36]                                   | [tests][37]  |    ✓    | <!-- Rename to: "Buy and sell a stock once"  and fix code according to: https://github.com/epibook/epibook.github.io/commit/44f09980c4039b7a7b3eb5200c6994631e543c7a -->
 | [Buy and sell a stock twice][38]                                         | [tests][39]  |         |
 | [Enumerate all primes to *n*][40]                                        | [tests][41]  |         |
@@ -444,8 +444,8 @@ Honors Class
 [31]:  in_progress.md
 [32]:  in_progress.md
 [33]:  in_progress.md
-[34]:  in_progress.md
-[35]:  in_progress.md
+[34]:  arrays/duplicates.go
+[35]:  arrays/duplicates_test.go
 [36]:  arrays/maxdiff.go
 [37]:  arrays/maxdiff_test.go
 [38]:  in_progress.md
