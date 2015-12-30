@@ -64,7 +64,7 @@ Strings
 | [Replace and remove][70]                                                 | [tests][71]  |         |
 | [Test palindromicity][72]                                                | [tests][73]  |         |
 | [Reverse all the words in a sentence][74]                                | [tests][75]  |    ✓    |
-| [Compute all mnemonics for a phone number][76]                           | [tests][77]  |         |
+| [Compute all mnemonics for a phone number][76]                           | [tests][77]  |    ✓    |
 | [The look-and-say problem][78]                                           | [tests][79]  |         |
 | [Convert from Roman to decimal][80]                                      | [tests][81]  |         |
 | [Compute all valid IP addresses][82]                                     | [tests][83]  |         |
@@ -486,8 +486,8 @@ Honors Class
 [73]:  in_progress.md
 [74]:  strings/reversewords.go
 [75]:  strings/reversewords_test.go
-[76]:  in_progress.md
-[77]:  in_progress.md
+[76]:  strings/phonemnemo.go
+[77]:  strings/phonemnemo_test.go
 [78]:  in_progress.md
 [79]:  in_progress.md
 [80]:  in_progress.md
