@@ -40,7 +40,7 @@ Arrays
 | [Delete duplicates from a sorted array][34]                              | [tests][35]  |    ✓    |
 | [Robot's minimum battery capacity][36]                                   | [tests][37]  |    ✓    | <!-- Rename to: "Buy and sell a stock once"  and fix code according to: https://github.com/epibook/epibook.github.io/commit/44f09980c4039b7a7b3eb5200c6994631e543c7a -->
 | [Buy and sell a stock twice][38]                                         | [tests][39]  |         |
-| [Enumerate all primes to *n*][40]                                        | [tests][41]  |         |
+| [Enumerate all primes to *n*][40]                                        | [tests][41]  |    ✓    |
 | [Permute the elements of an array][42]                                   | [tests][43]  |         |
 | [Compute the next permutation][44]                                       | [tests][45]  |    ✓    |
 | [Sample offline data][46]                                                | [tests][47]  |         |
@@ -450,8 +450,8 @@ Honors Class
 [37]:  arrays/maxdiff_test.go
 [38]:  in_progress.md
 [39]:  in_progress.md
-[40]:  in_progress.md
-[41]:  in_progress.md
+[40]:  arrays/enumprimes.go
+[41]:  arrays/enumprimes_test.go
 [42]:  in_progress.md
 [43]:  in_progress.md
 [44]:  arrays/nextperm.go
