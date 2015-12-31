@@ -522,8 +522,8 @@ Honors Class
 [109]: in_progress.md
 [110]: in_progress.md
 [111]: in_progress.md
-[112]: in_progress.md
-[113]: in_progress.md
+[112]: lists/evenoddmerge.go
+[113]: lists/evenoddmerge_test.go
 [114]: in_progress.md
 [115]: in_progress.md
 [116]: in_progress.md
