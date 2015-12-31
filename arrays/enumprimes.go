@@ -71,7 +71,7 @@ func GenPrimesSieve(n int) (primes []int, ok bool) {
 			for j < size {
 				isNotPrime[j] = true
 				jn := j + p
-				if jn < j { // Check for j+p overflow.
+				if jn < j { // Check for j+p overflows.
 					return nil, false
 				}
 				j = jn
