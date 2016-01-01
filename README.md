@@ -102,7 +102,7 @@ Stacks and Queues
 |--------------------------------------------------------------------------|:------------:|:-------:|
 | [Implement a stack with max API][120]                                    | [tests][121] |    ✓    |
 | [Evaluate RPN expressions][122]                                          | [tests][123] |    ✓    |
-| [Test a string over “{,},(,),[,]” for well-formedness][124]              | [tests][125] |         |
+| [Test a string over “{,},(,),[,]” for well-formedness][124]              | [tests][125] |    ✓    |
 | [Normalize pathnames][126]                                               | [tests][127] |         |
 | [BST keys in sort order][128]                                            | [tests][129] |         |
 | [Search a postings list][130]                                            | [tests][131] |         |
@@ -534,8 +534,8 @@ Honors Class
 [121]: stacks/max_test.go
 [122]: stacks/eval.go
 [123]: stacks/eval_test.go
-[124]: in_progress.md
-[125]: in_progress.md
+[124]: stackt/wellformed.go
+[125]: stackt/wellformed_test.go
 [126]: in_progress.md
 [127]: in_progress.md
 [128]: in_progress.md
