@@ -40,3 +40,28 @@ func (s *IntStack) Pop() (e interface{}) {
 
 // Len returns the length of this stack.
 func (s *IntStack) Len() int { return len(*s) }
+
+// RuneStack is an implementation of the Stack interface for rune values.
+type RuneStack []rune
+
+// Push adds e on top of the stack.
+// The time complexity is O(1) amortized.
+func (s *RuneStack) Push(e interface{}) { *s = append(*s, e.(rune)) }
+
+// Pop removes and returns the last added rune element from this stack.
+// The time complexity is O(1) amortized.
+func (s *RuneStack) Pop() (e interface{}) {
+	if s.Len() == 0 {
+		return nil
+	}
+	e = (*s)[s.Len()-1]
+	if cap(*s) > 64 && float64(s.Len()/cap(*s)) < 0.75 { // Free memory when the length of a slice shrunk enough.
+		*s = append([]rune(nil), (*s)[:s.Len()-1]...)
+	} else {
+		*s = (*s)[:s.Len()-1]
+	}
+	return e
+}
+
+// Len returns the length of this stack.
+func (s *RuneStack) Len() int { return len(*s) }

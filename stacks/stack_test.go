@@ -79,3 +79,7 @@ func testStackInterface(t *testing.T, s Stack, tests []interface{}) {
 func TestIntStack(t *testing.T) {
 	testStackInterface(t, new(IntStack), []interface{}{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, minInt, maxInt})
 }
+
+func TestByteStack(t *testing.T) {
+	testStackInterface(t, new(RuneStack), []interface{}{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'})
+}
