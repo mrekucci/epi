@@ -20,18 +20,18 @@ func isSafe(placement []int) bool {
 
 // solveNQueens use backtracking technique to place
 // queens on board to the non-attacking positions.
-func solveNQueens(positions *[][]int, queens []int, n, row int) {
+func solveNQueens(n, row int, queens []int, positions [][]int) [][]int {
 	if row == n { // Base case, all queens are placed on non-attacking positions.
-		*positions = append(*positions, append([]int(nil), queens...))
-	} else {
-		for col := 0; col < n; col++ {
-			queens = append(queens, col) // Place queen.
-			if isSafe(queens) {
-				solveNQueens(positions, queens, n, row+1)
-			}
-			queens = queens[:len(queens)-1] // Step back, remove queen and go try another position.
-		}
+		return append(positions, append([]int(nil), queens...))
 	}
+	for col := 0; col < n; col++ {
+		queens = append(queens, col) // Place queen.
+		if isSafe(queens) {
+			positions = solveNQueens(n, row+1, queens, positions)
+		}
+		queens = queens[:len(queens)-1] // Step back, remove queen and go try another position.
+	}
+	return positions
 }
 
 // NQueens returns 2D slice that represents all distinct non-attacking
@@ -42,11 +42,9 @@ func solveNQueens(positions *[][]int, queens []int, n, row int) {
 // n, but it's conjectured to tend to n!/(c**n), where c is approximately
 // 2.52, which is super-exponential. Beyond the returned n*n board O(1)
 // additional space is needed.
-func NQueens(n int) (positions [][]int) {
+func NQueens(n int) [][]int {
 	if n == 0 {
 		return nil
 	}
-	var queens []int
-	solveNQueens(&positions, queens, n, 0)
-	return positions
+	return solveNQueens(n, 0, nil, nil)
 }
