@@ -15,7 +15,7 @@ func Rearrange(an []int, i int) {
 	// elements less then the pivot an[0:p];
 	// elements equal to the pivot an[p:q];
 	// elements that are unclassified an[q:r+1];
-	// elements greater then the pivot an[r+1:len(an)-1].
+	// elements greater then the pivot an[r+1:len(an)].
 	// The time complexity is O(n) because on each iteration we decrease number of unclassified elements by 1.
 	for q <= r {
 		switch {
