@@ -33,10 +33,11 @@ func TestRearrange(t *testing.T) {
 
 func benchRearrange(b *testing.B, size int) {
 	b.StopTimer()
-	p := size / 3
-	q := size
+	p, q := size/3, size
+	ints := rand.New(rand.NewSource(int64(size))).Perm(size)
+	data := make([]int, size)
 	for i := 0; i < b.N; i++ {
-		data := rand.New(rand.NewSource(int64(i))).Perm(size)
+		copy(data, ints)
 		j := data[i%size]%(q-p) + p
 		b.StartTimer()
 		Rearrange(data, j)
@@ -44,6 +45,6 @@ func benchRearrange(b *testing.B, size int) {
 	}
 }
 
-func BenchmarkRearrange1e2(b *testing.B) { benchRearrange(b, 1e2) }
-func BenchmarkRearrange1e4(b *testing.B) { benchRearrange(b, 1e4) }
-func BenchmarkRearrange1e6(b *testing.B) { benchRearrange(b, 1e6) }
+func BenchmarkRearrange1e2(b *testing.B) { benchRearrange(b, 1e3) }
+func BenchmarkRearrange1e4(b *testing.B) { benchRearrange(b, 1e5) }
+func BenchmarkRearrange1e6(b *testing.B) { benchRearrange(b, 1e7) }
