@@ -30,9 +30,8 @@ func TestIndexEqualsEntry(t *testing.T) {
 }
 
 func benchIndexEqualsEntry(b *testing.B, size int) {
-	b.StopTimer()
 	data := make([]int, size) // Will be searching for 0.
-	b.StartTimer()
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		IndexEqualsEntry(data)
 	}

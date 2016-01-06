@@ -39,11 +39,10 @@ func TestFirstK(t *testing.T) {
 }
 
 func benchFirstK(b *testing.B, size int) {
-	b.StopTimer()
 	data := rand.Perm(size)
 	sort.Ints(data)
 	k := data[size-1]
-	b.StartTimer()
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		FirstK(data, k)
 	}
