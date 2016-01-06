@@ -28,15 +28,13 @@ func TestMergeSorted(t *testing.T) {
 }
 
 func benchMergeSorted(b *testing.B, size int) {
-	b.StopTimer()
 	j := size / 3
+	data := rand.New(rand.NewSource(int64(size))).Perm(size)
+	sort.Ints(data)
+	x, y, z := data[:j], data[j+1:2*j], data[2*j+1:]
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		data := rand.New(rand.NewSource(int64(i))).Perm(size)
-		sort.Ints(data)
-		x, y, z := data[:j], data[j+1:2*j], data[2*j+1:]
-		b.StartTimer()
 		MergeSorted([][]int{x, y, z})
-		b.StopTimer()
 	}
 }
 
