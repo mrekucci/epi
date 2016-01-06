@@ -42,19 +42,23 @@ func TestSortIncDecK(t *testing.T) {
 
 func benchSortK(b *testing.B, size int) {
 	b.StopTimer()
-	for i := 0; i < b.N; i++ {
-		data := rand.New(rand.NewSource(int64(i))).Perm(size)
-		o := -1
-		for p, q := 0, size/10; q < size; p, q = q, p+size/10 {
-			s := sort.IntSlice(data[p:q])
-			if o < 0 {
-				sort.Sort(sort.Reverse(s))
-			} else {
-				sort.Sort(s)
-			}
+	ints := rand.New(rand.NewSource(int64(size))).Perm(size)
+	o := 1
+	for p, q := 0, size/10; q < size; p, q = q, p+size/10 {
+		s := sort.IntSlice(ints[p:q])
+		if o < 0 {
+			sort.Sort(sort.Reverse(s))
+			o = 1
+		} else {
+			sort.Sort(s)
+			o = -1
 		}
+	}
+	data := make([]int, size)
+	for i := 0; i < b.N; i++ {
+		copy(data, ints)
 		b.StartTimer()
-		SortK(data)
+		SortK(ints)
 		b.StopTimer()
 	}
 }
