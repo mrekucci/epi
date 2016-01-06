@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func TestNext(t *testing.T) {
+func TestNextPerm(t *testing.T) {
 	for _, test := range []struct {
 		in   []int
 		want []int
@@ -31,16 +31,14 @@ func TestNext(t *testing.T) {
 	}
 }
 
-func benchNext(b *testing.B, size int) {
-	b.StopTimer()
+func benchNextPerm(b *testing.B, size int) {
+	data := rand.New(rand.NewSource(int64(size))).Perm(size)
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		data := rand.New(rand.NewSource(int64(i))).Perm(size)
-		b.StartTimer()
 		NextPerm(data)
-		b.StopTimer()
 	}
 }
 
-func BenchmarkNext1e2(b *testing.B) { benchNext(b, 1e2) }
-func BenchmarkNext1e4(b *testing.B) { benchNext(b, 1e4) }
-func BenchmarkNext1e6(b *testing.B) { benchNext(b, 1e6) }
+func BenchmarkNextPerm1e2(b *testing.B) { benchNextPerm(b, 1e2) }
+func BenchmarkNextPerm1e4(b *testing.B) { benchNextPerm(b, 1e4) }
+func BenchmarkNextPerm1e6(b *testing.B) { benchNextPerm(b, 1e6) }
