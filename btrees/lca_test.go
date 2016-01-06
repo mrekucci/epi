@@ -43,3 +43,31 @@ func TestLCA(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkLCA(b *testing.B) {
+	tree := &BTree{"A",
+		&BTree{"B",
+			&BTree{"C",
+				&BTree{"D", nil, nil},
+				&BTree{"E", nil, nil}},
+			&BTree{"F",
+				nil,
+				&BTree{"G",
+					&BTree{"H", nil, nil},
+					nil}}},
+		&BTree{"I",
+			&BTree{"J",
+				nil,
+				&BTree{"K",
+					&BTree{"L",
+						nil,
+						&BTree{"M", nil, nil}},
+					&BTree{"N", nil, nil}}},
+			&BTree{"O",
+				nil,
+				&BTree{"P", nil, nil}}}}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		LCA(tree, tree.right.left.right.left.right, tree.right.left.right.right) // n0 = M; n1 = N
+	}
+}
