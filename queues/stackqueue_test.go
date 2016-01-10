@@ -11,9 +11,8 @@ func TestIntStackQueue(t *testing.T) {
 }
 
 func BenchmarkIntStackQueue(b *testing.B) {
-	b.StopTimer()
 	q := new(IntListQueue)
-	b.StartTimer()
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		q.Enqueue(i)
 		if i%64 == 0 {
