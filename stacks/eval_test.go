@@ -58,21 +58,15 @@ func TestEvalRPN(t *testing.T) {
 }
 
 func benchEvalRPN(b *testing.B, size int) {
-	b.StopTimer()
 	var rpn, o string
 	for j := size / 2; j >= 0; j-- { // Construct rpn according to the size.
 		rpn += "0,0,+"
 		o += ",+"
 	}
 	rpn += o
-	var err error
-	b.StartTimer()
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		_, err = EvalRPN(rpn)
-	}
-	b.StopTimer()
-	if err != nil {
-		b.Error("EvalRPN did not evaluate the expression properly")
+		EvalRPN(rpn)
 	}
 }
 
