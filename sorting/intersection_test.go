@@ -38,11 +38,10 @@ func TestIntersectSorted(t *testing.T) {
 }
 
 func benchIntersectSorted(b *testing.B, size int) {
-	b.StopTimer()
 	x := rand.New(rand.NewSource(int64(size))).Perm(size)
 	sort.Ints(x)
 	y := x[size-(size/2):]
-	b.StartTimer()
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		IntersectSorted(x, y)
 	}

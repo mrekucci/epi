@@ -31,9 +31,8 @@ func TestCountOccurrences(t *testing.T) {
 }
 
 func benchCountOccurrences(b *testing.B, size int) {
-	b.StopTimer()
 	s := epiutil.RandStr(size, "0123456789abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(size)))
-	b.StartTimer()
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		CountOccurrences(s)
 	}

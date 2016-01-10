@@ -33,13 +33,12 @@ func TestMergeInPlace(t *testing.T) {
 }
 
 func benchMergeInPlace(b *testing.B, size int) {
-	b.StopTimer()
 	s := rand.NewSource(int64(size))
 	x := rand.New(s).Perm(2 * size / 3)
 	y := rand.New(s).Perm(size / 3)
 	sort.Ints(x)
 	sort.Ints(y)
-	b.StartTimer()
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		MergeInPlace(x, y)
 	}
