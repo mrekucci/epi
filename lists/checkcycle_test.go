@@ -38,16 +38,11 @@ func TestHasCycle(t *testing.T)    { testHasCycleFn(t, HasCycle, "HasCycle") }
 func TestHasCycleAlt(t *testing.T) { testHasCycleFn(t, HasCycleAlt, "HasCycleAlt") }
 
 func benchHasCycleFn(b *testing.B, size int, fn hasCycleFn, fnName string) {
-	b.StopTimer()
 	data := make([]interface{}, size) // We don't care about content but about pointers.
+	l, _ := CreateCycle(data, 0)
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		l, n := CreateCycle(data, 0)
-		b.StartTimer()
-		csn := fn(l)
-		b.StopTimer()
-		if n != csn {
-			b.Errorf("%s did not find the cycle", fnName)
-		}
+		fn(l)
 	}
 }
 
