@@ -34,11 +34,9 @@ func TestReverseInt(t *testing.T) {
 	}
 }
 
-func benchReverseInt(b *testing.B, size int) {
-	x := int64(size)
-	b.ResetTimer()
+func benchReverseInt(b *testing.B, size int64) {
 	for i := 0; i < b.N; i++ {
-		ReverseInt(x)
+		ReverseInt(size)
 	}
 }
 
