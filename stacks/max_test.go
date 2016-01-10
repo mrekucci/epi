@@ -48,7 +48,6 @@ func TestIntStackMax(t *testing.T) {
 }
 
 func benchIntStackMax(b *testing.B, size int) {
-	b.StopTimer()
 	s := new(IntStackMax)
 	max := -1
 	for _, n := range rand.New(rand.NewSource(int64(size))).Perm(size) {
@@ -57,14 +56,9 @@ func benchIntStackMax(b *testing.B, size int) {
 			max = n
 		}
 	}
-	var m interface{}
-	b.StartTimer()
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		m = s.Max()
-	}
-	b.StopTimer()
-	if m != max {
-		b.Error("s.Max() did not return proper max value")
+		s.Max()
 	}
 }
 
