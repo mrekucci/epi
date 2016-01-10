@@ -33,9 +33,8 @@ func TestCanFormPalindrome(t *testing.T) {
 }
 
 func benchCanFormPalindrome(b *testing.B, size int) {
-	b.StopTimer()
 	s := epiutil.RandStr(size, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(size)))
-	b.StartTimer()
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		CanFormPalindrome(s)
 	}

@@ -31,10 +31,9 @@ func TestIsLetterSubset(t *testing.T) {
 }
 
 func benchIsLetterSubset(b *testing.B, size int) {
-	b.StopTimer()
 	m := epiutil.RandStr(size, "ab cd ef gh ij kl mn op qr st uv wx yz", rand.NewSource(int64(size)))
 	l := m[:size/2]
-	b.StartTimer()
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		IsLetterSubset(l, m)
 	}
