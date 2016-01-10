@@ -30,19 +30,9 @@ func TestHanoiSteps(t *testing.T) {
 }
 
 func benchHanoiSteps(b *testing.B, n int) {
-	var cnt int
 	for i := 0; i < b.N; i++ {
-		cnt, _, _ = HanoiSteps(n)
+		HanoiSteps(n)
 	}
-	b.StopTimer()
-	power := 1
-	for i := 0; i < n; i++ { // Compute: 2**n.
-		power *= 2
-	}
-	if cnt != power-1 { // cnt must be equal to 2**n - 1.
-		b.Error("HanoiSteps did not return the proper number of steps")
-	}
-	b.StartTimer()
 }
 
 func BenchmarkHanoiStepsIntSizeDiv8(b *testing.B) { benchHanoiSteps(b, intSize/8) }
