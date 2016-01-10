@@ -57,12 +57,11 @@ func TestGroupAnagrams(t *testing.T) {
 }
 
 func benchGroupAnagrams(b *testing.B, n, m int) {
-	b.StopTimer()
-	var words []string
+	words := make([]string, n)
 	for i := 0; i < n; i++ {
-		words = append(words, epiutil.RandStr(m, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(i))))
+		words[i] = epiutil.RandStr(m, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(i)))
 	}
-	b.StartTimer()
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		GroupAnagrams(words)
 	}
