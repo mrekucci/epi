@@ -44,15 +44,13 @@ func TestPowerSetItr(t *testing.T) {
 }
 
 func benchPowerSetFn(b *testing.B, size int, fn powerSetFn) {
-	b.StopTimer()
+	data := make([]interface{}, size)
+	for j, p := range rand.New(rand.NewSource(int64(size))).Perm(size) {
+		data[j] = p
+	}
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		data := make([]interface{}, size)
-		for j, p := range rand.New(rand.NewSource(int64(i))).Perm(size) {
-			data[j] = p
-		}
-		b.StartTimer()
 		fn(data)
-		b.StopTimer()
 	}
 }
 
