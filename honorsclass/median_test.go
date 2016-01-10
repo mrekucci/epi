@@ -51,24 +51,16 @@ func TestMedianOfSorted(t *testing.T) {
 }
 
 func benchMedianOfSorted(b *testing.B, size int) {
-	b.StopTimer()
-	if size%2 == 0 { // Decrement size to pickup the median from the middle.
-		size--
+	ints := rand.New(rand.NewSource(int64(size))).Perm(size)
+	sort.Ints(ints)
+	data := make([]interface{}, size)
+	for i, n := range ints {
+		data[i] = n
 	}
+	l, n := lists.CreateCycle(data, 0)
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		ints := rand.New(rand.NewSource(int64(i))).Perm(size)
-		sort.Ints(ints)
-		var data []interface{}
-		for _, n := range ints {
-			data = append(data, n)
-		}
-		l, n := lists.CreateCycle(data, 0)
-		b.StartTimer()
-		m, err := MedianOfSorted(l, n)
-		b.StopTimer()
-		if int(m.Num().Int64()) != data[size/2] || err != nil {
-			b.Error("MedianOfSorted did not find the median")
-		}
+		MedianOfSorted(l, n)
 	}
 }
 
