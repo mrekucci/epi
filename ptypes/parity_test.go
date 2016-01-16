@@ -4,10 +4,7 @@
 
 package ptypes
 
-import (
-	"math"
-	"testing"
-)
+import "testing"
 
 const (
 	odd  = 1
@@ -31,7 +28,7 @@ func testParityFn(t *testing.T, fn parityFn, fnName string) {
 		{7, odd},
 		{8, odd},
 		{9, even},
-		{math.MaxUint64, even},
+		{1<<64 - 1, even},
 	} {
 		if got := fn(test.in); got != test.want {
 			t.Errorf("%s(%.64b) = %d; want %d", fnName, test.in, got, test.want)
@@ -45,7 +42,7 @@ func TestParityLookup(t *testing.T) { testParityFn(t, ParityLookup, "ParityLooku
 
 func benchParityFn(b *testing.B, fn parityFn) {
 	for i := 0; i < b.N; i++ {
-		fn(uint64(i))
+		fn(1<<64 - 1)
 	}
 }
 
