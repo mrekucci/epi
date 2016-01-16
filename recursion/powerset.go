@@ -9,8 +9,8 @@ func genPowerSet(i int, s, branch []interface{}, ps [][]interface{}) [][]interfa
 	if i == len(s) {
 		return append(ps, append([]interface{}(nil), branch...))
 	}
-	ps = genPowerSet(i+1, s, append(branch, s[i]), ps) // Generate all subset that contain s[i].
-	ps = genPowerSet(i+1, s, branch, ps)               // Generate all subset that do not contain s[i].
+	ps = genPowerSet(i+1, s, append(branch, s[i]), ps) // Generate all subsets that contain s[i].
+	ps = genPowerSet(i+1, s, branch, ps)               // Generate all subsets that do not contain s[i].
 	return ps
 }
 
