@@ -34,15 +34,13 @@ func TestReverseWords(t *testing.T) {
 }
 
 func benchReverseWords(b *testing.B, size int) {
-	b.StopTimer()
+	s := epiutil.RandStr(size, "The quick brown fox jumps over the lazy dog", rand.NewSource(int64(size))) // Pangram.
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		s := epiutil.RandStr(size, "The quick brown fox jumps over the lazy dog", rand.NewSource(int64(i))) // Pangram.
-		b.StartTimer()
 		ReverseWords(s)
-		b.StopTimer()
 	}
 }
 
-func BenchmarkReverseWords1e1(b *testing.B) { benchReverseWords(b, 1e1) }
 func BenchmarkReverseWords1e2(b *testing.B) { benchReverseWords(b, 1e2) }
-func BenchmarkReverseWords1e3(b *testing.B) { benchReverseWords(b, 1e3) }
+func BenchmarkReverseWords1e4(b *testing.B) { benchReverseWords(b, 1e4) }
+func BenchmarkReverseWords1e6(b *testing.B) { benchReverseWords(b, 1e6) }
