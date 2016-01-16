@@ -33,7 +33,7 @@ func TestReverseBitsLookup(t *testing.T) { testReverseBitsFn(t, ReverseBitsLooku
 
 func benchReverseBitsFn(b *testing.B, fn reverseBitsFn) {
 	for i := 0; i < b.N; i++ {
-		fn(uint64(i))
+		fn(0xffffffff00000000)
 	}
 }
 
