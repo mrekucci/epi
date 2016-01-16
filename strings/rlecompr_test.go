@@ -44,18 +44,16 @@ func TestRLEEncode(t *testing.T) {
 }
 
 func benchRLEEncode(b *testing.B, size int) {
-	b.StopTimer()
+	s := epiutil.RandStr(size, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(size)))
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		s := epiutil.RandStr(size, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(i)))
-		b.StartTimer()
 		RLEEncode(s)
-		b.StopTimer()
 	}
 }
 
-func BenchmarkRLEEncode1e1(b *testing.B) { benchRLEEncode(b, 1e1) }
 func BenchmarkRLEEncode1e2(b *testing.B) { benchRLEEncode(b, 1e2) }
-func BenchmarkRLEEncode1e3(b *testing.B) { benchRLEEncode(b, 1e3) }
+func BenchmarkRLEEncode1e4(b *testing.B) { benchRLEEncode(b, 1e4) }
+func BenchmarkRLEEncode1e6(b *testing.B) { benchRLEEncode(b, 1e6) }
 
 func TestRLEDecode(t *testing.T) {
 	for _, test := range []struct {
@@ -95,18 +93,16 @@ func TestRLEDecode(t *testing.T) {
 }
 
 func benchRLEDecode(b *testing.B, size int) {
-	b.StopTimer()
+	s, ok := RLEEncode(epiutil.RandStr(size, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(size))))
+	if !ok {
+		b.Error("RLEEncode did not encode string properly")
+	}
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		s, ok := RLEEncode(epiutil.RandStr(size, "abcdefghijklmnopqrstuvwxyz", rand.NewSource(int64(i))))
-		if !ok {
-			b.Error("RLEEncode did not encode string properly")
-		}
-		b.StartTimer()
 		RLEDecode(s)
-		b.StopTimer()
 	}
 }
 
-func BenchmarkRLEDecode1e1(b *testing.B) { benchRLEDecode(b, 1e1) }
 func BenchmarkRLEDecode1e2(b *testing.B) { benchRLEDecode(b, 1e2) }
-func BenchmarkRLEDecode1e3(b *testing.B) { benchRLEDecode(b, 1e3) }
+func BenchmarkRLEDecode1e4(b *testing.B) { benchRLEDecode(b, 1e4) }
+func BenchmarkRLEDecode1e6(b *testing.B) { benchRLEDecode(b, 1e6) }
