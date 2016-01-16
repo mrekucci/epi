@@ -7,6 +7,7 @@ package lists
 import (
 	"math/rand"
 	"reflect"
+	"sort"
 	"testing"
 )
 
@@ -41,22 +42,24 @@ func TestMergeSorted(t *testing.T) {
 
 func benchMergeSorted(b *testing.B, size int) {
 	b.StopTimer()
+	s := make([]interface{}, size)
+	s1 := s[:size/2]
+	s2 := s[size/2:]
+	data := rand.New(rand.NewSource(int64(size))).Perm(size)
+	sort.Ints(data)
+	for i := 1; i < size; i += 2 {
+		s1[i/2] = data[i-1]
+		s2[i/2] = data[i]
+	}
 	for i := 0; i < b.N; i++ {
-		var s []interface{}
-		for _, n := range rand.New(rand.NewSource(int64(i))).Perm(size) {
-			s = append(s, n)
-		}
-		l := NewFromSlice(s[:size/2])
-		f := NewFromSlice(s[size/2:])
+		l := NewFromSlice(s1)
+		f := NewFromSlice(s2)
 		b.StartTimer()
-		m, ok := MergeSorted(l, f)
+		MergeSorted(l, f)
 		b.StopTimer()
-		if !ok || !reflect.DeepEqual(m.ToSlice(), s) {
-			b.Error("MergeSorted did not merge lists properly")
-		}
 	}
 }
 
-func BenchmarkMergeSorted1e1(b *testing.B) { benchMergeSorted(b, 1e1) }
 func BenchmarkMergeSorted1e2(b *testing.B) { benchMergeSorted(b, 1e2) }
 func BenchmarkMergeSorted1e3(b *testing.B) { benchMergeSorted(b, 1e3) }
+func BenchmarkMergeSorted1e4(b *testing.B) { benchMergeSorted(b, 1e4) }
