@@ -4,10 +4,7 @@
 
 package ptypes
 
-import (
-	"math"
-	"testing"
-)
+import "testing"
 
 func TestIntWeight(t *testing.T) {
 	for _, test := range []struct {
@@ -24,7 +21,7 @@ func TestIntWeight(t *testing.T) {
 		{7, 3},
 		{8, 1},
 		{9, 2},
-		{math.MaxUint64, 64},
+		{1<<64 - 1, 64},
 	} {
 		if got := IntWeight(test.in); got != test.want {
 			t.Errorf("IntWeight(%d) = %d; want %d", test.in, got, test.want)
@@ -34,7 +31,7 @@ func TestIntWeight(t *testing.T) {
 
 func BenchmarkIntWeight(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		IntWeight(uint64(i))
+		IntWeight(1<<64 - 1)
 	}
 }
 
@@ -70,6 +67,6 @@ func TestClosestInt(t *testing.T) {
 
 func BenchmarkClosestInt(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		ClosestInt(uint64(i))
+		ClosestInt(1<<64 - 1)
 	}
 }
