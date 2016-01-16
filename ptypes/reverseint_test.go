@@ -4,10 +4,7 @@
 
 package ptypes
 
-import (
-	"math"
-	"testing"
-)
+import "testing"
 
 func TestReverseInt(t *testing.T) {
 	for _, test := range []struct {
@@ -21,10 +18,10 @@ func TestReverseInt(t *testing.T) {
 		{-10, -1, true},
 		{1234, 4321, true},
 		{-1234, -4321, true},
-		{math.MaxInt64, 7085774586302733229, true},
-		{7085774586302733229, math.MaxInt64, true},
-		{math.MinInt64, -8085774586302733229, true},
-		{-8085774586302733229, math.MinInt64, true},
+		{1<<63 - 1, 7085774586302733229, true},
+		{7085774586302733229, 1<<63 - 1, true},
+		{-1 << 63, -8085774586302733229, true},
+		{-8085774586302733229, -1 << 63, true},
 		{8085774586302733229, 0, false},
 		{-9085774586302733229, 0, false},
 	} {
