@@ -68,8 +68,7 @@ func TestIntToString(t *testing.T) {
 }
 
 func BenchmarkIntToString(b *testing.B) {
-	const n = 1<<63 - 1
 	for i := 0; i < b.N; i++ {
-		IntToString(n)
+		IntToString(1<<63 - 1)
 	}
 }
