@@ -131,7 +131,7 @@ Binary Trees
 | [Find a root to leaf path with specified sum][154]                       | [tests][155] |         |
 | [Compute the *k*th node in an inorder traversal][156]                    | [tests][157] |         |
 | [Compute the successor][158]                                             | [tests][159] |         |
-| [Implement an inorder traversal with *O(1)* space][160]                  | [tests][161] |         |
+| [Implement an inorder traversal with *O(1)* space][160]                  | [tests][161] |    ✓    |
 | [Reconstruct a binary tree from traversal data][162]                     | [tests][163] |         |
 | [Reconstruct a binary tree from a preorder traversal with markers][164]  | [tests][165] |         |
 | [Form a linked list from the leaves of a binary tree][166]               | [tests][167] |         |
@@ -570,8 +570,8 @@ Honors Class
 [157]: in_progress.md
 [158]: in_progress.md
 [159]: in_progress.md
-[160]: in_progress.md
-[161]: in_progress.md
+[160]: btrees/traversal.go
+[161]: btrees/traversal_test.go
 [162]: in_progress.md
 [163]: in_progress.md
 [164]: in_progress.md
