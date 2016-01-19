@@ -164,7 +164,7 @@ Searching
 | [Search a sorted array for entry equal to its index][192]                | [tests][193] |    ✓    |
 | [Search a cyclically sorted array][194]                                  | [tests][195] |         |
 | [Compute the integer square root][196]                                   | [tests][197] |         |
-| [Compute the real square root][198]                                      | [tests][199] |         |
+| [Compute the real square root][198]                                      | [tests][199] |    ✓    |
 
 ### Generalized Search
 
@@ -608,8 +608,8 @@ Honors Class
 [195]: in_progress.md
 [196]: in_progress.md
 [197]: in_progress.md
-[198]: in_progress.md
-[199]: in_progress.md
+[198]: bsearch/sqrtreal.go
+[199]: bsearch/sqrtreal_test.go
 [200]: search/matrix.go
 [201]: search/matrix_test.go
 [202]: search/minmax.go
