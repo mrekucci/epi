@@ -148,7 +148,7 @@ Heaps
 | [Sort an increasing-decreasing array][176]                               | [tests][177] |    ✓    |
 | [Sort an almost-sorted array][178]                                       | [tests][179] |         |
 | [Compute the *k* closest stars][180]                                     | [tests][181] |         |
-| [Compute the median of online data][182]                                 | [tests][183] |         |
+| [Compute the median of online data][182]                                 | [tests][183] |    ✓    |
 | [Compute the *k* largest elements in a max-heap][184]                    | [tests][185] |         |
 | [Implement a stack API using a heap][186]                                | [tests][187] |         |
 
@@ -592,8 +592,8 @@ Honors Class
 [179]: in_progress.md
 [180]: in_progress.md
 [181]: in_progress.md
-[182]: in_progress.md
-[183]: in_progress.md
+[182]: heaps/median.go
+[183]: heaps/median_test.go
 [184]: in_progress.md
 [185]: in_progress.md
 [186]: in_progress.md
