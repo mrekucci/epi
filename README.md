@@ -186,7 +186,7 @@ Hash Tables
 | [Test for palindromic permutations][214]                                 | [tests][215] |    ✓    |
 | [Is an anonymous letter constructible?][216]                             | [tests][217] |    ✓    |
 | [Implement an ISBN cache][218]                                           | [tests][219] |         |
-| [Compute the LCA, optimizing for close ancestors][220]                   | [tests][221] |         |
+| [Compute the LCA, optimizing for close ancestors][220]                   | [tests][221] |    ✓    |
 | [Compute the *k* most frequent queries][222]                             | [tests][223] |         |
 | [Find the nearest repeated entries in an array][224]                     | [tests][225] |         |
 | [Find the smallest subarray covering all values][226]                    | [tests][227] |         |
@@ -630,8 +630,8 @@ Honors Class
 [217]: htables/letter_test.go
 [218]: in_progress.md
 [219]: in_progress.md
-[220]: in_progress.md
-[221]: in_progress.md
+[220]: htables/lca.go
+[221]: htables/lca_test.go
 [222]: in_progress.md
 [223]: in_progress.md
 [224]: in_progress.md
