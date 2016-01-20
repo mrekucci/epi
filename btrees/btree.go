@@ -11,6 +11,14 @@ type BTree struct {
 	right *BTree
 }
 
+// BTreeP represents a binary tree which has also reference to its parent.
+type BTreeP struct {
+	Data   interface{}
+	parent *BTreeP
+	left   *BTreeP
+	right  *BTreeP
+}
+
 // Height returns the height of the binary tree t.
 // The time complexity is O(n). The O(h) additional
 // space is needed (where h is the height of the tree).

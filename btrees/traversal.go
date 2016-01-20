@@ -4,18 +4,10 @@
 
 package btrees
 
-// PBTree represents a binary tree which has also reference to its parent.
-type PBTree struct {
-	Data   interface{}
-	parent *PBTree
-	left   *PBTree
-	right  *PBTree
-}
-
 // InorderTraversal traverse the left subtree, visit the root, then traverse the right subtree.
 // The time complexity is O(n), and O(1) additional space is needed.
-func InorderTraversal(tree *PBTree) (w []interface{}) {
-	var prev, next *PBTree
+func InorderTraversal(tree *BTreeP) (w []interface{}) {
+	var prev, next *BTreeP
 	for curr := tree; curr != nil; prev, curr = curr, next {
 		switch prev {
 		case curr.parent: // Going down: we came down to curr from prev.

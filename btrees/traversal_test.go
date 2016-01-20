@@ -10,22 +10,22 @@ import (
 )
 
 func TestInorderTraversal(t *testing.T) {
-	A := &PBTree{Data: "A"}
-	B := &PBTree{Data: "B"}
-	C := &PBTree{Data: "C"}
-	D := &PBTree{Data: "D"}
-	E := &PBTree{Data: "E"}
-	F := &PBTree{Data: "F"}
-	G := &PBTree{Data: "G"}
-	H := &PBTree{Data: "H"}
-	I := &PBTree{Data: "I"}
-	J := &PBTree{Data: "J"}
-	K := &PBTree{Data: "K"}
-	L := &PBTree{Data: "L"}
-	M := &PBTree{Data: "M"}
-	N := &PBTree{Data: "N"}
-	O := &PBTree{Data: "O"}
-	P := &PBTree{Data: "P"}
+	A := &BTreeP{Data: "A"}
+	B := &BTreeP{Data: "B"}
+	C := &BTreeP{Data: "C"}
+	D := &BTreeP{Data: "D"}
+	E := &BTreeP{Data: "E"}
+	F := &BTreeP{Data: "F"}
+	G := &BTreeP{Data: "G"}
+	H := &BTreeP{Data: "H"}
+	I := &BTreeP{Data: "I"}
+	J := &BTreeP{Data: "J"}
+	K := &BTreeP{Data: "K"}
+	L := &BTreeP{Data: "L"}
+	M := &BTreeP{Data: "M"}
+	N := &BTreeP{Data: "N"}
+	O := &BTreeP{Data: "O"}
+	P := &BTreeP{Data: "P"}
 
 	// A Binary Tree of height 5 with root in "A".
 	A.parent, A.left, A.right = nil, B, I
@@ -54,22 +54,22 @@ func TestInorderTraversal(t *testing.T) {
 }
 
 func BenchmarkInorderTraversal(b *testing.B) {
-	A := &PBTree{Data: "A"}
-	B := &PBTree{Data: "B"}
-	C := &PBTree{Data: "C"}
-	D := &PBTree{Data: "D"}
-	E := &PBTree{Data: "E"}
-	F := &PBTree{Data: "F"}
-	G := &PBTree{Data: "G"}
-	H := &PBTree{Data: "H"}
-	I := &PBTree{Data: "I"}
-	J := &PBTree{Data: "J"}
-	K := &PBTree{Data: "K"}
-	L := &PBTree{Data: "L"}
-	M := &PBTree{Data: "M"}
-	N := &PBTree{Data: "N"}
-	O := &PBTree{Data: "O"}
-	P := &PBTree{Data: "P"}
+	A := &BTreeP{Data: "A"}
+	B := &BTreeP{Data: "B"}
+	C := &BTreeP{Data: "C"}
+	D := &BTreeP{Data: "D"}
+	E := &BTreeP{Data: "E"}
+	F := &BTreeP{Data: "F"}
+	G := &BTreeP{Data: "G"}
+	H := &BTreeP{Data: "H"}
+	I := &BTreeP{Data: "I"}
+	J := &BTreeP{Data: "J"}
+	K := &BTreeP{Data: "K"}
+	L := &BTreeP{Data: "L"}
+	M := &BTreeP{Data: "M"}
+	N := &BTreeP{Data: "N"}
+	O := &BTreeP{Data: "O"}
+	P := &BTreeP{Data: "P"}
 
 	// A Binary Tree of height 5 with root in "A".
 	A.parent, A.left, A.right = nil, B, I
