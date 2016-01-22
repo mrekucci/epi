@@ -189,7 +189,7 @@ Hash Tables
 | [Compute the LCA, optimizing for close ancestors][220]                   | [tests][221] |    ✓    |
 | [Compute the *k* most frequent queries][222]                             | [tests][223] |         |
 | [Find the nearest repeated entries in an array][224]                     | [tests][225] |         |
-| [Find the smallest subarray covering all values][226]                    | [tests][227] |         |
+| [Find the smallest subarray covering all values][226]                    | [tests][227] |    ✓    |
 | [Find smallest subarray sequentially covering all values][228]           | [tests][229] |         |
 | [Find the longest subarray with distinct entries][230]                   | [tests][231] |         |
 | [Find the length of a longest contained range][232]                      | [tests][233] |         |
@@ -636,8 +636,8 @@ Honors Class
 [223]: in_progress.md
 [224]: in_progress.md
 [225]: in_progress.md
-[226]: in_progress.md
-[227]: in_progress.md
+[226]: htables/smallestsubarray.go
+[227]: htables/smallestsubarray_test.go
 [228]: in_progress.md
 [229]: in_progress.md
 [230]: in_progress.md
