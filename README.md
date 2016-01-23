@@ -210,7 +210,7 @@ Sorting
 | [Find unique elements][250]                                              | [tests][251] |         |
 | [Render a calendar][252]                                                 | [tests][253] |         |
 | [Sets of disjoint intervals][254]                                        | [tests][255] |         |
-| [Compute the union of intervals][256]                                    | [tests][257] |         |
+| [Compute the union of intervals][256]                                    | [tests][257] |    ✓    |
 | [Partitioning and sorting an array with many repeated entries][258]      | [tests][259] |         |
 | [Team photo day—1][260]                                                  | [tests][261] |         |
 | [Implement a fast sorting algorithm for lists][262]                      | [tests][263] |         |
@@ -666,8 +666,8 @@ Honors Class
 [253]: in_progress.md
 [254]: in_progress.md
 [255]: in_progress.md
-[256]: in_progress.md
-[257]: in_progress.md
+[256]: sorting/union.go
+[257]: sorting/union_test.go
 [258]: in_progress.md
 [259]: in_progress.md
 [260]: in_progress.md
