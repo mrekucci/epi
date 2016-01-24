@@ -213,7 +213,7 @@ Sorting
 | [Compute the union of intervals][256]                                    | [tests][257] |    ✓    |
 | [Partitioning and sorting an array with many repeated entries][258]      | [tests][259] |         |
 | [Team photo day—1][260]                                                  | [tests][261] |         |
-| [Implement a fast sorting algorithm for lists][262]                      | [tests][263] |         |
+| [Implement a fast sorting algorithm for lists][262]                      | [tests][263] |    ✓    |
 | [Compute a salary threshold][264]                                        | [tests][265] |         |
 
 Binary Search Trees
@@ -672,8 +672,8 @@ Honors Class
 [259]: in_progress.md
 [260]: in_progress.md
 [261]: in_progress.md
-[262]: in_progress.md
-[263]: in_progress.md
+[262]: sorting/sortlist.go
+[263]: sorting/sortlist_test.go
 [264]: in_progress.md
 [265]: in_progress.md
 [266]: bstrees/property.go
