@@ -250,7 +250,7 @@ Recursion
 | [Generate strings of matched parens][306]                                | [tests][307] |         |
 | [Generate palindromic decompositions][308]                               | [tests][309] |         |
 | [Generate binary trees][310]                                             | [tests][311] |         |
-| [Implement a Sudoku solver][312]                                         | [tests][313] |         |
+| [Implement a Sudoku solver][312]                                         | [tests][313] |    ✓    |
 | [Compute a Gray code][314]                                               | [tests][315] |         |
 | [Compute the diameter of a tree][316]                                    | [tests][317] |         |
 
@@ -722,8 +722,8 @@ Honors Class
 [309]: in_progress.md
 [310]: in_progress.md
 [311]: in_progress.md
-[312]: in_progress.md
-[313]: in_progress.md
+[312]: recursion/sudoku.go
+[313]: recursion/sudoku_test.go
 [314]: in_progress.md
 [315]: in_progress.md
 [316]: in_progress.md
