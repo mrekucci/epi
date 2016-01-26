@@ -11,6 +11,7 @@ import "math"
 // The time complexity is O(n), where n is the number of digits in x.
 // The space complexity is O(1).
 func ReverseInt(x int64) (r int64, ok bool) {
+	const cutoff = math.MaxInt64/10 + 1 // The first smallest number such that cutoff*10 > MaxInt64.
 	var n uint64
 
 	neg := x < 0
@@ -20,6 +21,9 @@ func ReverseInt(x int64) (r int64, ok bool) {
 	}
 
 	for u > 0 {
+		if n >= cutoff { // Check if n*10 overflows.
+			return 0, false // TODO: cover this in tests!
+		}
 		n = n*10 + u%10
 		if neg && n > -math.MinInt64 || !neg && n > math.MaxInt64 { // -n < math.MinInt64 || n > math.MaxInt64
 			return 0, false
