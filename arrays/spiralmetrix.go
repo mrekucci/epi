@@ -4,48 +4,48 @@
 
 package arrays
 
-// add adds elements to ac for offset off in spiral order and returns modified mxc.
-func add(mx [][]int, mxc []int, off int) []int {
-	l := len(mx) - 1 - off // n := len(mx)-1
+// add adds elements of matrix represented by a square layer distant by offset from the most outer layer.
+func add(matrix [][]int, clockwise []int, off int) []int {
+	l := len(matrix) - 1 - off
 
-	// For matrix with odd size append center element when layer is there.
+	// For matrix with odd size, append the center element when layer is there.
 	if off == l {
-		return append(mxc, mx[off][off])
+		return append(clockwise, matrix[off][off])
 	}
 
 	// From (0,0) to (O,n-1).
 	for j := off; j < l; j++ {
-		mxc = append(mxc, mx[off][j])
+		clockwise = append(clockwise, matrix[off][j])
 	}
 
 	// From (O,n) to (n-1,n).
 	for i := off; i < l; i++ {
-		mxc = append(mxc, mx[i][l])
+		clockwise = append(clockwise, matrix[i][l])
 	}
 
 	// From (n,n) to (n,1).
 	for j := l; j > off; j-- {
-		mxc = append(mxc, mx[l][j])
+		clockwise = append(clockwise, matrix[l][j])
 	}
 
 	// From (n,0) to (1,0).
 	for i := l; i > off; i-- {
-		mxc = append(mxc, mx[i][off])
+		clockwise = append(clockwise, matrix[i][off])
 	}
 
-	return mxc
+	return clockwise
 }
 
-// Clockwise returns mxc slice which elements are ordered under
-// clockwise spiral order of the original two-dimensional matrix mx.
+// Clockwise returns a slice which elements are ordered under
+// clockwise spiral order of the original two-dimensional matrix.
 // The time complexity is O(n*n) and O(1) additional space is needed.
-func Clockwise(mx [][]int) (mxc []int) {
-	ctr := len(mx) >> 1 // Center of matrix.
-	if len(mx)%2 != 0 {
+func Clockwise(matrix [][]int) (clockwise []int) {
+	ctr := len(matrix) / 2
+	if len(matrix)%2 != 0 {
 		ctr++
 	}
 	for off := 0; off < ctr; off++ {
-		mxc = add(mx, mxc, off)
+		clockwise = add(matrix, clockwise, off)
 	}
-	return mxc
+	return clockwise
 }
