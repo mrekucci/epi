@@ -13,11 +13,11 @@ func findLCA(t, n0, n1 *BTree) (cnt int, ancestor *BTree) {
 	}
 
 	// Postorder walk.
-	lc, la := findLCA(t.right, n0, n1)
+	lc, la := findLCA(t.left, n0, n1)
 	if lc == 2 {
 		return lc, la
 	}
-	rc, ra := findLCA(t.left, n0, n1)
+	rc, ra := findLCA(t.right, n0, n1)
 	if rc == 2 {
 		return rc, ra
 	}
