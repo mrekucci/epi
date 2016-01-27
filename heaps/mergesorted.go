@@ -28,8 +28,7 @@ func (h *minEntryHeap) Pop() (v interface{}) {
 
 func (h *minEntryHeap) Push(v interface{}) { *h = append(*h, v.(*entry)) }
 
-// MergeSorted merges given slice of already
-// sorted slices into one sorted slice that slice.
+// MergeSorted merges given slice of already sorted slices into one sorted slice.
 // The time complexity is O(n*log(k)) where n is the total number
 // of elements combining all slices together and k = len(ss).
 // The O(k) additional space is needed (beyond the space needed
