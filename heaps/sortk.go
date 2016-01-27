@@ -18,8 +18,7 @@ func reverseInts(an []int, i, j int) {
 // the final result, the O(k) additional space is needed.
 // The an can be modified during the function execution.
 func SortK(an []int) []int {
-	i := 0
-	o := 1 // Order: 1 - increasing, -1 decreasing.
+	i, o := 0, 1 // o - Order: 1 - increasing, -1 - decreasing.
 	var ss [][]int
 	for j := 1; j <= len(an); j++ {
 		if j == len(an) || o > 0 && an[j-1] > an[j] || o < 0 && an[j-1] < an[j] {
