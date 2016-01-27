@@ -15,28 +15,27 @@ type IntBTree struct {
 // same level (order is from left to right) of the binary tree t.
 // The time complexity is O(n). The O(m) additional space is
 // needed, where m is the maximum number of nodes at any level.
-func DepthOrder(t *IntBTree) [][]int {
-	var r [][]int
-	var l []int
+func DepthOrder(t *IntBTree) (order [][]int) {
+	var level []int
 	pq := new(arrayQueue)
 	pq.Enqueue(t) // Add root.
-	c := pq.Len() // Number of elements on the same level.
+	cnt := pq.Len() // Number of elements on the same level.
 	for pq.Len() != 0 {
 		n := pq.Dequeue()
-		c--
+		cnt--
 		if n != (*IntBTree)(nil) {
 			st := n.(*IntBTree)
 			pq.Enqueue(st.left)
 			pq.Enqueue(st.right)
-			l = append(l, st.Data)
+			level = append(level, st.Data)
 		}
-		if c == 0 {
-			c = pq.Len() // Set count to the number of elements that should be processed on next level.
-			if len(l) != 0 {
-				r = append(r, l)
-				l = []int(nil)
+		if cnt == 0 {
+			cnt = pq.Len() // Set count to the number of elements that should be processed on next level.
+			if len(level) != 0 {
+				order = append(order, level)
+				level = []int(nil)
 			}
 		}
 	}
-	return r
+	return order
 }
