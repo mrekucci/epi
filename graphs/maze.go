@@ -41,7 +41,7 @@ func SearchMaze(maze [][]bool, start, end Coordinate) (path []Coordinate) {
 	path = append(path, start)
 	maze[start.x][start.y] = black // Mark as visited.
 	if !pathExists(maze, start, end, &path) {
-		return []Coordinate(nil)
+		return nil
 	}
 	return path
 }
