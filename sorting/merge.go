@@ -4,8 +4,8 @@
 
 package sorting
 
-// MergeInPlace extends x by length of y and merges sorted slices x and y into
-// the extended the x slice. The modified header of x slice is returned.
+// MergeInPlace extends x by length of y and merges sorted slices x and y
+// into the extended x slice. The modified header of x slice is returned.
 // The time complexity is O(n+m), where n=len(x), m=len(y).
 // The O(1) additional space is needed beyond the expansion of x by m.
 func MergeInPlace(x, y []int) []int {
