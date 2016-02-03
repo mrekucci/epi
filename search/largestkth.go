@@ -7,15 +7,15 @@ package search
 import "math/rand"
 
 // partition returns an index of the new pivot and partitions elements in an such
-// as: an[l:pivot] contains elements that are less then the pivot and
-// an[pivot+1:r+1] contains elements that are greater then the pivot.
+// as: an[l:pivot] contains elements that are greater then the pivot and
+// an[pivot+1:r+1] contains elements that are less then the pivot.
 func partition(an []int, l, r int) int {
 	q := l
 	pivot := rand.Intn(r-l+1) + l
 	an[pivot], an[r] = an[r], an[pivot]
 	// Loop invariant:
-	// each element in data[l:q] is less than the pivot (elements are distinct);
-	// each element in data[q:u] is greater than the pivot;
+	// each element in data[l:q] is greater than the pivot;
+	// each element in data[q:u] is less than or equal to the pivot;
 	// each element in data[u:r] is unsorted;
 	// the element data[r] holds the pivot.
 	for u := q; u < r; u++ {
