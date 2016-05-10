@@ -9,21 +9,21 @@ import (
 	"testing"
 )
 
-type genPrimeFn func(uint64) ([]uint64, bool)
+type genPrimeFn func(uint) ([]uint, bool)
 
 func testGenPrimesFn(t *testing.T, fn genPrimeFn, fnName string) {
 	for _, test := range []struct {
-		in   uint64
-		want []uint64
+		in   uint
+		want []uint
 		ok   bool
 	}{
 		{1, nil, true},
-		{2, []uint64{2}, true},
-		{3, []uint64{2, 3}, true},
-		{7, []uint64{2, 3, 5, 7}, true},
-		{15, []uint64{2, 3, 5, 7, 11, 13}, true},
-		{25, []uint64{2, 3, 5, 7, 11, 13, 17, 19, 23}, true},
-		{100, []uint64{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97}, true},
+		{2, []uint{2}, true},
+		{3, []uint{2, 3}, true},
+		{7, []uint{2, 3, 5, 7}, true},
+		{15, []uint{2, 3, 5, 7, 11, 13}, true},
+		{25, []uint{2, 3, 5, 7, 11, 13, 17, 19, 23}, true},
+		{100, []uint{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97}, true},
 	} {
 		if got, ok := fn(test.in); !reflect.DeepEqual(got, test.want) || ok != test.ok {
 			t.Errorf("%s(%d) = %v, %t; want %v, %t", fnName, test.in, got, ok, test.want, test.ok)
@@ -34,7 +34,7 @@ func testGenPrimesFn(t *testing.T, fn genPrimeFn, fnName string) {
 func TestGenPrimesTrialDiv(t *testing.T) { testGenPrimesFn(t, GenPrimesTrialDiv, "GenPrimesTrialDiv") }
 func TestGenPrimesSieve(t *testing.T)    { testGenPrimesFn(t, GenPrimesSieve, "GenPrimesSieve") }
 
-func benchGenPrimesFn(b *testing.B, size uint64, fn genPrimeFn) {
+func benchGenPrimesFn(b *testing.B, size uint, fn genPrimeFn) {
 	for i := 0; i < b.N; i++ {
 		fn(size)
 	}
