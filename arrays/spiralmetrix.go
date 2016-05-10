@@ -5,7 +5,7 @@
 package arrays
 
 // add adds elements of matrix represented by a square layer distant by offset from the most outer layer.
-func add(matrix [][]int, clockwise []int, off int) []int {
+func add(clockwise []int, matrix [][]int, off int) []int {
 	l := len(matrix) - 1 - off
 
 	// For matrix with odd size, append the center element when layer is there.
@@ -40,12 +40,12 @@ func add(matrix [][]int, clockwise []int, off int) []int {
 // clockwise spiral order of the original two-dimensional matrix.
 // The time complexity is O(n*n) and O(1) additional space is needed.
 func Clockwise(matrix [][]int) (clockwise []int) {
-	ctr := len(matrix) / 2
+	mid := len(matrix) / 2
 	if len(matrix)%2 != 0 {
-		ctr++
+		mid++
 	}
-	for off := 0; off < ctr; off++ {
-		clockwise = add(matrix, clockwise, off)
+	for off := 0; off < mid; off++ {
+		clockwise = add(clockwise, matrix, off)
 	}
 	return clockwise
 }
