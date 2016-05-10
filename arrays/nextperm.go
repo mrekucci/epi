@@ -26,18 +26,15 @@ func NextPerm(p []int) (next []int) {
 		return nil
 	}
 
-	l := 0
-	for i := k + 1; i < len(p); i++ { // Find the smallest entry in p[k+1:] decreasing suffix that is largest then p[k].
-		if p[k] < p[i] {
-			l = i
-		} else {
-			break
-		}
+	i := k + 1
+	for i < len(p) && p[k] < p[i] { // Find the smallest entry in p[k+1:] decreasing sub-sequence that is larger then p[k].
+		i++
 	}
+	i--
 
-	next= append(next, p...)
-	next[k], next[l] = next[l], next[k]
-	// Because swapping next[k] and next[l] leaves the sequence after position k in decreasing order, we
+	next = append(next, p...)
+	next[k], next[i] = next[i], next[k]
+	// Because swapping next[k] and next[i] leaves the sequence after position k in decreasing order, we
 	// must reverse this sub-sequence to produce its lexicographically minimal permutation.
 	reverseInts(next, k+1, len(next)-1)
 
