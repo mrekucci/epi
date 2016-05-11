@@ -51,7 +51,7 @@ Arrays
 | [The Sudoku checker problem][56]                                         | [tests][57]  |         |
 | [Compute the spiral ordering of a 2D array][58]                          | [tests][59]  |    ✓    |
 | [Rotate a 2D array][60]                                                  | [tests][61]  |         |
-| [Compute rows in Pascal’s Triangle][62]                                  | [tests][63]  |         |
+| [Compute rows in Pascal’s Triangle][62]                                    | [tests][63]  |         |
 
 Strings
 -------
@@ -82,8 +82,8 @@ Linked List
 | [Reverse a singly linked list][94]                                       | [tests][95]  |         |
 | [Reverse a single sublist][96]                                           | [tests][97]  |         |
 | [Test for cyclicity][98]                                                 | [tests][99]  |    ✓    |
-| [Test for overlapping lists—lists are cycle-free][100]                   | [tests][101] |         |
-| [Test for overlapping lists—lists may have cycles][102]                  | [tests][103] |         |
+| [Test for overlapping lists—lists are cycle-free][100]                     | [tests][101] |         |
+| [Test for overlapping lists—lists may have cycles][102]                    | [tests][103] |         |
 | [Delete a node from a singly linked list][104]                           | [tests][105] |         |
 | [Remove the *k*th last element from a list][106]                         | [tests][107] |         |
 | [Remove duplicates from a sorted list][108]                              | [tests][109] |         |
@@ -102,7 +102,7 @@ Stacks and Queues
 |--------------------------------------------------------------------------|:------------:|:-------:|
 | [Implement a stack with max API][120]                                    | [tests][121] |    ✓    |
 | [Evaluate RPN expressions][122]                                          | [tests][123] |    ✓    |
-| [Test a string over “{,},(,),[,]” for well-formedness][124]              | [tests][125] |    ✓    |
+| [Test a string over “{,},(,),[,]” for well-formedness][124]                | [tests][125] |    ✓    |
 | [Normalize pathnames][126]                                               | [tests][127] |         |
 | [BST keys in sort order][128]                                            | [tests][129] |         |
 | [Search a postings list][130]                                            | [tests][131] |         |
@@ -212,7 +212,7 @@ Sorting
 | [Sets of disjoint intervals][254]                                        | [tests][255] |         |
 | [Compute the union of intervals][256]                                    | [tests][257] |    ✓    |
 | [Partitioning and sorting an array with many repeated entries][258]      | [tests][259] |         |
-| [Team photo day—1][260]                                                  | [tests][261] |         |
+| [Team photo day—1][260]                                                    | [tests][261] |         |
 | [Implement a fast sorting algorithm for lists][262]                      | [tests][263] |    ✓    |
 | [Compute a salary threshold][264]                                        | [tests][265] |         |
 
@@ -246,7 +246,7 @@ Recursion
 | [Generate all nonattacking placements of *n*-Queens][298]                | [tests][299] |    ✓    |
 | [Generate permutations][300]                                             | [tests][301] |    ✓    |
 | [Generate the power set][302]                                            | [tests][303] |    ✓    |
-| [Generate all subsets of size *k*][304]                                  | [tests][305] |         |
+| [Generate all subsets of size *k*][304]                                  | [tests][305] |    ✓    |
 | [Generate strings of matched parens][306]                                | [tests][307] |         |
 | [Generate palindromic decompositions][308]                               | [tests][309] |         |
 | [Generate binary trees][310]                                             | [tests][311] |         |
@@ -305,12 +305,12 @@ Graphs
 | [Search a maze][366]                                                     | [tests][367] |    ✓    |
 | [Paint a Boolean matrix][368]                                            | [tests][369] |    ✓    |
 | [Compute enclosed regions][370]                                          | [tests][371] |         |
-| [Degrees of connectedness—1][372]                                        | [tests][373] |    ✓    |
+| [Degrees of connectedness—1][372]                                          | [tests][373] |    ✓    |
 | [Clone a graph][374]                                                     | [tests][375] |         |
 | [Making wired connections][376]                                          | [tests][377] |         |
 | [Transform one string to another][378]                                   | [tests][379] |         |
 | [The shortest straight-line program for *x^n*][380]                      | [tests][381] |         |
-| [Team photo day—2][382]                                                  | [tests][383] |         |
+| [Team photo day—2][382]                                                    | [tests][383] |         |
 | [Compute a shortest path with fewest edges][384]                         | [tests][385] |         |
 
 Parallel Computing
@@ -403,8 +403,8 @@ Honors Class
 | [Load balancing][526]                                                    | [tests][527] |         |
 | [Search for a pair-sum in an abs-sorted array][528]                      | [tests][529] |         |
 | [The heavy hitter problem][530]                                          | [tests][531] |         |
-| [Find the longest subarray whose sum ≤ *k*][532]                         | [tests][533] |         |
-| [Degrees of connectedness—2][534]                                        | [tests][535] |         |
+| [Find the longest subarray whose sum ≤ *k*][532]                          | [tests][533] |         |
+| [Degrees of connectedness—2][534]                                          | [tests][535] |         |
 | [Compute a minimum delay schedule, unlimited resources][536]             | [tests][537] |         |
 | [Road network][538]                                                      | [tests][539] |         |
 | [Test if arbitrage is possible][540]                                     | [tests][541] |         |
@@ -714,8 +714,8 @@ Honors Class
 [301]: recursion/perm_test.go
 [302]: recursion/powerset.go
 [303]: recursion/powerset_test.go
-[304]: in_progress.md
-[305]: in_progress.md
+[304]: recursion/subsets.go
+[305]: recursion/subsets_test.go
 [306]: in_progress.md
 [307]: in_progress.md
 [308]: in_progress.md
