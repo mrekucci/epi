@@ -38,21 +38,21 @@ func RLEDecode(s string) (ds string, ok bool) {
 	}
 
 	var d []byte
-	mbd := true
+	num := true
 	cnt := 0
 	for _, c := range s {
 		switch {
-		case c > 127 || mbd && !('0' <= c && c <= '9'):
+		case c > 127 || num && !('0' <= c && c <= '9'):
 			return "", false
 		case '0' <= c && c <= '9':
 			cnt = cnt*10 + int(c-'0')
-			mbd = false
+			num = false
 		default:
 			for cnt > 0 {
 				d = append(d, byte(c))
 				cnt--
 			}
-			mbd = true
+			num = true
 		}
 	}
 
