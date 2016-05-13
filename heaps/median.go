@@ -13,7 +13,7 @@ type minIntHeap []int
 
 func (h *minIntHeap) Less(i, j int) bool { return (*h)[i] < (*h)[j] }
 func (h *minIntHeap) Swap(i, j int)      { (*h)[i], (*h)[j] = (*h)[j], (*h)[i] }
-func (h *minIntHeap) Len() int           { return len((*h)) }
+func (h *minIntHeap) Len() int           { return len(*h) }
 
 func (h *minIntHeap) Pop() (e interface{}) {
 	e, *h = (*h)[h.Len()-1], (*h)[:h.Len()-1]
@@ -26,7 +26,7 @@ type maxIntHeap []int
 
 func (h *maxIntHeap) Less(i, j int) bool { return (*h)[i] > (*h)[j] }
 func (h *maxIntHeap) Swap(i, j int)      { (*h)[i], (*h)[j] = (*h)[j], (*h)[i] }
-func (h *maxIntHeap) Len() int           { return len((*h)) }
+func (h *maxIntHeap) Len() int           { return len(*h) }
 
 func (h *maxIntHeap) Pop() (e interface{}) {
 	e, *h = (*h)[h.Len()-1], (*h)[:h.Len()-1]
