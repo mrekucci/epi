@@ -8,7 +8,7 @@ package htables
 // the given paragraph that covers all the words in the keywords.
 // The time complexity is O(n). The space complexity is O(k), where k
 // is the size of the keywords set.
-func SubarrayCoveringSet(paragraph []string, keywords map[string]struct{}) (start, end int) {
+func SubarrayCoveringSet(paragraph []string, keywords map[string]bool) (start, end int) {
 	start, end = -1, -1
 	if len(keywords) == 0 {
 		return start, end
@@ -21,7 +21,7 @@ func SubarrayCoveringSet(paragraph []string, keywords map[string]struct{}) (star
 		// or every word in keywords haven't been found.
 		for r < len(paragraph) && len(kwCnt) < len(keywords) {
 			w := paragraph[r]
-			if _, ok := keywords[w]; ok {
+			if keywords[w] {
 				kwCnt[w]++
 			}
 			r++
@@ -51,7 +51,7 @@ func SubarrayCoveringSet(paragraph []string, keywords map[string]struct{}) (star
 // the given paragraph that covers all the words in the keywords.
 // The time complexity is O(n*n). The space complexity is O(k), where k
 // is the size of the keywords set.
-func SubarrayCoveringSetNaive(paragraph []string, keywords map[string]struct{}) (start, end int) {
+func SubarrayCoveringSetNaive(paragraph []string, keywords map[string]bool) (start, end int) {
 	start, end = -1, -1
 	if len(keywords) == 0 {
 		return start, end
@@ -61,7 +61,7 @@ func SubarrayCoveringSetNaive(paragraph []string, keywords map[string]struct{}) 
 		kwCnt := make(map[string]int)
 		for r := l; r < len(paragraph) && (start == -1 && end == -1 || r-l < end-start); r++ {
 			w := paragraph[r]
-			if _, ok := keywords[w]; ok {
+			if keywords[w] {
 				kwCnt[w]++
 			}
 			if len(kwCnt) == len(keywords) {

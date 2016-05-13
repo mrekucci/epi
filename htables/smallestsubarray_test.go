@@ -6,23 +6,23 @@ package htables
 
 import "testing"
 
-type subarrayCoveringSetFn func([]string, map[string]struct{}) (int, int)
+type subarrayCoveringSetFn func([]string, map[string]bool) (int, int)
 
 func testSubarrayCoveringSetFn(t *testing.T, fn subarrayCoveringSetFn, fnName string) {
 	for _, test := range []struct {
 		paragraph  []string
-		keywords   map[string]struct{}
+		keywords   map[string]bool
 		start, end int
 	}{
-		{nil, map[string]struct{}{"none": {}}, -1, -1},
+		{nil, map[string]bool{"none": true}, -1, -1},
 		{[]string{"a", "b"}, nil, -1, -1},
-		{[]string{"a", "b"}, map[string]struct{}{"none": {}}, -1, -1},
-		{[]string{"a", "b"}, map[string]struct{}{"a": {}, "b": {}}, 0, 1},
-		{[]string{"a", "b"}, map[string]struct{}{"b": {}, "a": {}}, 0, 1},
-		{[]string{"a", "b"}, map[string]struct{}{"a": {}, "b": {}, "c": {}}, -1, -1},
+		{[]string{"a", "b"}, map[string]bool{"none": true}, -1, -1},
+		{[]string{"a", "b"}, map[string]bool{"a": true, "b": true}, 0, 1},
+		{[]string{"a", "b"}, map[string]bool{"b": true, "a": true}, 0, 1},
+		{[]string{"a", "b"}, map[string]bool{"a": true, "b": true, "c": true}, -1, -1},
 		{
 			[]string{"apple", "banana", "apple", "apple", "dog", "cat", "apple", "dog", "banana", "apple", "cat", "dog"},
-			map[string]struct{}{"banana": {}, "cat": {}},
+			map[string]bool{"banana": true, "cat": true},
 			8, 10,
 		},
 	} {
