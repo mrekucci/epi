@@ -12,7 +12,7 @@ func MinMax(an []int) (min, max int) {
 	}
 
 	min, max = an[0], an[0]
-	for _, v := range an { // We start iterate again from index 0 to avoid array bounds checking and thus improve performance.
+	for _, v := range an[1:] {
 		if v < min {
 			min = v
 		} else if v > max {
@@ -42,7 +42,7 @@ func MinMaxAlt(an []int) (min, max int) {
 	}
 
 	min, max = compare(an[0], an[1])
-	for i := 3; i < len(an); i += 2 { // Compare 3/2n - 2 times.
+	for i := 3; i < len(an); i += 2 { // Compare 3*n/2 - 2 times.
 		nMin, nMax := compare(an[i-1], an[i])
 		min, _ = compare(nMin, min)
 		_, max = compare(nMax, max)
