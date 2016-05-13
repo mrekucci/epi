@@ -40,9 +40,8 @@ func StringToInt(s string) (int64, error) {
 		if u >= cutoff { // Check if u*10 overflows.
 			return 0, ErrRange
 		}
-		u *= 10
 
-		u += uint64(c-'0')
+		u = u*10 + uint64(c-'0')
 		if neg && u > -math.MinInt64 || !neg && u > math.MaxInt64 { // Check for overflows: -n < math.MinInt64 || n > math.MaxInt64
 			return 0, ErrRange
 		}
