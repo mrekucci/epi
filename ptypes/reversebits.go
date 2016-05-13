@@ -4,16 +4,14 @@
 
 package ptypes
 
-// reverseBitsTable is a reverse bits cache for all 16-bit non-negative integers.
-var reverseBitsTable = createReverseBitsTable()
+// rbt is a reverse bits cache for all 16-bit non-negative integers.
+var rbt [1 << 16]uint16
 
-// createReverseBitsTable computes and returns reverse
-// bits for all 16-bit non-negative integers.
-func createReverseBitsTable() (bt [1 << 16]uint16) {
-	for i := 0; i < len(bt); i++ {
-		bt[i] = uint16(ReverseBits(uint64(i)) >> 48)
+// initialize reverse bit table rbt.
+func init() {
+	for i := 0; i < len(rbt); i++ {
+		rbt[i] = uint16(ReverseBits(uint64(i)) >> 48)
 	}
-	return bt
 }
 
 // ReverseBits reverse bits in x.
@@ -31,8 +29,8 @@ func ReverseBits(x uint64) uint64 {
 // of a word of cache key. The space complexity is O(1) beyond the 1<<l space
 // is needed to cache precomputed results, which is constant.
 func ReverseBitsLookup(x uint64) uint64 {
-	return uint64(reverseBitsTable[(x>>48)&0xffff]) |
-		uint64(reverseBitsTable[(x>>32)&0xffff])<<16 |
-		uint64(reverseBitsTable[(x>>16)&0xffff])<<32 |
-		uint64(reverseBitsTable[x&0xffff])<<48
+	return uint64(rbt[(x>>48)&0xffff]) |
+		uint64(rbt[(x>>32)&0xffff])<<16 |
+		uint64(rbt[(x>>16)&0xffff])<<32 |
+		uint64(rbt[x&0xffff])<<48
 }
