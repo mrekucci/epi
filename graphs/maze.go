@@ -20,10 +20,10 @@ func SearchMaze(maze [][]bool, start, end Coordinate) (path []Coordinate) {
 	path = append(path, start)
 	maze[start.x][start.y] = black // Mark as visited.
 
-	// pathExists returns true if path from curr to end exists in maze.
+	// pathExistsFrom returns true if path from curr to end exists in maze.
 	// Function is recursive implementation of DFS.
-	var pathExists func(maze [][]bool, curr, end Coordinate) bool
-	pathExists = func(maze [][]bool, curr, end Coordinate) bool {
+	var pathExistsFrom func(curr Coordinate) bool
+	pathExistsFrom = func(curr Coordinate) bool {
 		if curr == end { // Base case.
 			return true
 		}
@@ -33,7 +33,7 @@ func SearchMaze(maze [][]bool, start, end Coordinate) (path []Coordinate) {
 			if isFeasible(maze, next) { // Check if we can move this way.
 				path = append(path, next)
 				maze[next.x][next.y] = black // Mark as visited.
-				if pathExists(maze, next, end) {
+				if pathExistsFrom(next) {
 					return true
 				}
 				path = path[:len(path)-1] // End wasn't found, take step back and try another one.
@@ -42,7 +42,7 @@ func SearchMaze(maze [][]bool, start, end Coordinate) (path []Coordinate) {
 		return false
 	}
 
-	if pathExists(maze, start, end) {
+	if pathExistsFrom(start) {
 		return path
 	}
 	return nil
