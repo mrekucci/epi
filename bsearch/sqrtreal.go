@@ -4,9 +4,7 @@
 
 package bsearch
 
-import (
-	"math"
-)
+import "math"
 
 // cmp compares a and b with a tolerance and returns:
 //
@@ -17,10 +15,10 @@ import (
 // Note: works only for positive numbers.
 func cmp(a, b float64) int {
 	const epsilon = 0.00001       // The tolerance.
-	switch diff := (a - b) / b; { // a-b ensures that the diff will be always negative when a < b
-	case diff < -epsilon: // Check tolerance if a < b
+	switch diff := (a - b) / b; { // a-b ensures that the diff will always be negative when a < b.
+	case diff < -epsilon: // Check tolerance if a < b.
 		return -1
-	case diff > epsilon: // Check tolerance if a > b
+	case diff > epsilon: // Check tolerance if a > b.
 		return 1
 	}
 	return 0
