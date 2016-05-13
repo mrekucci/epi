@@ -7,10 +7,7 @@ package heaps
 import "container/heap"
 
 // entry holds value v of slice on index i in slice of slices.
-type entry struct {
-	v int
-	i int
-}
+type entry struct { i, v int }
 
 // minEntryHeap is an implementation of min heap for entry values.
 type minEntryHeap []*entry
@@ -35,19 +32,19 @@ func (h *minEntryHeap) Push(v interface{}) { *h = append(*h, v.(*entry)) }
 // to write the final result).
 func MergeSorted(ss [][]int) (m []int) {
 	h := new(minEntryHeap)
-	idx := make([]int, len(ss)) // Stores the next index of element from particular slice.
+	next := make([]int, len(ss)) // Stores the next index of element from particular slice.
 	for i, s := range ss {      // Add first entry from each slice to the heap.
 		if len(s) > 0 {
-			heap.Push(h, &entry{s[0], i})
-			idx[i] = 1
+			heap.Push(h, &entry{i, s[0]})
+			next[i] = 1
 		}
 	}
 	for h.Len() != 0 {
 		e := heap.Pop(h).(*entry)
 		m = append(m, e.v)
-		if s, i := ss[e.i], idx[e.i]; i < len(s) {
-			heap.Push(h, &entry{s[i], e.i}) // Add next entry from the slice that previously had the smallest element.
-			idx[e.i]++
+		if s, i := ss[e.i], next[e.i]; i < len(s) {
+			heap.Push(h, &entry{e.i, s[i]}) // Add next entry from the slice that previously had the smallest element.
+			next[e.i]++
 		}
 	}
 	return m
