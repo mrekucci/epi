@@ -33,8 +33,8 @@ func NQueens(n int) (positions [][]int) {
 
 	// solveNQueens use backtracking technique to place
 	// queens on board to the non-attacking positions.
-	var solveNQueens func(n, row int, queens []int)
-	solveNQueens = func(n, row int, queens []int) {
+	var solveNQueens func(row int, queens []int)
+	solveNQueens = func(row int, queens []int) {
 		if row == n { // Base case, all queens are placed on non-attacking positions.
 			positions = append(positions, append([]int(nil), queens...))
 			return
@@ -42,12 +42,12 @@ func NQueens(n int) (positions [][]int) {
 		for col := 0; col < n; col++ {
 			queens = append(queens, col) // Place queen.
 			if isSafe(queens) {
-				solveNQueens(n, row+1, queens)
+				solveNQueens(row+1, queens)
 			}
 			queens = queens[:len(queens)-1] // Step back, remove queen and go try another position.
 		}
 	}
 
-	solveNQueens(n, 0, nil)
+	solveNQueens(0, nil)
 	return positions
 }
