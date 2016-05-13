@@ -112,44 +112,6 @@ func HeapSort(data sort.Interface) {
 	}
 }
 
-// move moves the largest element in data[s:e+1] into the position e.
-// It has O(n) time complexity (n=e-s) and O(1) additional space is needed.
-func move(data sort.Interface, s, e int) {
-	for i := s; i < e; i++ {
-		if data.Less(i+1, i) {
-			data.Swap(i+1, i)
-		}
-	}
-}
-
-// merge combines sorted data[p:q+1] and data[q+1:r+1] together.
-// The time complexity is O((q-p)*(r-q+1)). No additional space is needed.
-func merge(data sort.Interface, p, q, r int) {
-	// Loop invariant: data[0:i], data[i:q+1] and data[q+1:r+1] are sorted, and every
-	// elements in data[0:i] are less or equal to the data[q+1].
-	for i := p; i <= q; i++ {
-		if data.Less(q+1, i) {
-			data.Swap(q+1, i)
-			move(data, q+1, r)
-		}
-	}
-}
-
-// mergeSortFn is a recursive function that sorts data[l:r+1].
-func mergeSortFn(ints sort.Interface, p, r int) {
-	switch cnt := r - p; {
-	case cnt == 1: // Two elements left.
-		if ints.Less(r, p) {
-			ints.Swap(p, r)
-		}
-	case cnt > 1:
-		q := p + (r-p)/2
-		mergeSortFn(ints, p, q)   // Divide.
-		mergeSortFn(ints, q+1, r) // Divide.
-		merge(ints, p, q, r)      // Combine and Conquer.
-	}
-}
-
 // MergeSort (in-place version) sorts given data and has next properties:
 //
 // - Not stable
@@ -162,51 +124,46 @@ func mergeSortFn(ints sort.Interface, p, r int) {
 // case is O(n*lg(n)) and O(n) additional space is needed.
 //
 func MergeSort(data sort.Interface) {
-	mergeSortFn(data, 0, data.Len()-1)
-}
-
-// median moves the median of data[a], data[b], data[c] into data[b].
-// Selecting a median helps avoid to cause worst-case behavior on already
-// sorted (or reverse-sorted) data, and gives a better estimate of the optimal
-// pivot than selecting any single element, when no information about the
-// ordering of the input is known.
-func median(data sort.Interface, a, b, c int) {
-	if data.Less(b, a) {
-		data.Swap(b, a)
-	}
-	if data.Less(c, b) {
-		data.Swap(c, b)
-		if data.Less(b, a) {
-			data.Swap(b, a)
-		}
-	}
-}
-
-// quickSortFn is a recursive function that sorts data[l:r+1].
-func quickSortFn(data sort.Interface, p, r int) {
-	if p < r {
-		// Partition (divide). The time complexity is O(n). The O(1) additional space is needed.
-		q := p
-		pivot := p + (r-p)/2
-		median(data, p, pivot, r) // Is much faster then rand.Intn(r-p+1)+p.
-		data.Swap(pivot, r)       // Move the pivot value into the position r.
-		// Loop invariant:
-		// each element in data[p:q] is less than or equal to the pivot;
-		// each element in data[q:u] is greater than the pivot;
-		// each element in data[u:r] is unsorted;
-		// the element data[r] holds the pivot.
-		for u := q; u < r; u++ {
-			if data.Less(u, r) {
-				data.Swap(u, q)
-				q++
+	// move moves the largest element in data[s:e+1] into the position e.
+	// It has O(n) time complexity (n=e-s) and O(1) additional space is needed.
+	move := func(s, e int) {
+		for i := s; i < e; i++ {
+			if data.Less(i+1, i) {
+				data.Swap(i+1, i)
 			}
 		}
-		data.Swap(r, q)
-
-		quickSortFn(data, p, q-1) // Conquer.
-		quickSortFn(data, q+1, r) // Conquer.
-		// Because the sub-arrays are already sorted, no work is needed to combine them.
 	}
+
+	// merge combines sorted data[p:q+1] and data[q+1:r+1] together.
+	// The time complexity is O((q-p)*(r-q+1)). No additional space is needed.
+	merge := func(p, q, r int) {
+		// Loop invariant: data[0:i], data[i:q+1] and data[q+1:r+1] are sorted, and every
+		// elements in data[0:i] are less or equal to the data[q+1].
+		for i := p; i <= q; i++ {
+			if data.Less(q+1, i) {
+				data.Swap(q+1, i)
+				move(q+1, r)
+			}
+		}
+	}
+
+	// mergeSortFn is a recursive function that sorts data[l:r+1].
+	var mergeSortFn func(l, r int)
+	mergeSortFn = func(l, r int) {
+		switch cnt := r - l; {
+		case cnt == 1: // Two elements left.
+			if data.Less(r, l) {
+				data.Swap(l, r)
+			}
+		case cnt > 1:
+			q := l + (r-l)/2
+			mergeSortFn(l, q)   // Divide.
+			mergeSortFn(q+1, r) // Divide.
+			merge(l, q, r)      // Combine and Conquer.
+		}
+	}
+
+	mergeSortFn(0, data.Len()-1)
 }
 
 // QuickSort sorts given data and has next properties:
@@ -217,5 +174,50 @@ func quickSortFn(data sort.Interface, p, r int) {
 // - Not adaptive
 //
 func QuickSort(data sort.Interface) {
-	quickSortFn(data, 0, data.Len()-1)
+	// median moves the median of data[a], data[b], data[c] into data[b].
+	// Selecting a median helps avoid to cause worst-case behavior on already
+	// sorted (or reverse-sorted) data, and gives a better estimate of the optimal
+	// pivot than selecting any single element, when no information about the
+	// ordering of the input is known.
+	median := func(a, b, c int) {
+		if data.Less(b, a) {
+			data.Swap(b, a)
+		}
+		if data.Less(c, b) {
+			data.Swap(c, b)
+			if data.Less(b, a) {
+				data.Swap(b, a)
+			}
+		}
+	}
+
+	// quickSortFn is a recursive function that sorts data[l:r+1].
+	var quickSortFn func(l, r int)
+	quickSortFn = func(l, r int) {
+		if l < r {
+			// Partition (divide). The time complexity is O(n). The O(1) additional space is needed.
+			q := l
+			pivot := l + (r-l)/2
+			median(l, pivot, r) // Is much faster then rand.Intn(r-p+1)+p.
+			data.Swap(pivot, r)       // Move the pivot value into the position r.
+			// Loop invariant:
+			// each element in data[p:q] is less than or equal to the pivot;
+			// each element in data[q:u] is greater than the pivot;
+			// each element in data[u:r] is unsorted;
+			// the element data[r] holds the pivot.
+			for u := q; u < r; u++ {
+				if data.Less(u, r) {
+					data.Swap(u, q)
+					q++
+				}
+			}
+			data.Swap(r, q)
+
+			quickSortFn(l, q-1) // Conquer.
+			quickSortFn(q+1, r) // Conquer.
+			// Because the sub-arrays are already sorted, no work is needed to combine them.
+		}
+	}
+
+	quickSortFn(0, data.Len()-1)
 }
