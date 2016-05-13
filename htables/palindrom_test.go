@@ -18,6 +18,7 @@ func TestCanFormPalindrome(t *testing.T) {
 	}{
 		{"", true},
 		{"ab", false},
+		{"aa", true},
 		{"aab", true},
 		{"aaab", false},
 		{"aaabccc", false},
