@@ -7,18 +7,18 @@ package btrees
 // LCA returns the lowest common ancestor in
 // the binary tree t for the nodes n0, n1.
 func LCA(t, n0, n1 *BTree) *BTree {
-	var findLCA func(t, n0, n1 *BTree) (cnt int, ancestor *BTree)
-	findLCA = func(t, n0, n1 *BTree) (cnt int, ancestor *BTree) {
+	var findLCA func(t *BTree) (cnt int, ancestor *BTree)
+	findLCA = func(t *BTree) (cnt int, ancestor *BTree) {
 		if t == nil {
 			return 0, nil // Base case.
 		}
 
 		// Post-order walk.
-		lc, la := findLCA(t.left, n0, n1)
+		lc, la := findLCA(t.left)
 		if lc == 2 {
 			return lc, la
 		}
-		rc, ra := findLCA(t.right, n0, n1)
+		rc, ra := findLCA(t.right)
 		if rc == 2 {
 			return rc, ra
 		}
@@ -35,6 +35,7 @@ func LCA(t, n0, n1 *BTree) *BTree {
 		}
 		return cnt, ancestor
 	}
-	_, a := findLCA(t, n0, n1)
+
+	_, a := findLCA(t)
 	return a
 }
