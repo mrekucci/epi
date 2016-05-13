@@ -18,20 +18,20 @@ type BTreeP struct {
 // In the worst case, when n0 and n1 are children and the LCA is root, the time
 // and the space complexity is O(h), where h is the height of the tree t.
 func LCA(t, n0, n1 *BTreeP) *BTreeP {
-	set := make(map[*BTreeP]struct{})
+	set := make(map[*BTreeP]bool)
 	for n0 != nil || n1 != nil {
 		if n0 != nil {
-			if _, ok := set[n0]; ok {
+			if set[n0] {
 				return n0
 			}
-			set[n0] = struct{}{}
+			set[n0] = true
 			n0 = n0.parent
 		}
 		if n1 != nil {
-			if _, ok := set[n1]; ok {
+			if set[n1] {
 				return n1
 			}
-			set[n1] = struct{}{}
+			set[n1] = true
 			n1 = n1.parent
 		}
 	}
