@@ -21,13 +21,12 @@ func DepthOrder(t *IntBTree) (order [][]int) {
 	pq.Enqueue(t) // Add root.
 	cnt := pq.Len() // Number of elements on the same level.
 	for pq.Len() != 0 {
-		n := pq.Dequeue()
+		n := pq.Dequeue().(*IntBTree)
 		cnt--
-		if n != (*IntBTree)(nil) {
-			st := n.(*IntBTree)
-			pq.Enqueue(st.left)
-			pq.Enqueue(st.right)
-			level = append(level, st.Data)
+		if n != nil {
+			pq.Enqueue(n.left)
+			pq.Enqueue(n.right)
+			level = append(level, n.Data)
 		}
 		if cnt == 0 {
 			cnt = pq.Len() // Set count to the number of elements that should be processed on next level.
