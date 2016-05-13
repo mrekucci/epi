@@ -42,8 +42,8 @@ func SearchMaze(maze [][]bool, start, end Coordinate) (path []Coordinate) {
 		return false
 	}
 
-	if !pathExists(maze, start, end) {
-		return nil
+	if pathExists(maze, start, end) {
+		return path
 	}
-	return path
+	return nil
 }
