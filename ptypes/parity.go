@@ -4,15 +4,14 @@
 
 package ptypes
 
-// parityTable is a parity cache for all 16-bit non-negative integers.
-var parityTable = initParityTable()
+// pt is a parity cache for all 16-bit non-negative integers.
+var pt [1 << 16]uint16
 
-// initParityTable computes and returns parities for all 16-bit non-negative integers.
-func initParityTable() (pt [1 << 16]uint16) {
+// initialize parity table pt.
+func init() {
 	for i := 0; i < len(pt); i++ {
 		pt[i] = Parity(uint64(i))
 	}
-	return pt
 }
 
 // Parity returns 1 if the number of bits set to 1 in x is odd, otherwise O.
@@ -34,7 +33,7 @@ func Parity(x uint64) (p uint16) {
 func ParityAlt(x uint64) (p uint16) {
 	for x != 0 {
 		p ^= 1
-		x &= (x - 1)
+		x &= x - 1
 	}
 	return p
 }
@@ -44,5 +43,5 @@ func ParityAlt(x uint64) (p uint16) {
 // of a word of cache key. The space complexity is O(1) beyond the 1<<l space
 // is needed to cache precomputed results, which is constant.
 func ParityLookup(x uint64) uint16 {
-	return parityTable[(x>>48)&0xffff] ^ parityTable[(x>>32)&0xffff] ^ parityTable[(x>>16)&0xffff] ^ parityTable[x&0xffff]
+	return pt[(x>>48)&0xffff] ^ pt[(x>>32)&0xffff] ^ pt[(x>>16)&0xffff] ^ pt[x&0xffff]
 }
