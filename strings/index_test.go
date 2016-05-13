@@ -7,6 +7,7 @@ package strings
 import (
 	"math/rand"
 	"testing"
+	"time"
 
 	"github.com/mrekucci/epi/internal/epiutil"
 )
@@ -49,7 +50,7 @@ func TestIndexNaive(t *testing.T) { testIndexFn(t, IndexNaive, "IndexNaive") }
 func TestIndexRK(t *testing.T)    { testIndexFn(t, IndexRK, "IndexRK") }
 
 func benchIndexFn(b *testing.B, size int, fn indexFn) {
-	s := epiutil.RandStr(size, "☺ abcdefghijklmnopqrstuvwxyz 世界", rand.NewSource(int64(size)))
+	s := epiutil.RandStr(size, "☺ abcdefghijklmnopqrstuvwxyz 世界", rand.NewSource(time.Now().UnixNano()))
 	p := s[size/3 : size*2/3]
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {

@@ -66,10 +66,8 @@ func IndexRK(s, p string) int {
 
 	// Matching.
 	for i := m; i <= n; i++ {
-		if ph == sh {
-			if s[i-m:i] == p {
-				return i - m
-			}
+		if ph == sh && s[i-m:i] == p {
+			return i - m
 		}
 		if i < n {
 			// Slide right the rolling hash window (include implicit modulus 2**32-1).
