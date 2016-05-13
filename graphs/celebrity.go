@@ -14,7 +14,7 @@ func FindCelebrity(f [][]bool) int {
 		if f[row][col] {
 			row, col = col, col+1 // All candidates less then col are not celebrity candidates.
 		} else {
-			col++ // row is still a celebrity candidate but col is not.
+			col++ // Row is still a celebrity candidate but col is not.
 		}
 	}
 	for _, status := range f[row] { // Check if selected candidate is really a celebrity.
