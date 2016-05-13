@@ -8,7 +8,6 @@ import (
 	"bytes"
 	"fmt"
 	"sort"
-	"strconv"
 )
 
 type sentence []rune
@@ -31,12 +30,7 @@ func CountOccurrences(s string) string {
 	buf := new(bytes.Buffer)
 	for i := 1; i < len(chars); i++ {
 		if chars[i-1] != chars[i] {
-			// We don't check for error 'cause writing to bytes.Buffer has always nil err.
-			buf.WriteByte('(')
-			buf.WriteRune(chars[i-1])
-			buf.WriteString(", ")
-			buf.WriteString(strconv.Itoa(cnt))
-			buf.WriteString("), ")
+			fmt.Fprintf(buf, "(%c, %d), ", chars[i-1], cnt)
 			cnt = 0
 		}
 		cnt++
