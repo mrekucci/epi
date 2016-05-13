@@ -52,7 +52,7 @@ func TestWalk(t *testing.T) {
 
 	for _, test := range []struct {
 		fnName string
-		fn     func(t *BTree, w *[]interface{})
+		fn     func(t *BTree, w []interface{}) []interface{}
 		want   []interface{}
 	}{
 		{"Preorder", Preorder, []interface{}{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"}},

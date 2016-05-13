@@ -23,11 +23,11 @@ type BTreeP struct {
 // The time complexity is O(n). The O(h) additional
 // space is needed (where h is the height of the tree).
 func Height(t *BTree) int {
-	hl, hr := -1, -1
-	if t != nil {
-		hl = 1 + Height(t.right)
-		hr = 1 + Height(t.left)
+	if t == nil {
+		return -1
 	}
+	hl := 1 + Height(t.left)
+	hr := 1 + Height(t.right)
 	if hl > hr {
 		return hl
 	}
@@ -35,44 +35,45 @@ func Height(t *BTree) int {
 }
 
 // Walk returns elements of the binary tree t in given traversal order.
-func Walk(t *BTree, order func(t *BTree, w *[]interface{})) []interface{} {
-	var w []interface{}
-	order(t, &w)
-	return w
+func Walk(t *BTree, order func(t *BTree, w []interface{}) []interface{}) []interface{} {
+	return order(t, nil)
 }
 
 // Preorder visit the root, traverse the left
 // subtree, then traverse the right subtree.
 // The time complexity is O(n). The O(h) additional
 // space is needed (where h is the height of the tree).
-func Preorder(t *BTree, w *[]interface{}) {
+func Preorder(t *BTree, w []interface{}) []interface{} {
 	if t != nil {
-		*w = append(*w, t.Data)
-		Preorder(t.left, w)
-		Preorder(t.right, w)
+		w = append(w, t.Data)
+		w = Preorder(t.left, w)
+		w = Preorder(t.right, w)
 	}
+	return w
 }
 
 // Inorder traverse the left subtree, visit the
 // root, then traverse the right subtree.
 // The time complexity is O(n). The O(h) additional
 // space is needed (where h is the height of the tree).
-func Inorder(t *BTree, w *[]interface{}) {
+func Inorder(t *BTree, w []interface{}) []interface{} {
 	if t != nil {
-		Inorder(t.left, w)
-		*w = append(*w, t.Data)
-		Inorder(t.right, w)
+		w = Inorder(t.left, w)
+		w = append(w, t.Data)
+		w = Inorder(t.right, w)
 	}
+	return w
 }
 
 // Postorder traverse the left subtree, traverse the
 // right subtree, and then visit the root.
 // The time complexity is O(n). The O(h) additional
 // space is needed (where h is the height of the tree).
-func Postorder(t *BTree, w *[]interface{}) {
+func Postorder(t *BTree, w []interface{}) []interface{} {
 	if t != nil {
-		Postorder(t.left, w)
-		Postorder(t.right, w)
-		*w = append(*w, t.Data)
+		w = Postorder(t.left, w)
+		w = Postorder(t.right, w)
+		w = append(w, t.Data)
 	}
+	return w
 }
