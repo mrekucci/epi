@@ -10,28 +10,12 @@ func isSafe(placement []int) bool {
 	row := len(placement) - 1 // placement indices represents rows indices.
 	for i := 0; i < row; i++ {
 		dir := placement[i] - placement[row]
-		// on the same column || on the left-down diagonal || on right-down diagonal
+		// on the same column || on the left-down diagonal || on the right-down diagonal
 		if dir == 0 || -dir == row-i || dir == row-i {
 			return false
 		}
 	}
 	return true
-}
-
-// solveNQueens use backtracking technique to place
-// queens on board to the non-attacking positions.
-func solveNQueens(n, row int, queens []int, positions [][]int) [][]int {
-	if row == n { // Base case, all queens are placed on non-attacking positions.
-		return append(positions, append([]int(nil), queens...))
-	}
-	for col := 0; col < n; col++ {
-		queens = append(queens, col) // Place queen.
-		if isSafe(queens) {
-			positions = solveNQueens(n, row+1, queens, positions)
-		}
-		queens = queens[:len(queens)-1] // Step back, remove queen and go try another position.
-	}
-	return positions
 }
 
 // NQueens returns 2D slice that represents all distinct non-attacking
@@ -42,9 +26,28 @@ func solveNQueens(n, row int, queens []int, positions [][]int) [][]int {
 // n, but it's conjectured to tend to n!/(c**n), where c is approximately
 // 2.52, which is super-exponential. Beyond the returned n*n board O(1)
 // additional space is needed.
-func NQueens(n int) [][]int {
+func NQueens(n int) (positions [][]int) {
 	if n == 0 {
 		return nil
 	}
-	return solveNQueens(n, 0, nil, nil)
+
+	// solveNQueens use backtracking technique to place
+	// queens on board to the non-attacking positions.
+	var solveNQueens func(n, row int, queens []int)
+	solveNQueens = func(n, row int, queens []int) {
+		if row == n { // Base case, all queens are placed on non-attacking positions.
+			positions = append(positions, append([]int(nil), queens...))
+			return
+		}
+		for col := 0; col < n; col++ {
+			queens = append(queens, col) // Place queen.
+			if isSafe(queens) {
+				solveNQueens(n, row+1, queens)
+			}
+			queens = queens[:len(queens)-1] // Step back, remove queen and go try another position.
+		}
+	}
+
+	solveNQueens(n, 0, nil)
+	return positions
 }
