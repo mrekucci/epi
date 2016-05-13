@@ -4,22 +4,24 @@
 
 package recursion
 
-// genPerm generates all the permutation of an into the res.
-func genPerm(i int, an []int, perm [][]int) [][]int {
-	if i == len(an)-1 { // Base case. Copy actual permutation of an to the result.
-		return append(perm, append([]int(nil), an...))
-	}
-	for j := i; j < len(an); j++ {
-		an[i], an[j] = an[j], an[i]
-		perm = genPerm(i+1, an, perm) // To an[i] generate all permutations of an[i+1:].
-		an[i], an[j] = an[j], an[i]
-	}
-	return perm
-}
-
 // Permutations returns all the possible permutations of an.
-// The time complexity is O(n!); The O(1) additional space is needed.
+// The time and space complexity is O(n!),
 // The an slice may be modified during the execution.
-func Permutations(an []int) [][]int {
-	return genPerm(0, an, nil)
+func Permutations(an []int) (p [][]int) {
+	// genPerm generates all the permutation of an into the p.
+	var genPerm func(i int)
+	genPerm = func(i int) {
+		if i == len(an)-1 { // Base case. Copy actual permutation of an to the result.
+			p = append(p, append([]int(nil), an...))
+			return
+		}
+		for j := i; j < len(an); j++ {
+			an[i], an[j] = an[j], an[i]
+			genPerm(i+1) // To an[i] generate all permutations of an[i+1:].
+			an[i], an[j] = an[j], an[i]
+		}
+	}
+
+	genPerm(0)
+	return p
 }
