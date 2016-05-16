@@ -12,19 +12,18 @@ func AllSubsets(n, k int) (subset [][]int) {
 	if k == 0 {
 		return nil
 	}
-	var combinations func(n, k, i int, set []int)
-	combinations = func(n, k, i int, set []int) {
+	var combinations func(i int, set []int)
+	combinations = func(i int, set []int) {
 		if len(set) == k {
 			subset = append(subset, append([]int(nil), set...))
 			return
 		}
-		for j := i; j <= n; j++ {
-			// First execution of this cycle generates the first values in every subset.
+		for j := i; j <= n; j++ { // First execution of this cycle generates the first values in every subset.
 			set = append(set, j)
-			combinations(n, k, j+1, set)
+			combinations(j+1, set)
 			set = set[:len(set)-1]
 		}
 	}
-	combinations(n, k, 1, nil)
+	combinations(1, nil)
 	return subset
 }
