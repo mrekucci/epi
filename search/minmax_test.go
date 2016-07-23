@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-type minMaxFn func(an []int) (min, max int)
+type minMaxFn func(xs []int) (min, max int)
 
 func testMinMaxFn(t *testing.T, fn minMaxFn, fnName string) {
 	for _, test := range []struct {

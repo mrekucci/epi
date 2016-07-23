@@ -45,7 +45,7 @@ func GenPrimesTrialDiv(n uint) (primes []uint, ok bool) {
 // The nil, false is returned when primes cannot be generated up to the n.
 // The time complexity is O(n*log(log(n))), and O(n) additional space is needed.
 func GenPrimesSieve(n uint) (primes []uint, ok bool) {
-	var size uint = (n-3)/2 + 1 // For n > 2: n-3: subtract num: 0,1,2; div by 2: we need only to go through odd numbers; +1: include num: n
+	size := (n-3)/2 + 1 // For n > 2: n-3: subtract num: 0,1,2; div by 2: we need only to go through odd numbers; +1: include num: n
 
 	switch {
 	case n < 2:

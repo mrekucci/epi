@@ -4,13 +4,13 @@
 
 package bsearch
 
-// IndexEqualsEntry returns the index of the first entry in an that equals to its index.
+// IndexEqualsEntry returns the index of the first entry in xs that equals to its index.
 // The time complexity is O(log(n)). The O(1) additional space is needed.
-func IndexEqualsEntry(an []int) int {
-	l, r := 0, len(an)-1
+func IndexEqualsEntry(xs []int) int {
+	l, r := 0, len(xs)-1
 	for l <= r {
 		m := l + (r-l)/2
-		switch d := an[m] - m; {
+		switch d := xs[m] - m; {
 		case d < 0:
 			l = m + 1
 		case d == 0:

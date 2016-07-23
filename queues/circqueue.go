@@ -8,22 +8,22 @@ package queues
 type arrayQueue struct {
 	head, tail int
 	len        int
-	an         []interface{}
+	xs         []interface{}
 }
 
 // Enqueue inserts e element at the back of the queue.
 // The time complexity is O(1) amortized.
 func (q *arrayQueue) Enqueue(e interface{}) {
-	if q.Len() == cap(q.an) { // Resize.
-		an := make([]interface{}, 2*cap(q.an)+1)
-		n := copy(an, q.an[q.head:])
-		copy(an[n:], q.an[:q.tail])
+	if q.Len() == cap(q.xs) { // Resize.
+		xs := make([]interface{}, 2*cap(q.xs)+1)
+		x := copy(xs, q.xs[q.head:])
+		copy(xs[x:], q.xs[:q.tail])
 		q.head = 0
 		q.tail = q.Len()
-		q.an = an
+		q.xs = xs
 	}
-	q.an[q.tail] = e
-	q.tail = (q.tail + 1) % cap(q.an)
+	q.xs[q.tail] = e
+	q.tail = (q.tail + 1) % cap(q.xs)
 	q.len++
 }
 
@@ -33,8 +33,8 @@ func (q *arrayQueue) Dequeue() interface{} {
 	if q.Len() == 0 {
 		return nil
 	}
-	e := q.an[q.head]
-	q.head = (q.head + 1) % cap(q.an)
+	e := q.xs[q.head]
+	q.head = (q.head + 1) % cap(q.xs)
 	q.len--
 	return e
 }

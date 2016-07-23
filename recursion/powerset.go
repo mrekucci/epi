@@ -8,18 +8,18 @@ package recursion
 // The time complexity is O(n*(2**n)). The space complexity is O(2**n).
 // The returned boolean value is always true.
 func PowerSetRec(s []interface{}) (ps [][]interface{}, ok bool) {
-	// genPowerSet generates a power set of s[i:] into the ps.
-	var genPowerSet func(i int, branch []interface{})
-	genPowerSet = func(i int, branch []interface{}) {
+	// generate generates a power set of s[i:] into the ps.
+	var generate func(i int, branch []interface{})
+	generate = func(i int, branch []interface{}) {
 		if i == len(s) {
 			ps = append(ps, append([]interface{}(nil), branch...))
 			return
 		}
-		genPowerSet(i+1, append(branch, s[i])) // Generate all subsets that contain s[i].
-		genPowerSet(i+1, branch)               // Generate all subsets that do not contain s[i].
+		generate(i+1, append(branch, s[i])) // Generate all subsets that contain s[i].
+		generate(i+1, branch)               // Generate all subsets that do not contain s[i].
 	}
 
-	genPowerSet(0, nil)
+	generate(0, nil)
 	return ps, true
 }
 

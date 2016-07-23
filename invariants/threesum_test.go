@@ -11,7 +11,7 @@ import (
 
 func TestHasThreeSum(t *testing.T) {
 	for _, test := range []struct {
-		an   []int
+		xs   []int
 		k    int
 		want bool
 	}{
@@ -30,18 +30,18 @@ func TestHasThreeSum(t *testing.T) {
 		{[]int{5, 7, 2, 3, 11}, 21, true},
 		{[]int{-3, 7, -5, 2, 9}, -1, true},
 	} {
-		if got := HasThreeSum(test.an, test.k); got != test.want {
-			t.Errorf("HasThreeSum(%v, %d) = %t; want %t", test.an, test.k, got, test.want)
+		if got := HasThreeSum(test.xs, test.k); got != test.want {
+			t.Errorf("HasThreeSum(%v, %d) = %t; want %t", test.xs, test.k, got, test.want)
 		}
 	}
 }
 
 func benchHasThreeSum(b *testing.B, size int) {
-	an := rand.New(rand.NewSource(int64(size))).Perm(size)
-	k := an[0] + an[size/3] + an[size-1]
+	xs := rand.New(rand.NewSource(int64(size))).Perm(size)
+	k := xs[0] + xs[size/3] + xs[size-1]
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		HasThreeSum(an, k)
+		HasThreeSum(xs, k)
 	}
 }
 

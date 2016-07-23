@@ -8,10 +8,10 @@ import "sort"
 
 // hasTwoSum returns true if the sum of two (not distinct) elements results into k.
 // The time complexity is O(n), and O(1) additional space is needed.
-func hasTwoSum(an []int, k int) bool {
-	i, j := 0, len(an)-1
+func hasTwoSum(xs []int, k int) bool {
+	i, j := 0, len(xs)-1
 	for i <= j { // Operation <= takes not distinct values into a credit.
-		switch sum := an[i] + an[j]; {
+		switch sum := xs[i] + xs[j]; {
 		case sum == k:
 			return true
 		case sum < k:
@@ -25,10 +25,10 @@ func hasTwoSum(an []int, k int) bool {
 
 // HasThreeSum returns true if the sum of three (not distinct) elements results into k.
 // The time complexity is O(n*n), and O(1) additional space is needed.
-func HasThreeSum(an []int, k int) bool {
-	sort.Ints(an)
-	for _, v := range an {
-		if hasTwoSum(an, k-v) { // Find if the sum of two numbers in an results into k-v.
+func HasThreeSum(xs []int, k int) bool {
+	sort.Ints(xs)
+	for _, v := range xs {
+		if hasTwoSum(xs, k-v) { // Find if the sum of two numbers in xs results into k-v.
 			return true
 		}
 	}

@@ -7,13 +7,13 @@ package arrays
 import (
 	"math/rand"
 	"reflect"
-	"testing"
 	"sort"
+	"testing"
 )
 
 func TestDeleteDuplicates(t *testing.T) {
 	for _, test := range []struct {
-		an     []int
+		xs     []int
 		want   int
 		update []int
 	}{
@@ -24,12 +24,12 @@ func TestDeleteDuplicates(t *testing.T) {
 		{[]int{1, 1, 2, 2, 3, 3}, 3, []int{1, 2, 3, 2, 3, 3}},
 		{[]int{2, 3, 5, 5, 7, 11, 11, 11, 13}, 6, []int{2, 3, 5, 7, 11, 13, 11, 11, 13}},
 	} {
-		an := append([]int(nil), test.an...)
-		if got := DeleteDuplicates(an); got != test.want {
-			t.Errorf("DeleteDuplicates(%v) = %d; want %d", test.an, got, test.want)
+		xs := append([]int(nil), test.xs...)
+		if got := DeleteDuplicates(xs); got != test.want {
+			t.Errorf("DeleteDuplicates(%v) = %d; want %d", test.xs, got, test.want)
 		}
-		if !reflect.DeepEqual(an, test.update) {
-			t.Errorf("DeleteDuplicates(%v): updated slice %v; want %v", test.an, an, test.update)
+		if !reflect.DeepEqual(xs, test.update) {
+			t.Errorf("DeleteDuplicates(%v): updated slice %v; want %v", test.xs, xs, test.update)
 		}
 	}
 }
@@ -38,11 +38,11 @@ func benchDeleteDuplicates(b *testing.B, size int) {
 	b.StopTimer()
 	ints := rand.New(rand.NewSource(int64(size))).Perm(size)
 	sort.Ints(ints)
-	an := make([]int, size)
+	xs := make([]int, size)
 	for i := 0; i < b.N; i++ {
-		copy(an, ints)
+		copy(xs, ints)
 		b.StartTimer()
-		DeleteDuplicates(an)
+		DeleteDuplicates(xs)
 		b.StopTimer()
 	}
 }

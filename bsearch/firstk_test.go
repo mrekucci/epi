@@ -12,7 +12,7 @@ import (
 
 func TestFirstK(t *testing.T) {
 	for _, test := range []struct {
-		an   []int
+		xs   []int
 		k    int
 		want int
 	}{
@@ -32,8 +32,8 @@ func TestFirstK(t *testing.T) {
 		{[]int{0, 1, 1, 2, 3}, 1, 1},
 		{[]int{2, 2, 2, 2, 2}, 2, 0},
 	} {
-		if got := FirstK(test.an, test.k); got != test.want {
-			t.Errorf("FirstK(%d, %v) = %d; want %d", test.k, test.an, got, test.want)
+		if got := FirstK(test.xs, test.k); got != test.want {
+			t.Errorf("FirstK(%d, %v) = %d; want %d", test.k, test.xs, got, test.want)
 		}
 	}
 }

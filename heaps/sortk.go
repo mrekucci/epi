@@ -4,28 +4,28 @@
 
 package heaps
 
-// reverseInts reverse elements of an[i:j] in an.
-func reverseInts(an []int, i, j int) {
+// reverseInts reverse elements of xs[i:j] in xs.
+func reverseInts(xs []int, i, j int) {
 	for i < j {
-		an[i], an[j] = an[j], an[i]
+		xs[i], xs[j] = xs[j], xs[i]
 		i++
 		j--
 	}
 }
 
-// SortK sorts k-increasing-decreasing slice an and returns the result.
+// SortK sorts k-increasing-decreasing slice xs and returns the result.
 // The time complexity is O(n*log(k)). Beyond the space needed to write
 // the final result, the O(k) additional space is needed.
-// The an can be modified during the function execution.
-func SortK(an []int) []int {
+// The xs can be modified during the function execution.
+func SortK(xs []int) []int {
 	i, o := 0, 1 // o - Order: 1 - increasing, -1 - decreasing.
 	var ss [][]int
-	for j := 1; j <= len(an); j++ {
-		if j == len(an) || o > 0 && an[j-1] > an[j] || o < 0 && an[j-1] < an[j] {
+	for j := 1; j <= len(xs); j++ {
+		if j == len(xs) || o > 0 && xs[j-1] > xs[j] || o < 0 && xs[j-1] < xs[j] {
 			if o < 0 {
-				reverseInts(an, i, j-1)
+				reverseInts(xs, i, j-1)
 			}
-			ss = append(ss, an[i:j])
+			ss = append(ss, xs[i:j])
 			i, o = j, -o
 		}
 	}

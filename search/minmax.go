@@ -4,15 +4,15 @@
 
 package search
 
-// MinMax returns the min and max values from an.
+// MinMax returns the min and max values from xs.
 // The time complexity is O(n). The O(1) additional space is needed.
-func MinMax(an []int) (min, max int) {
-	if len(an) == 0 {
+func MinMax(xs []int) (min, max int) {
+	if len(xs) == 0 {
 		return 0, 0
 	}
 
-	min, max = an[0], an[0]
-	for _, v := range an[1:] {
+	min, max = xs[0], xs[0]
+	for _, v := range xs[1:] {
 		if v < min {
 			min = v
 		} else if v > max {
@@ -30,26 +30,26 @@ func compare(a, b int) (min, max int) {
 	return b, a
 }
 
-// MinMaxAlt is an alternative function to MinMax for searching min and max in an.
+// MinMaxAlt is an alternative function to MinMax for searching min and max in xs.
 // The time complexity is O(n). The O(1) additional space is needed.
 // The time complexity hidden constant is more significant here than in the MaxMin.
-func MinMaxAlt(an []int) (min, max int) {
-	switch len(an) {
+func MinMaxAlt(xs []int) (min, max int) {
+	switch len(xs) {
 	case 0:
 		return 0, 0
 	case 1:
-		return an[0], an[0]
+		return xs[0], xs[0]
 	}
 
-	min, max = compare(an[0], an[1])
-	for i := 3; i < len(an); i += 2 { // Compare 3*n/2 - 2 times.
-		nMin, nMax := compare(an[i-1], an[i])
+	min, max = compare(xs[0], xs[1])
+	for i := 3; i < len(xs); i += 2 { // Compare 3*n/2 - 2 times.
+		nMin, nMax := compare(xs[i-1], xs[i])
 		min, _ = compare(nMin, min)
 		_, max = compare(nMax, max)
 	}
 
-	if len(an)%2 != 0 { // We need to compare the last element if length of an is odd.
-		v := an[len(an)-1]
+	if len(xs)%2 != 0 { // We need to compare the last element if length of xs is odd.
+		v := xs[len(xs)-1]
 		if v < min {
 			min = v
 		} else if v > max {

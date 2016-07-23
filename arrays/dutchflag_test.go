@@ -12,7 +12,7 @@ import (
 
 func TestRearrange(t *testing.T) {
 	for _, test := range []struct {
-		an   [5]int
+		xs   [5]int
 		i    int
 		want [5]int
 	}{
@@ -23,10 +23,10 @@ func TestRearrange(t *testing.T) {
 		{[...]int{5, 4, 3, 2, 1}, 4, [...]int{1, 3, 2, 4, 5}},
 		{[...]int{4, 3, 3, 5, 5}, 0, [...]int{3, 3, 4, 5, 5}},
 	} {
-		got := test.an
+		got := test.xs
 		Rearrange(got[:], test.i)
 		if !reflect.DeepEqual(got, test.want) {
-			t.Errorf("Rearrange(%d, %d) got %d; want %d", test.an, test.i, got, test.want)
+			t.Errorf("Rearrange(%d, %d) got %d; want %d", test.xs, test.i, got, test.want)
 		}
 	}
 }

@@ -4,24 +4,24 @@
 
 package recursion
 
-// Permutations returns all the possible permutations of an.
+// Permutations returns all the possible permutations of xs.
 // The time and space complexity is O(n!),
-// The an slice may be modified during the execution.
-func Permutations(an []int) (p [][]int) {
-	// genPerm generates all the permutation of an into the p.
-	var genPerm func(i int)
-	genPerm = func(i int) {
-		if i == len(an)-1 { // Base case. Copy actual permutation of an to the result.
-			p = append(p, append([]int(nil), an...))
+// The xs slice may be modified during the execution.
+func Permutations(xs []int) (p [][]int) {
+	// generate generates all the permutation of xs into the p.
+	var generate func(i int)
+	generate = func(i int) {
+		if i == len(xs)-1 { // Base case. Copy actual permutation of xs to the result.
+			p = append(p, append([]int(nil), xs...))
 			return
 		}
-		for j := i; j < len(an); j++ {
-			an[i], an[j] = an[j], an[i]
-			genPerm(i+1) // To an[i] generate all permutations of an[i+1:].
-			an[i], an[j] = an[j], an[i]
+		for j := i; j < len(xs); j++ {
+			xs[i], xs[j] = xs[j], xs[i]
+			generate(i + 1) // To xs[i] generate all permutations of xs[i+1:].
+			xs[i], xs[j] = xs[j], xs[i]
 		}
 	}
 
-	genPerm(0)
+	generate(0)
 	return p
 }

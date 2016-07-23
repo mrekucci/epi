@@ -11,7 +11,7 @@ import (
 
 func TestLargestKth(t *testing.T) {
 	for _, test := range []struct {
-		an []int
+		xs []int
 		k  int
 		e  int
 		ok bool
@@ -29,9 +29,9 @@ func TestLargestKth(t *testing.T) {
 		{[]int{-4, -3, -2, -1, 0}, 3, -2, true},
 		{[]int{-4, -3, -2, -1, 0}, 5, -4, true},
 	} {
-		an := append([]int(nil), test.an...) // Copy the slice to avoid modification of the original slice.
-		if got, ok := LargestKth(an, test.k); got != test.e || ok != test.ok {
-			t.Errorf("LargestKth(%v, %d) = %d, %t; want %d, %t", test.an, test.k, got, ok, test.e, test.ok)
+		xs := append([]int(nil), test.xs...) // Copy the slice to avoid modification of the original slice.
+		if got, ok := LargestKth(xs, test.k); got != test.e || ok != test.ok {
+			t.Errorf("LargestKth(%v, %d) = %d, %t; want %d, %t", test.xs, test.k, got, ok, test.e, test.ok)
 		}
 	}
 }

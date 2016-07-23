@@ -27,10 +27,10 @@ func TestPermutations(t *testing.T) {
 }
 
 func benchPermutations(b *testing.B, size int) {
-	an := rand.New(rand.NewSource(int64(size))).Perm(size)
+	xs := rand.New(rand.NewSource(int64(size))).Perm(size)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		Permutations(an)
+		Permutations(xs)
 	}
 }
 

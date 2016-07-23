@@ -19,7 +19,7 @@ func isSafe(placement []int) bool {
 }
 
 // NQueens returns 2D slice that represents all distinct non-attacking
-// placements of n queens on an n*n board. In every sub-slice the indices
+// placements of n queens onto n*n board. In every sub-slice the indices
 // represents row index and the value represents column index.
 // The time complexity is lower bounded by the number of non-attacking
 // placements. No exact form is known for this quantity as a function of
@@ -31,10 +31,10 @@ func NQueens(n int) (positions [][]int) {
 		return nil
 	}
 
-	// solveNQueens use backtracking technique to place
+	// solve use backtracking technique to place
 	// queens on board to the non-attacking positions.
-	var solveNQueens func(row int, queens []int)
-	solveNQueens = func(row int, queens []int) {
+	var solve func(row int, queens []int)
+	solve = func(row int, queens []int) {
 		if row == n { // Base case, all queens are placed on non-attacking positions.
 			positions = append(positions, append([]int(nil), queens...))
 			return
@@ -42,12 +42,12 @@ func NQueens(n int) (positions [][]int) {
 		for col := 0; col < n; col++ {
 			queens = append(queens, col) // Place queen.
 			if isSafe(queens) {
-				solveNQueens(row+1, queens)
+				solve(row+1, queens)
 			}
 			queens = queens[:len(queens)-1] // Step back, remove queen and go try another position.
 		}
 	}
 
-	solveNQueens(0, nil)
+	solve(0, nil)
 	return positions
 }
